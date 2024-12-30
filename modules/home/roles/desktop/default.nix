@@ -23,6 +23,8 @@ in
       zip
       wl-clipboard
       gnupg
+      xpipe
+      nextcloud-client
     ];
   };
 }

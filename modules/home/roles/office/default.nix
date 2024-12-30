@@ -22,8 +22,6 @@ in
       libreoffice
       logseq
       okular
-      nextcloud-client
     ];
   };
-
 }
