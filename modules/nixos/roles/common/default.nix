@@ -22,7 +22,6 @@ in
           nix.enable = true;
           networking.enable = true;
           locale.enable = true;
-          fonts.enable = true;
           boot.enable = true;
         };
       };
@@ -33,5 +32,6 @@ in
           # comin.enable = true;
         };
       };
+      styles.stylix.enable = true;
     };
   }

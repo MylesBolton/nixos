@@ -20,11 +20,10 @@ in
 
     system.${namespace}.nix.enable = true;
     cli.shells.fish.enable = true;
-    styles.stylix.enable = true;
-
     home.packages = with pkgs; [
 
     ];
+    styles.stylix.enable = true;
   };
 }
 

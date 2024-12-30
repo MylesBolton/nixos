@@ -49,7 +49,9 @@
 
       channels-config = {
         allowUnfree = true;
-        permittedInsecurePackages = [ ];
+        permittedInsecurePackages = [
+          "electron-27.3.11" # for logseq
+        ];
       };
 
       overlays = with inputs; [ ];

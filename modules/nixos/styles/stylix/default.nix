@@ -1,18 +1,14 @@
 {
-  options,
-  config,
-  pkgs,
   lib,
+  pkgs,
+  config,
   namespace,
   ...
-}:
-with lib;
-with lib.${namespace};
-let
-  cfg = config.styles.${namespace}.stylix;
+}: let
+  cfg = config.styles.stylix;
 in {
-  options.styles.${namespace}.stylix = with types; {
-    enable = mkBoolOpt false "enable stylix";
+  options.styles.stylix = {
+    enable = lib.mkEnableOption "Enable stylix";
   };
 
   config = lib.mkIf cfg.enable {
@@ -52,12 +48,12 @@ in {
     stylix = {
       enable = true;
       autoEnable = true;
-      base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+      #base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
       homeManagerIntegration.autoImport = false;
       homeManagerIntegration.followSystem = false;
       targets.nixvim.enable = false;
 
-      image = pkgs.wallpapers.earth;
+      image = pkgs.${namespace}.wallpapers.main;
 
       cursor = {
         name = "Bibata-Modern-Classic";
@@ -83,8 +79,8 @@ in {
         };
 
         monospace = {
-          package = pkgs.monolisa;
-          name = "MonoLisa Nerd Font";
+          package = pkgs.b612;
+          name = "b612 Font";
         };
 
         emoji = {

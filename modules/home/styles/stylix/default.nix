@@ -1,15 +1,11 @@
 {
-  options,
-  config,
   lib,
   pkgs,
-  namespace,
+  config,
   inputs,
+  namespace,
   ...
-}:
-with lib;
-with lib.${namespace};
-let
+}: let
   cfg = config.styles.stylix;
 in {
   imports = with inputs; [
@@ -17,11 +13,11 @@ in {
     catppuccin.homeManagerModules.catppuccin
   ];
 
-  options.styles.stylix = with types; {
-    enable = mkBoolOpt false "Enable stylix";
+  options.styles.stylix = {
+    enable = lib.mkEnableOption "Enable stylix";
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     fonts.fontconfig.enable = true;
     home.packages = with pkgs; [
       nerd-fonts.symbols-only
@@ -29,16 +25,17 @@ in {
       plemoljp
     ];
 
+    # TODO: Possible to use stylix instead?
     catppuccin.flavor = "mocha";
     catppuccin.fish.enable = true;
 
     stylix = {
       enable = true;
       autoEnable = true;
-      base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+      #base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
       targets.nixvim.enable = false;
 
-      image = pkgs.nixicle.wallpapers.earth;
+      image = pkgs.${namespace}.wallpapers.main;
 
       cursor = {
         name = "Bibata-Modern-Classic";
@@ -64,7 +61,7 @@ in {
         };
 
         monospace = {
-          package = pkgs.nixicle.monolisa;
+          package = pkgs.b612;
           name = "MonoLisa Nerd Font";
         };
 

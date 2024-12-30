@@ -24,11 +24,7 @@ in
       };
     };
 
-    home.packages = with pkgs; [
-      nixgl.nixGLIntel
-      nix-output-monitor
-      nvd
-    ];
+    home.packages = with pkgs; [ ];
 
     systemd.user.startServices = "sd-switch";
 

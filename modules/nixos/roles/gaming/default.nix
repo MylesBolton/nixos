@@ -23,7 +23,8 @@ in
       steam = {
         enable = true;
         package = pkgs.steam.override {
-          extraPkgs = [
+          extraPkgs = p:
+            with p; [
               mangohud
               gamemode
             ];

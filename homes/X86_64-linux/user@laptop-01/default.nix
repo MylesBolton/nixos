@@ -4,7 +4,6 @@
     common.enable = true;
     desktop.enable = true;
     office.enable = true;
-    gaming.enable = true;
   };
   
   user = {

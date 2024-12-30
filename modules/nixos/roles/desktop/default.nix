@@ -27,7 +27,6 @@ in
       system = {
         ${namespace} = {
           bluetooth.enable = true;
-          #battery.enable = true;
         };
       };
     };

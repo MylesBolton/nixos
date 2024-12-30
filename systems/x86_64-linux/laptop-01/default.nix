@@ -1,4 +1,4 @@
-{ ... }:
+{ namespace, ... }:
 {
   imports = [
     ./disko.nix
@@ -6,13 +6,14 @@
     ./secrets/secrets.nix
   ];
 
-  networking.hostName = "workstation-01";
+  networking.hostName = "laptop-01";
   
     roles = {
       common.enable = true;
       desktop.enable = true;
-      gaming.enable = true;
     };
+
+    system.${namespace}.battery.enable = true;
 
     system.stateVersion = "25.05";
   }
