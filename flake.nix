@@ -60,6 +60,17 @@
         stylix.nixosModules.stylix
         home-manager.nixosModules.home-manager
         disko.nixosModules.disko
+        comin.nixosModules.comin
+        ({...}: {
+            services.comin = {
+              enable = true;
+              remotes = [{
+                name = "origin";
+                url = "https://github.com/MylesBolton/nixos.git";
+                branches.main.name = "main";
+              }];
+            };
+          })
       ];
     };
 }
