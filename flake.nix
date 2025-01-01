@@ -33,11 +33,11 @@
       src = ./.;
 
       snowfall = {
-        metadata = "eden";
-        namespace = "eden";
+        metadata = "custom";
+        namespace = "custom";
         meta = {
-          name = "eden";
-          title = "MylesBolton's Nix Eden";
+          name = "custom";
+          title = "MylesBolton's custom Nix stuff";
         };
       };
     };

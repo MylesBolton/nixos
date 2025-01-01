@@ -6,7 +6,7 @@
     office.enable = true;
   };
   
-  user = {
+  custom.user = {
     enable = true;
     name = "user";
   };
