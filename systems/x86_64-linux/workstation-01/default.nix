@@ -2,7 +2,7 @@
 {
   imports = [
     ./disko.nix
-    #./hardware-configuration.nix
+    ./hardware-configuration.nix
     ./secrets/secrets.nix
   ];
 
