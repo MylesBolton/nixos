@@ -24,7 +24,7 @@ in
   };
 
   config = {
-    users.mutableUsers = false;
+    users.mutableUsers = true;
     users.users.${cfg.name} =
       {
         isNormalUser = true;
