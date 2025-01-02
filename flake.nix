@@ -7,6 +7,10 @@
     agenix.url                          = "github:ryantm/agenix";
     stylix.url                          = "github:danth/stylix";
     catppuccin.url                      = "github:catppuccin/nix";
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+      };
     snowfall-lib = {
       url                               = "github:snowfallorg/lib";
       inputs.nixpkgs.follows            = "nixpkgs";
