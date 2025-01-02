@@ -1,4 +1,4 @@
-{ namespace, ... }:
+{ namespace, lib, pkgs, ... }:
 {
   imports = [
     ./disko.nix
@@ -14,6 +14,12 @@
     };
 
     system.${namespace}.battery.enable = true;
+
+  boot = {
+    supportedFilesystems = lib.mkForce ["btrfs"];
+    kernelPackages = pkgs.linuxPackages_latest;
+    resumeDevice = "/dev/disk/by-label/nixos";
+  };
 
     system.stateVersion = "24.05";
   }
