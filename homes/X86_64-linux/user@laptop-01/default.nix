@@ -9,7 +9,6 @@
   custom.user = {
     enable = true;
     name = "user";
-    initialPassword = "1";
   };
 
   home.stateVersion = "24.05";
