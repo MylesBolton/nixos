@@ -29,7 +29,6 @@ in
         ${namespace} = {
           ssh.enable = true;
           tailscale.enable = true;
-          # comin.enable = true;
         };
       };
       styles.stylix.enable = true;

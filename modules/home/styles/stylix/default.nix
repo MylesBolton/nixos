@@ -42,7 +42,7 @@ in {
         package = pkgs.bibata-cursors;
         size = 24;
       };
-
+      
       fonts = {
         sizes = {
           terminal = 14;
@@ -62,7 +62,7 @@ in {
 
         monospace = {
           package = pkgs.b612;
-          name = "MonoLisa Nerd Font";
+          name = "b612 Font";
         };
 
         emoji = {

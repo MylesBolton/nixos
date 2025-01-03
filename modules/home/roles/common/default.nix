@@ -20,8 +20,15 @@ in
 
     system.${namespace}.nix.enable = true;
     cli.shells.fish.enable = true;
+    apps.firefox.enable = true;
     home.packages = with pkgs; [
-
+      gopass
+      gnupg
+      unrar
+      unzip
+      zip
+      btop
+      pciutils
     ];
     styles.stylix.enable = true;
   };

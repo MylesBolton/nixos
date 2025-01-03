@@ -4,12 +4,13 @@
   host,
   pkgs,
   config,
+  namespace,
   ...
 }:
 with lib; let
-  cfg = config.browsers.firefox;
+  cfg = config.apps.firefox;
 in {
-  options.browsers.firefox = {
+  options.apps.firefox = {
     enable = mkEnableOption "enable firefox browser";
   };
 
@@ -32,17 +33,38 @@ in {
         '';
 
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-          bitwarden
-          enhancer-for-youtube
-          languagetool
-          old-reddit-redirect
-          private-relay
-          return-youtube-dislikes
-          reddit-enhancement-suite
-          tab-stash
-          stylus
-          ublock-origin
-          vimium
+          gopass-bridge #password manager
+          stylus #custom styles
+          temporary-containers #auto delete browsing sessions
+          floccus #bookmark sync 
+          languagetool #spelling help
+          plasma-integration #desktop intergration
+          react-devtools #dev tools
+          snowflake #help other peeps
+          enhanced-github # better gh
+          new-tab-override #start page 
+          terms-of-service-didnt-read # TOS TLDR
+          ublock-origin #ad block
+
+          #yt specific 
+          enhancer-for-youtube # 1080p 2.5x speed mods
+          youtube-recommended-videos #remove yt brain rot
+          dearrow #change pics and titles 
+          sponsorblock # remove yt sponsor spots 
+
+          #bullshit removers 
+          clearurls
+          news-feed-eradicator
+          re-enable-right-click
+          absolute-enable-right-click
+          ublacklist
+          i-dont-care-about-cookies
+
+          #stuff i need to look at later
+          #startup-bookmarks
+          #markdownload
+          #omnivore
+          #aria2-integration
         ];
 
         settings = {
@@ -53,7 +75,7 @@ in {
           "gnomeTheme.systemIcons" = true;
           "gnomeTheme.spinner" = true;
           "layers.acceleration.force-enabled" = true;
-          "identity.fxaccounts.account.device.name" = "${config.user.name}@${host}";
+          "identity.fxaccounts.account.device.name" = "${config.${namespace}.user.name}@${host}";
           "browser.urlbar.oneOffSearches" = false;
           "browser.search.hiddenOneOffs" = "Google,Yahoo,Bing,Amazon.com,Twitter,Wikipedia (en),YouTube,eBay";
           "extensions.pocket.enabled" = false;

@@ -3,7 +3,6 @@
   imports = [
     ./disko.nix
     ./hardware-configuration.nix
-    ./secrets/secrets.nix
   ];
 
   networking.hostName = "workstation-01";

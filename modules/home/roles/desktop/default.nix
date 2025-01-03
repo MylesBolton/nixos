@@ -18,13 +18,9 @@ in
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      unrar
-      unzip
-      zip
-      wl-clipboard
-      gnupg
       xpipe
-      nextcloud-client
+      wl-clipboard
+      vscode
     ];
   };
 }
