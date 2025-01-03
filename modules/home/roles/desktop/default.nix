@@ -17,6 +17,8 @@ in
   };
 
   config = mkIf cfg.enable {
+    cli.terminals.ghostty.enable = true;
+    apps.firefox.enable = true;
     home.packages = with pkgs; [
       xpipe
       wl-clipboard

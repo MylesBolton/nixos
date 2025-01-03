@@ -17,10 +17,8 @@ in
   };
 
   config = mkIf cfg.enable {
-
     system.${namespace}.nix.enable = true;
     cli.shells.fish.enable = true;
-    apps.firefox.enable = true;
     home.packages = with pkgs; [
       gopass
       gnupg

@@ -32,6 +32,7 @@ in
       elisa
       khelpcenter
       kwallet
+      kwalletmanager
     ];
 
       system = {
