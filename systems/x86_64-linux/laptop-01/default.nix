@@ -9,7 +9,6 @@
   
     roles = {
       common.enable = true;
-      desktop.enable = true;
     };
 
     system.${namespace}.battery.enable = true;
