@@ -18,7 +18,7 @@
     };
   };
 
-  custom.user = {
+  user = {
     name = "user";
     initialPassword = "1";
   };
