@@ -16,5 +16,22 @@ in
     enable = mkBoolOpt false "Enable ssh";
   };
 
-  config = mkIf cfg.enable { services.openssh.enable = true; };
+  config = mkIf cfg.enable {     
+    services.openssh = {
+      enable = true;
+      ports = [22];
+
+      settings = {
+        PasswordAuthentication = false;
+        StreamLocalBindUnlink = "yes";
+        GatewayPorts = "clientspecified";
+      };
+    };
+    users.users = {
+      ${config.user.name}.openssh.authorizedKeys.keys = [
+        "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIAlij2lxj8OoCoDNurBmYuRucZ7eGZ65vy0/goCY9mmDAAAAGnNzaDpNeWxlc0JvbHRvbl9CYWNrdXBfU1NI"
+        "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIEII8saSYun/OtVtCJrPJFjoTaN8XFTMNy9R1giZPcvlAAAAGHNzaDpNeWxlc0JvbHRvbl9NYWluX1NTSA=="
+      ];
+    };
+  };
 }
