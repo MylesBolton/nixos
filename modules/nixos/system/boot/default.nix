@@ -18,10 +18,9 @@ in
 
   config = mkIf cfg.enable {
     boot.loader = {
-      systemd-boot = {
+      grub = {
         enable = true;
-        configurationLimit = 10;
-        editor = false;
+        configurationLimit = 5;
       };
       efi.canTouchEfiVariables = true;
       timeout = 5;
