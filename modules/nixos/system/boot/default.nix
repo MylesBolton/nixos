@@ -21,11 +21,12 @@ in
       grub = {
         enable = true;
         configurationLimit = 5;
-      };
-      generationsDir = {
-        enable = true;
         copyKernels = true;
       };
+#      generationsDir = {
+#        enable = true;
+#        copyKernels = true;
+#      };
       efi.canTouchEfiVariables = true;
       timeout = 5;
     };
