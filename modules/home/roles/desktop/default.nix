@@ -17,6 +17,10 @@ in
   };
 
   config = mkIf cfg.enable {
+    ${namespace}.services {
+      kdeconnect.enable = true;
+      syncthing.enable = true;
+    };
     cli.terminals.ghostty.enable = true;
     apps.firefox.enable = true;
     home.packages = with pkgs; [
