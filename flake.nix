@@ -93,7 +93,7 @@
             #auth.access_token_path = "/filepath/to/your/access/token";
             branches.main.name = "main";
             branches.testing.name = "testing";
-            poller.period = 900;
+            poller.period = 300;
           }];
         };
       })
