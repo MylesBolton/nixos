@@ -18,15 +18,11 @@ in
 
   config = mkIf cfg.enable {
     boot.loader = {
-      grub = {
+      systemd-boot = {
         enable = true;
-        configurationLimit = 5;
-        copyKernels = true;
+        configurationLimit = 8;
+        editor = false;
       };
-#      generationsDir = {
-#        enable = true;
-#        copyKernels = true;
-#      };
       efi.canTouchEfiVariables = true;
       timeout = 5;
     };
