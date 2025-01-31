@@ -7,12 +7,12 @@
   ...
 }:
 with lib;
-with lib.${namespace};
+with lib.custom;
 let
-  cfg = config.system.${namespace}.boot;
+  cfg = config.system.custom.boot;
 in
 {
-  options.system.${namespace}.boot = with types; {
+  options.system.custom.boot = with types; {
     enable = mkBoolOpt false "Whether or not to enable booting.";
   };
 

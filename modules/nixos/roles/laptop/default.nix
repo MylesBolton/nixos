@@ -7,7 +7,7 @@
   ...
 }:
 with lib;
-with lib.${namespace};
+with lib.custom;
 let
   cfg = config.roles.laptop;
 in
@@ -18,6 +18,6 @@ in
 
   config = mkIf cfg.enable {
     
-      system.${namespace}.battery.enable = true;
+      system.custom.battery.enable = true;
   };
 }

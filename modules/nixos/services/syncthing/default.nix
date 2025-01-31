@@ -7,11 +7,11 @@
   ...
 }:
 with lib;
-with lib.${namespace};
+with lib.custom;
 let
-  cfg = config.services.${namespace}.syncthing;
+  cfg = config.services.custom.syncthing;
 in {
-  options.services.${namespace}.syncthing = {
+  options.services.custom.syncthing = {
     enable = mkEnableOption "Enable syncthing service";
   };
 

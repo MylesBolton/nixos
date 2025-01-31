@@ -6,12 +6,12 @@
   ...
 }:
 with lib;
-with lib.${namespace};
+with lib.custom;
 let
-  cfg = config.services.${namespace}.tailscale;
+  cfg = config.services.custom.tailscale;
 in
 {
-  options.services.${namespace}.tailscale = with types; {
+  options.services.custom.tailscale = with types; {
     enable = mkBoolOpt false "Whether or not to configure Tailscale";
     autoconnect = {
       enable = mkBoolOpt false "Whether or not to enable automatic connection to Tailscale";

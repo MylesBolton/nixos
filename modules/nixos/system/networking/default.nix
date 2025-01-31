@@ -7,12 +7,12 @@
   ...
 }:
 with lib;
-with lib.${namespace};
+with lib.custom;
 let
-  cfg = config.system.${namespace}.networking;
+  cfg = config.system.custom.networking;
 in
 {
-  options.system.${namespace}.networking = with types; {
+  options.system.custom.networking = with types; {
     enable = mkBoolOpt false "Whether or not to manage networking settings.";
   };
 

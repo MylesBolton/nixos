@@ -7,7 +7,7 @@
   ...
 }:
 with lib;
-with lib.${namespace};
+with lib.custom;
 let
   cfg = config.roles.common;
 in
@@ -18,7 +18,7 @@ in
 
   config = mkIf cfg.enable {
       system = {
-        ${namespace} = {
+        custom = {
           nix.enable = true;
           networking.enable = true;
           locale.enable = true;
@@ -26,7 +26,7 @@ in
         };
       };
       services = {
-        ${namespace} = {
+        custom = {
           ssh.enable = true;
           tailscale.enable = true;
         };

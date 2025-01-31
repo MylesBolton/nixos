@@ -35,7 +35,7 @@ in {
       base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
       targets.nixvim.enable = false;
 
-      image = pkgs.${namespace}.wallpapers.main;
+      image = pkgs.custom.wallpapers.main;
 
       cursor = {
         name = "Bibata-Modern-Classic";

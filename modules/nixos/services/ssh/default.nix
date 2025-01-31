@@ -7,12 +7,12 @@
   ...
 }:
 with lib;
-with lib.${namespace};
+with lib.custom;
 let
-  cfg = config.services.${namespace}.ssh;
+  cfg = config.services.custom.ssh;
 in
 {
-  options.services.${namespace}.ssh = with types; {
+  options.services.custom.ssh = with types; {
     enable = mkBoolOpt false "Enable ssh";
   };
 

@@ -7,12 +7,12 @@
   ...
 }:
 with lib;
-with lib.${namespace};
+with lib.custom;
 let
-  cfg = config.system.${namespace}.nix;
+  cfg = config.system.custom.nix;
 in
 {
-  options.system.${namespace}.nix = with types; {
+  options.system.custom.nix = with types; {
     enable = mkBoolOpt false "Whether or not to manage nix stuff.";
   };
   config = mkIf cfg.enable {

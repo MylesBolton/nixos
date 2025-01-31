@@ -7,12 +7,12 @@
   ...
 }:
 with lib;
-with lib.${namespace};
+with lib.custom;
 let
-  cfg = config.system.${namespace}.locale;
+  cfg = config.system.custom.locale;
 in
 {
-  options.system.${namespace}.locale = with types; {
+  options.system.custom.locale = with types; {
     enable = mkBoolOpt false "Whether or not to manage locale settings.";
   };
 

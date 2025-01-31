@@ -53,7 +53,7 @@ in {
       homeManagerIntegration.followSystem = false;
       targets.nixvim.enable = false;
 
-      image = pkgs.${namespace}.wallpapers.main;
+      image = pkgs.custom.wallpapers.main;
 
       cursor = {
         name = "Bibata-Modern-Classic";

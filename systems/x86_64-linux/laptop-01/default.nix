@@ -11,7 +11,7 @@
       common.enable = true;
     };
 
-    system.${namespace}.battery.enable = true;
+    system.custom.battery.enable = true;
 
   boot = {
     supportedFilesystems = lib.mkForce ["btrfs"];

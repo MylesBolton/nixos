@@ -7,7 +7,7 @@
   ...
 }:
 with lib;
-with lib.${namespace};
+with lib.custom;
 let
   cfg = config.roles.desktop;
 in
@@ -36,7 +36,7 @@ in
     ];
 
       system = {
-        ${namespace} = {
+        custom = {
           bluetooth.enable = true;
         };
       };

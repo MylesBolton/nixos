@@ -7,12 +7,12 @@
   ...
 }:
 with lib;
-with lib.${namespace};
+with lib.custom;
 let
-  cfg = config.system.${namespace}.battery;
+  cfg = config.system.custom.battery;
 in
 {
-  options.system.${namespace}.battery = with types; {
+  options.system.custom.battery = with types; {
     enable = mkBoolOpt false "Whether or not to enable battery optimizations and utils.";
   };
 

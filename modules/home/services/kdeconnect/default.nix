@@ -7,11 +7,11 @@
   ...
 }:
 with lib;
-with lib.${namespace};
+with lib.custom;
 let
-  cfg = config.services.${namespace}.kdeconnect;
+  cfg = config.services.custom.kdeconnect;
 in {
-  options.services.${namespace}.kdeconnect = with types; {
+  options.services.custom.kdeconnect = with types; {
     enable = mkBoolOpt false "Whether or not to manage kdeconnect";
   };
 

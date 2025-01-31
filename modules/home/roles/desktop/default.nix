@@ -7,7 +7,7 @@
   ...
 }:
 with lib;
-with lib.${namespace};
+with lib.custom;
 let
   cfg = config.roles.desktop;
 in
@@ -17,9 +17,8 @@ in
   };
 
   config = mkIf cfg.enable {
-    services.${namespace} = {
+    services.custom = {
       kdeconnect.enable = true;
-      syncthing.enable = true;
     };
     cli.terminals.ghostty.enable = true;
     apps.firefox.enable = true;

@@ -7,12 +7,12 @@
   ...
 }:
 with lib;
-with lib.${namespace};
+with lib.custom;
 let
-  cfg = config.${namespace}.user;
+  cfg = config.custom.user;
 in
 {
-  options.${namespace}.user = with types; {
+  options.custom.user = with types; {
     enable = mkOpt types.bool false "Whether to configure the user account.";
     home = mkOpt (types.nullOr types.str) "/home/${cfg.name}" "The user's home directory.";
     name = mkOpt (types.nullOr types.str) config.snowfallorg.user.name "The user account.";
@@ -23,7 +23,7 @@ in
       assertions = [
         {
           assertion = cfg.name != null;
-          message = "${namespace}.user.name must be set";
+          message = "custom.user.name must be set";
         }
       ];
 

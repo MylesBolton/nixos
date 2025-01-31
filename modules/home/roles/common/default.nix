@@ -7,7 +7,7 @@
   ...
 }:
 with lib;
-with lib.${namespace};
+with lib.custom;
 let
   cfg = config.roles.common;
 in
@@ -17,7 +17,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    system.${namespace}.nix.enable = true;
+    system.custom.nix.enable = true;
     cli.shells.fish.enable = true;
     home.packages = with pkgs; [
       gopass

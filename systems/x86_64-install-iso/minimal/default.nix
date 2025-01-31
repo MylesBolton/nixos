@@ -6,14 +6,14 @@
   networking.networkmanager.enable = true;
   
   system = {
-    ${namespace} = {
+    custom = {
       nix.enable = true;
       networking.enable = true;
       locale.enable = true;
     };
   };
   services = {
-    ${namespace} = {
+    custom = {
       ssh.enable = true;
     };
   };

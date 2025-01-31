@@ -7,12 +7,12 @@
   ...
 }:
 with lib;
-with lib.${namespace};
+with lib.custom;
 let
-  cfg = config.system.${namespace}.bluetooth;
+  cfg = config.system.custom.bluetooth;
 in
 {
-  options.system.${namespace}.bluetooth = with types; {
+  options.system.custom.bluetooth = with types; {
     enable = mkBoolOpt false "Enable bluetooth";
   };
 
