@@ -21,7 +21,7 @@ in
       nextcloud-client
       calibre
       libreoffice
-      logseq
+      teams-for-linux
       obsidian
       okular
     ];

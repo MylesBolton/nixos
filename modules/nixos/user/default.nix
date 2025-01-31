@@ -15,7 +15,7 @@ in
   options.user = with types; {
     name = mkOpt str "user" "The name of the user's account";
     initialPassword =
-      mkOpt str "1"
+      mkOpt str "1337"
       "The initial password to use";
     extraGroups = mkOpt (listOf str) [] "Groups for the user to be assigned.";
     extraOptions =
