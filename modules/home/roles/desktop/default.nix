@@ -17,7 +17,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    ${namespace}.services = {
+    services.${namespace} = {
       kdeconnect.enable = true;
       syncthing.enable = true;
     };
