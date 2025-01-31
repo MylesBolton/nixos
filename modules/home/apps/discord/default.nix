@@ -11,7 +11,7 @@ with lib; let
   cfg = config.apps.discord;
 in {
   options.apps.discord = {
-    enable = mkEnableOption "enable discord browser";
+    enable = mkEnableOption "enable discord";
   };
 
   config = mkIf cfg.enable {

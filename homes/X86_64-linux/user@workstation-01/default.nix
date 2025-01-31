@@ -5,6 +5,7 @@
     desktop.enable = true;
     office.enable = true;
     gaming.enable = true;
+    social.enable = true;
   };
 
   services.custom = {
