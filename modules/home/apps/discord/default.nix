@@ -15,7 +15,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    xdg.configFile."BetterDicord/data/stable/custom.css" = {source = ./custom.css};
+    xdg.configFile."BetterDicord/data/stable/custom.css" = {source = ./custom.css;};
     home.packages = with pkgs; [goofcord];
   };
 }

@@ -18,8 +18,6 @@ in
 
   config = mkIf cfg.enable {
     apps.discord.enable = true;
-        home.packages = with pkgs; [
-      signal-desktop
-        ];
+    home.packages = with pkgs; [signal-desktop];
   };
 }
