@@ -22,6 +22,7 @@ in
     home.packages = with pkgs; [
       gopass
       gnupg
+      gpg-tui
       unrar
       unzip
       zip

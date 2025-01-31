@@ -23,6 +23,7 @@ in
     cli.terminals.ghostty.enable = true;
     apps.firefox.enable = true;
     home.packages = with pkgs; [
+      thunderbird
       xpipe
       wl-clipboard
       vscode
