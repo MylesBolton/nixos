@@ -24,6 +24,7 @@ in
     apps.firefox.enable = true;
     home.packages = with pkgs; [
       thunderbird
+      vlc
       xpipe
       wl-clipboard
       vscode

@@ -5,7 +5,6 @@
     nixpkgs-unstable.url                = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-hardware.url                  = "github:NixOS/nixos-hardware";
     stylix.url                          = "github:danth/stylix";
-    catppuccin.url                      = "github:catppuccin/nix";
     nur.url                             = "github:nix-community/NUR";
     firefox-gnome-theme = {
       url                               = "github:rafaelmardojai/firefox-gnome-theme";
@@ -69,9 +68,6 @@
 
       channels-config = {
         allowUnfree = true;
-        permittedInsecurePackages = [
-          "electron-27.3.11" # for logseq
-        ];
       };
 
       overlays = with inputs; [
