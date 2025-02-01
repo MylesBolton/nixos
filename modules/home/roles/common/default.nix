@@ -23,6 +23,7 @@ in
       gopass
       gnupg
       gpg-tui
+      git
       unrar
       unzip
       zip
