@@ -29,6 +29,7 @@ in
       lutris
       winetricks
       wineWowPackages.stable
+      vulkan-tools
     ];
   };
 }
