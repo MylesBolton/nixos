@@ -10,7 +10,6 @@
 in {
   imports = with inputs; [
     stylix.homeManagerModules.stylix
-    catppuccin.homeManagerModules.catppuccin
   ];
 
   options.styles.stylix = {
@@ -18,22 +17,10 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    fonts.fontconfig.enable = true;
-    home.packages = with pkgs; [
-      nerd-fonts.symbols-only
-      open-sans
-      plemoljp
-    ];
-
-    # TODO: Possible to use stylix instead?
-    catppuccin.flavor = "mocha";
-    catppuccin.fish.enable = true;
-
     stylix = {
       enable = true;
       autoEnable = true;
       base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
-      targets.nixvim.enable = false;
 
       image = pkgs.custom.wallpapers.main;
 
@@ -42,7 +29,7 @@ in {
         package = pkgs.bibata-cursors;
         size = 24;
       };
-      
+
       fonts = {
         sizes = {
           terminal = 14;
