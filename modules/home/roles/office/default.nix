@@ -19,7 +19,6 @@ in
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       nextcloud-client
-      calibre
       libreoffice
       teams-for-linux
       obsidian
