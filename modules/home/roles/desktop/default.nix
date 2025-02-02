@@ -27,8 +27,6 @@ in
       vlc
       xpipe
       wl-clipboard
-      vscode
-      nixfmt-rfc-style
     ];
   };
 }
