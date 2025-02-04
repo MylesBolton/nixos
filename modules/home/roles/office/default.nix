@@ -23,7 +23,7 @@ in
       teams-for-linux
       obsidian
       okular
-      glabels
+      glabels-qt
     ];
   };
 }
