@@ -24,6 +24,7 @@ in
       obsidian
       okular
       glabels-qt
+      ptouch-driver
     ];
   };
 }
