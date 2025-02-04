@@ -25,6 +25,7 @@ in
       okular
       glabels-qt
       ptouch-driver
+      brgenml1lpr
     ];
   };
 }

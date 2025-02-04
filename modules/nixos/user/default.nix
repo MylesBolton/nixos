@@ -44,6 +44,7 @@ in
             "podman"
             "kvm"
             "libvirtd"
+            "lp"
           ]
           ++ cfg.extraGroups;
       }
