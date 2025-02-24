@@ -4,10 +4,10 @@ on:
   workflow_dispatch:
   # Runs at 2AM
   schedule:
-    - cron: '0 2 * * 0'
+    - cron: '0 2 * * *'
 
 jobs:
-  update:
+  update-inputs:
     runs-on: ubuntu-latest
     steps:
       # Checkout 
@@ -17,4 +17,4 @@ jobs:
       # Run Thaw.
       - uses: snowfallorg/thaw-action@main
       # Flake Check
-      - uses: DeterminateSystems/flake-checker-action@v4
+      - uses: DeterminateSystems/flake-checker-action@v24

@@ -9,7 +9,10 @@ jobs:
   check:
     runs-on: ubuntu-22.04
     steps:
-      # Checkout 
       - uses: actions/checkout@v4
-      # Check Nix flake inputs
-      -  uses: DeterminateSystems/flake-checker-action@v4
+      - name:  Check Nix flake inputs
+        uses: DeterminateSystems/flake-checker-action@v24
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v16
+      - name: Build default package
+        run: nix flake check --all-systems
