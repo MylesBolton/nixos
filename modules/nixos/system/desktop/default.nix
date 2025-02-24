@@ -21,7 +21,6 @@ in
     {
       services = {
         xserver = {
-          enable = true;
           excludePackages = [ pkgs.xterm ];
         };
         printing.enable = true;
