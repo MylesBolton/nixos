@@ -1,0 +1,14 @@
+name: 'Nix Flake Check'
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  check:
+    runs-on: ubuntu-22.04
+    steps:
+      # Checkout 
+      - uses: actions/checkout@v4
+      # Check Nix flake inputs
+      -  uses: DeterminateSystems/flake-checker-action@v4

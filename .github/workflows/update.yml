@@ -1,0 +1,19 @@
+name: 'Update Flake Inputs'
+
+on:
+  # Runs at 2AM
+  schedule:
+    - cron: '0 2 * * 0'
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout 
+      - uses: actions/checkout@v4
+      # Installs Nix
+      - uses: DeterminateSystems/nix-installer-action@main
+      # Run Thaw.
+      - uses: snowfallorg/thaw-action@main
+      # Flake Check
+      - uses: DeterminateSystems/flake-checker-action@v4
