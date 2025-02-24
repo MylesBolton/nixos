@@ -1,6 +1,7 @@
 name: 'Update Flake Inputs'
 
 on:
+  workflow_dispatch:
   # Runs at 2AM
   schedule:
     - cron: '0 2 * * 0'
