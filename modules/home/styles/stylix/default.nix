@@ -51,11 +51,6 @@ in {
           package = pkgs.b612;
           name = "b612 Font";
         };
-
-        emoji = {
-          package = pkgs.noto-fonts-emoji;
-          name = "Noto Color Emoji";
-        };
       };
     };
   };
