@@ -4,14 +4,17 @@
   config,
   namespace,
   ...
-}: let
+}:
+let
   cfg = config.styles.stylix;
-in {
+in
+{
   options.styles.stylix = {
     enable = lib.mkEnableOption "Enable stylix";
   };
 
   config = lib.mkIf cfg.enable {
+    fonts.enableDefaultPackages = false;
     stylix = {
       enable = true;
       autoEnable = true;
@@ -28,26 +31,26 @@ in {
       };
 
       fonts = {
-        sizes = {
-          terminal = 14;
-          applications = 10;
-          popups = 10;
-        };
-
         serif = {
-          name = "Source Serif";
-          package = pkgs.source-serif;
+          package = pkgs.dejavu_fonts;
+          name = "DejaVu Serif";
         };
 
         sansSerif = {
-          name = "Noto Sans";
-          package = pkgs.noto-fonts;
+          package = pkgs.dejavu_fonts;
+          name = "DejaVu Sans";
         };
 
         monospace = {
           package = pkgs.b612;
           name = "b612 Font";
         };
+
+        emoji = {
+          package = pkgs.openmoji-color;
+          name = "OpenMoji Color";
+        };
+
       };
     };
   };
