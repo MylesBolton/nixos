@@ -17,12 +17,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    nixpkgs = {
-      config = {
-        allowUnfree = true;
-      };
-    };
-
+    
     home.packages = with pkgs; [ ];
 
     systemd.user.startServices = "sd-switch";
