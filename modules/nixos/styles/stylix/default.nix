@@ -30,8 +30,8 @@ in {
       fonts = {
         sizes = {
           terminal = 14;
-          applications = 12;
-          popups = 12;
+          applications = 10;
+          popups = 10;
         };
 
         serif = {
