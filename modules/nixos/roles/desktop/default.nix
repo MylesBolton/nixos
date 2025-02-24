@@ -18,32 +18,5 @@ in
 
   config = mkIf cfg.enable {
 
-    services = {
-        xserver = {
-          enable = true;
-          excludePackages = [ pkgs.xterm ];
-        };
-        displayManager.sddm.enable = true;
-        desktopManager.plasma6.enable = true;
-        printing.enable = true;
-    };
-
-    environment.plasma6.excludePackages = with pkgs.kdePackages; [
-      plasma-browser-integration
-      gwenview
-      konsole
-      oxygen
-      kate
-      elisa
-      khelpcenter
-      kwallet
-      kwalletmanager
-    ];
-
-      system = {
-        custom = {
-          bluetooth.enable = true;
-        };
-      };
-    };
-  }
+  };
+}
