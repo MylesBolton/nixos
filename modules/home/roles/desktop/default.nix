@@ -17,16 +17,15 @@ in
   };
 
   config = mkIf cfg.enable {
-    services.custom = {
-      kdeconnect.enable = true;
-    };
+    services.custom.kdeconnect.enable = true;
     cli.terminals.ghostty.enable = true;
     apps.firefox.enable = true;
     home.packages = with pkgs; [
       thunderbird
       vlc
-      xpipe
       wl-clipboard
+      keepassxc
+      rustdesk
     ];
   };
 }

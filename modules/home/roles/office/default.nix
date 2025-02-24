@@ -22,10 +22,8 @@ in
       libreoffice
       teams-for-linux
       obsidian
-      okular
       glabels-qt
       ptouch-driver
-      brgenml1lpr
     ];
   };
 }

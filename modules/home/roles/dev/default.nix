@@ -17,9 +17,11 @@ in
   };
 
   config = mkIf cfg.enable {
+    apps.vscode.enable = true;
     home.packages = with pkgs; [
-      vscode
+      xpipe
       nixfmt-rfc-style
+      nil
     ];
   };
 }
