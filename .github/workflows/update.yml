@@ -7,14 +7,17 @@ on:
     - cron: '0 2 * * *'
 
 jobs:
-  update-inputs:
+  update:
     runs-on: ubuntu-latest
     steps:
-      # Checkout 
-      - uses: actions/checkout@v4
-      # Installs Nix
-      - uses: DeterminateSystems/nix-installer-action@main
-      # Run Thaw.
-      - uses: snowfallorg/thaw-action@main
-      # Flake Check
-      - uses: DeterminateSystems/flake-checker-action@v9
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+      - name: Update flake.lock
+        uses: DeterminateSystems/update-flake-lock@main
+        with:
+          pr-title: "GH Action - Update flake.lock" 
+          pr-labels: |                  
+            dependencies
+            automated
