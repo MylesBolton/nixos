@@ -17,4 +17,4 @@ jobs:
       # Run Thaw.
       - uses: snowfallorg/thaw-action@main
       # Flake Check
-      - uses: DeterminateSystems/flake-checker-action@v24
+      - uses: DeterminateSystems/flake-checker-action@v9
