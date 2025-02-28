@@ -29,6 +29,9 @@ in
       zip
       btop
       pciutils
+      lsscsi
+      wget
+      docker
     ];
     styles.stylix.enable = true;
   };

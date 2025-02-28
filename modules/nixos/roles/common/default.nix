@@ -17,6 +17,7 @@ in
   };
 
   config = mkIf cfg.enable {
+    virtualisation.docker.enable = true;
       system = {
         custom = {
           nix.enable = true;
