@@ -29,6 +29,7 @@ in
       zip
       btop
       pciutils
+      lsscsi
     ];
     styles.stylix.enable = true;
   };
