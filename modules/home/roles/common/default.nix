@@ -30,6 +30,7 @@ in
       btop
       pciutils
       lsscsi
+      wget
     ];
     styles.stylix.enable = true;
   };
