@@ -16,6 +16,7 @@ in
     enable = mkBoolOpt false "Whether or not to manage nix stuff.";
   };
   config = mkIf cfg.enable {
+    allowUnfree = true;
     nix = {
       settings = {
         trusted-users = ["@wheel" "root"];
