@@ -42,6 +42,7 @@ in
             "input"
             "tty"
             "podman"
+            "docker"
             "kvm"
             "libvirtd"
             "lp"
