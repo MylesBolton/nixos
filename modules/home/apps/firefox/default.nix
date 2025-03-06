@@ -20,6 +20,7 @@ in
     xdg.mimeApps.defaultApplications = {
       "text/html" = [ "firefox.desktop" ];
       "text/xml" = [ "firefox.desktop" ];
+      "application/pdf" = [ "firefox.desktop" ];
       "x-scheme-handler/http" = [ "firefox.desktop" ];
       "x-scheme-handler/https" = [ "firefox.desktop" ];
     };
@@ -65,12 +66,8 @@ in
             temporary-containers # auto delete browsing sessions
             floccus # bookmark sync
             languagetool # spelling help
-            plasma-integration # desktop intergration
-            react-devtools # dev tools
-            snowflake # help other peeps
             enhanced-github # better gh
             new-tab-override # start page
-            terms-of-service-didnt-read # TOS TLDR
             ublock-origin # ad block
 
             #yt specific
@@ -83,7 +80,6 @@ in
             clearurls
             news-feed-eradicator
             re-enable-right-click
-            absolute-enable-right-click
             ublacklist
             i-dont-care-about-cookies
 

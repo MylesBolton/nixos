@@ -18,7 +18,10 @@ in
 
   config = mkIf cfg.enable {
     
-    home.packages = with pkgs; [ ];
+    home.packages = with pkgs; [
+      nix-output-monitor
+      nvd
+    ];
 
     systemd.user.startServices = "sd-switch";
 

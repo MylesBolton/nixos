@@ -32,7 +32,7 @@
       acc // {"${name}" = mkWallpaper name (./wallpapers + "/${image}");})
     {}
     images;
-  installTarget = "$out/share/wallpapers";
+  installTarget = "$out/share/backgrounds";
   installWallpapers =
     builtins.mapAttrs
     (name: wallpaper: ''
