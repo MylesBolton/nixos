@@ -43,7 +43,7 @@ in
         isDefault = true;
         
         settings = {
-          "browser.startup.homepage" = "https://nixos.org";
+          "browser.startup.homepage" = "https://startpage.mylesbolton.com/";
           "browser.search.region" = "GB";
           "browser.search.isUS" = false;
           "distribution.searchplugins.defaultLocale" = "en-GB";
@@ -53,7 +53,7 @@ in
           "browser.newtabpage.pinned" = [
             {
               title = "NixOS";
-              url = "https://nixos.org";
+              url = "https://startpage.mylesbolton.com/";
             }
           ];
         };
@@ -67,8 +67,11 @@ in
             floccus # bookmark sync
             languagetool # spelling help
             enhanced-github # better gh
-            new-tab-override # start page
+            new-tab-override # start page - need to find one that correctly selects the urlbar so i can instantly type to search
             ublock-origin # ad block
+            startup-bookmarks #opens a folder of bookmarks on startup
+            markdownload #dowlaods webpages as markdown
+            aria2-integration #multi-protocol downlaod util 
 
             #yt specific
             enhancer-for-youtube # 1080p 2.5x speed mods
@@ -82,12 +85,6 @@ in
             re-enable-right-click
             ublacklist
             i-dont-care-about-cookies
-
-            #stuff i need to look at later
-            #startup-bookmarks
-            #markdownload
-            #omnivore
-            #aria2-integration
           ];
         };
       };
