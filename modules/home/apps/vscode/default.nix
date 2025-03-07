@@ -35,6 +35,7 @@ in
           editor.formatOnSave = true;
           editor.formatOnPaste = true;
           git.autofetch = true;
+          git.enableSmartCommit = true;
           workbench.iconTheme = "catppuccin-mocha";
           terminal.integrated.defaultProfile.linux = "fish";
           nix.serverPath = "nil";
