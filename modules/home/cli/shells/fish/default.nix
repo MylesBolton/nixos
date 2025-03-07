@@ -40,10 +40,6 @@ in {
           inherit (pkgs.fishPlugins.sponge) src;
         }
         {
-          name = "tide";
-          inherit (pkgs.fishPlugins.tide) src;
-        }
-        {
           name = "nvm";
           inherit (pkgs.fishPlugins.nvm) src;
         }
