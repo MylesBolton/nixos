@@ -76,7 +76,6 @@ in
             #yt specific
             enhancer-for-youtube # 1080p 2.5x speed mods
             youtube-recommended-videos # remove yt brain rot
-            dearrow # change pics and titles
             sponsorblock # remove yt sponsor spots
 
             #bullshit removers
