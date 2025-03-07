@@ -17,7 +17,6 @@ in {
       theme = catppuccin-mocha
       font-family = "b612 Nerd Font"
       command = fish
-      gtk-titlebar = false
       font-size = 14
       window-padding-x = 6
       window-padding-y = 6
