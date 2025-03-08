@@ -8,6 +8,7 @@
     social.enable = true;
     rot.enable = true;
     dev.enable = true;
+    ai.enable = true;
   };
 
   services.custom = {
