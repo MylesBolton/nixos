@@ -21,6 +21,8 @@ in
     home.packages = with pkgs; [
       signal-desktop
       element-desktop
+      whatsapp-for-linux
+      fluffychat
     ];
   };
 }

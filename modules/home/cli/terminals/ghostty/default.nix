@@ -20,7 +20,6 @@ in {
       font-size = 14
       window-padding-x = 6
       window-padding-y = 6
-      copy-on-select = clipboard
       cursor-style = block
     '';
 
