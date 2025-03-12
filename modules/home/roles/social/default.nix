@@ -22,7 +22,6 @@ in
       signal-desktop
       element-desktop
       whatsapp-for-linux
-      fluffychat
     ];
   };
 }
