@@ -72,7 +72,12 @@ in
       environment.systemPackages = with pkgs.gnomeExtensions; [
         blur-my-shell
         headsetcontrol
-        kimpanel
+        tactile
+        syncthing-indicator
+        dash-to-dock
+        caffeine
+        sound-percentage
+        gsconnect
       ];
       environment.gnome.excludePackages = (
         with pkgs;
