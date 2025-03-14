@@ -24,7 +24,6 @@ in
         editor = false;
       };
       efi.canTouchEfiVariables = true;
-      timeout = 5;
     };
   };
 }
