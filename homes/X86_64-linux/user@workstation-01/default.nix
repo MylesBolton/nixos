@@ -11,10 +11,6 @@
     ai.enable = true;
   };
 
-  services.custom = {
-      syncthing.enable = true;
-    };
-
   custom.user = {
       enable = true;
       name = "user";
