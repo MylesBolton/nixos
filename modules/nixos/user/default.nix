@@ -9,10 +9,10 @@
 with lib;
 with lib.custom;
 let
-  cfg = config.user;
+  cfg = config.custom.user;
 in
 {
-  options.user = with types; {
+  options.custom.user = with types; {
     name = mkOpt str "user" "The name of the user's account";
     initialPassword =
       mkOpt str "1337"
