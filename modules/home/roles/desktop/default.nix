@@ -19,6 +19,9 @@ in
   config = mkIf cfg.enable {
     cli.terminals.ghostty.enable = true;
     apps.firefox.enable = true;
+    services.custom = {
+      syncthing.enable = true;
+    };
     home.packages = with pkgs; [
       thunderbird
       vlc
