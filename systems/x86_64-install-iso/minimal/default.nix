@@ -1,31 +1,36 @@
-{lib, namespace, ...}: {
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  networking.wireless.enable = lib.mkForce false;
-  networking.networkmanager.enable = true;
-  
+{ lib, namespace, ... }:
+{
   system = {
     custom = {
       nix.enable = true;
       networking.enable = true;
       locale.enable = true;
-    };
-  };
-  services = {
-    custom = {
-      ssh.enable = true;
+      boot.enable = true;
     };
   };
 
+  services = {
+    openssh.enable = true;
+    custom = {
+      tailscale.enable = true;
+    };
+  };
+  styles.stylix.enable = true;
+
   user = {
-    name = "user";
-    initialPassword = "1";
+    name = "nixos";
+    initialPassword = "1337";
   };
 
   fileSystems."/nix/.rw-store" = {
     fsType = "tmpfs";
-    options = [ "mode=0755" "nosuid" "nodev" "relatime" "size=32G" ];
+    options = [
+      "mode=0755"
+      "nosuid"
+      "nodev"
+      "relatime"
+      "size=32G"
+    ];
     neededForBoot = true;
   };
 

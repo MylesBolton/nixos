@@ -27,8 +27,8 @@ in
         };
       };
       services = {
+        ssh.enable = true;
         custom = {
-          ssh.enable = true;
           tailscale.enable = true;
         };
       };
