@@ -3,8 +3,8 @@ name: "Nix Flake Check"
 on:
   workflow_dispatch:
   repository_dispatch:
-  push:
-    branches: [main]
+  check_run:
+    types: [rerequested]
 jobs:
   check:
     runs-on: ubuntu-22.04
