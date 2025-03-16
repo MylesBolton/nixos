@@ -9,10 +9,10 @@
 with lib;
 with lib.custom;
 let
-  cfg = config.system.custom.locale;
+  cfg = config.custom.system.locale;
 in
 {
-  options.system.custom.locale = with types; {
+  options.custom.system.locale = with types; {
     enable = mkBoolOpt false "Whether or not to manage locale settings.";
   };
 

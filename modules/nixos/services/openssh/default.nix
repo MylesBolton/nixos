@@ -9,10 +9,10 @@
 with lib;
 with lib.custom;
 let
-  cfg = config.services.ssh;
+  cfg = config.custom.services.openssh;
 in
 {
-  options.services.ssh = with types; {
+  options.custom.services.openssh = with types; {
     enable = mkBoolOpt false "Enable ssh";
   };
 

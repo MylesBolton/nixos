@@ -17,6 +17,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    services.custom.ollama.enable = true;
+    custom.services.ollama.enable = true;
   };
 }

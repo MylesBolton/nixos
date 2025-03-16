@@ -9,9 +9,9 @@
 with lib;
 with lib.custom;
 let
-  cfg = config.services.custom.ollama;
+  cfg = config.custom.services.ollama;
 in {
-  options.services.custom.ollama = with types; {
+  options.custom.services.ollama = with types; {
     enable = mkBoolOpt false "Whether or not to setup ollama";
   };
 

@@ -18,6 +18,6 @@ in
 
   config = mkIf cfg.enable {
     
-      system.custom.battery.enable = true;
+      custom.system.battery.enable = true;
   };
 }

@@ -9,10 +9,10 @@
 with lib;
 with lib.custom;
 let
-  cfg = config.services.custom.kdeconnect;
+  cfg = config.custom.services.kdeconnect;
 in
 {
-  options.services.custom.kdeconnect = with types; {
+  options.custom.services.kdeconnect = with types; {
     enable = mkBoolOpt false "Enable kdeconnect";
   };
 

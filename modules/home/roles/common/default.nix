@@ -17,7 +17,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    system.custom.nix.enable = true;
+    custom.system.nix.enable = true;
     cli.shells.fish.enable = true;
     home.packages = with pkgs; [
       gopass

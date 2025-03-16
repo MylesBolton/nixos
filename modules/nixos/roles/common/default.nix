@@ -18,20 +18,19 @@ in
 
   config = mkIf cfg.enable {
     virtualisation.docker.enable = true;
+
+    custom = {
       system = {
-        custom = {
-          nix.enable = true;
-          networking.enable = true;
-          locale.enable = true;
-          boot.enable = true;
-        };
+        nix.enable = true;
+        networking.enable = true;
+        locale.enable = true;
+        boot.enable = true;
       };
       services = {
-        ssh.enable = true;
-        custom = {
-          tailscale.enable = true;
-        };
+        tailscale.enable = true;
+        openssh.enable = true;
       };
-      styles.stylix.enable = true;
     };
-  }
+    styles.stylix.enable = true;
+  };
+}

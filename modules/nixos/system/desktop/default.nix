@@ -8,15 +8,15 @@
 with lib;
 with lib.custom;
 let
-  cfg = config.system.custom.desktop;
+  cfg = config.custom.system.desktop;
 in
 {
-  options.system.custom.desktop = with types; {
+  options.custom.system.desktop = with types; {
     enable = mkBoolOpt false "Enable desktop environment";
     kde = mkBoolOpt false "Enable KDE Plasma";
-    xfce = mkBoolOpt false "Enable xfce";
     gnome = mkBoolOpt false "Enable Gnome";
   };
+
   config = mkIf cfg.enable (mkMerge [
     {
       services = {
@@ -32,6 +32,9 @@ in
         displayManager.sddm = {
           enable = true;
           wayland.enable = true;
+          settings = {
+            HideUsers = "user";
+          };
         };
         desktopManager.plasma6.enable = true;
         displayManager.defaultSession = "plasma";
@@ -51,21 +54,15 @@ in
       programs.dconf.enable = true;
     })
 
-    (mkIf cfg.xfce {
-      services = {
-        xserver = {
-          desktopManager = {
-            xterm.enable = false;
-            xfce.enable = true;
-          };
-        };
-        displayManager.defaultSession = "xfce";
-      };
-    })
     (mkIf cfg.gnome {
       services.xserver = {
         enable = true;
-        displayManager.gdm.enable = true;
+        displayManager.gdm = {
+          enable = true;
+          settings.greeter = {
+            Exclude = "user";
+          };
+        };
         desktopManager.gnome.enable = true;
       };
 

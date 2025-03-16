@@ -15,8 +15,8 @@
   roles = {
     common.enable = true;
   };
-  system = {
     custom = {
+      system = {
       bluetooth.enable = true;
       battery.enable = true;
       desktop = {

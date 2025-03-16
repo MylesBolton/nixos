@@ -9,10 +9,10 @@
 with lib;
 with lib.custom;
 let
-  cfg = config.system.custom.bluetooth;
+  cfg = config.custom.system.bluetooth;
 in
 {
-  options.system.custom.bluetooth = with types; {
+  options.custom.system.bluetooth = with types; {
     enable = mkBoolOpt false "Enable bluetooth";
   };
 

@@ -9,10 +9,10 @@
 with lib;
 with lib.custom;
 let
-  cfg = config.system.custom.networking;
+  cfg = config.custom.system.networking;
 in
 {
-  options.system.custom.networking = with types; {
+  options.custom.system.networking = with types; {
     enable = mkBoolOpt false "Whether or not to manage networking settings.";
   };
 

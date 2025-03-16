@@ -11,9 +11,8 @@
     common.enable = true;
     gaming.enable = true;
   };
-
-  system = {
-    custom = {
+  custom = {
+    system = {
       bluetooth.enable = true;
       desktop = {
         enable = true;

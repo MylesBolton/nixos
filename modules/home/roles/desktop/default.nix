@@ -19,7 +19,7 @@ in
   config = mkIf cfg.enable {
     cli.terminals.ghostty.enable = true;
     apps.firefox.enable = true;
-    services.custom = {
+    custom.services = {
       syncthing.enable = true;
     };
     home.packages = with pkgs; [

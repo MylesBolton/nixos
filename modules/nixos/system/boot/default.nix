@@ -9,10 +9,10 @@
 with lib;
 with lib.custom;
 let
-  cfg = config.system.custom.boot;
+  cfg = config.custom.system.boot;
 in
 {
-  options.system.custom.boot = with types; {
+  options.custom.system.boot = with types; {
     enable = mkBoolOpt false "Whether or not to enable booting.";
   };
 

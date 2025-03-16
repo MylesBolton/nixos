@@ -8,10 +8,10 @@
 with lib;
 with lib.custom;
 let
-  cfg = config.services.custom.tailscale;
+  cfg = config.custom.services.tailscale;
 in
 {
-  options.services.custom.tailscale = with types; {
+  options.custom.services.tailscale = with types; {
     enable = mkBoolOpt false "Whether or not to configure Tailscale";
     autoconnect = {
       enable = mkBoolOpt false "Whether or not to enable automatic connection to Tailscale";
