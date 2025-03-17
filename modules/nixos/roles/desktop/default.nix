@@ -31,11 +31,6 @@ in
         boot.plymouth = true;
         battery.enable = true;
       };
-      user = {
-        name = "user";
-        admin = true;
-        initialPassword = "1337";
-      };
     };
 
     ##### Default #####

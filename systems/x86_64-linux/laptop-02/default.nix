@@ -11,7 +11,14 @@
   ];
 
   networking.hostName = "laptop-02";
-  
+
+  snowfallorg.users = {
+    aj.admin = false;
+    mb.admin = false;
+    jb.admin = false;
+    jj.admin = false;
+  };
+
   roles = {
     desktop = {
       enable = true;

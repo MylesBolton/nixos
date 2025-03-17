@@ -27,6 +27,10 @@ in
       services = {
         openssh.enable = true;
       };
+      user = {
+        name = "user";
+        initialPassword = "1337";
+      };
     };
     styles.stylix.enable = true;
   };

@@ -17,7 +17,6 @@ in
     initialPassword =
       mkOpt str "1337"
       "The initial password to use";
-    admin = mkBoolOpt false "is admin";
     extraGroups = mkOpt (listOf str) [] "Groups for the user to be assigned.";
     extraOptions =
       mkOpt attrs {}
@@ -26,7 +25,6 @@ in
 
   config = {
     users.mutableUsers = true;
-    snowfallorg.users.${cfg.name}.admin = cfg.admin;
     users.users.${cfg.name} = {
         isNormalUser = true;
         inherit (cfg) name initialPassword;
@@ -35,10 +33,16 @@ in
 
         extraGroups =
           [
+            "wheel"
             "audio"
             "sound"
             "video"
-            "lp"
+            "networkmanager"
+            "input"
+            "tty"
+            "podman"
+            "kvm"
+            "libvirtd"
           ]
           ++ cfg.extraGroups;
       }
