@@ -25,6 +25,15 @@ in
         };
         printing.enable = true;
       };
+      environment.systemPackages = with pkgs; [
+        firefox
+        thunderbird
+        vlc
+        wl-clipboard
+        keepassxc
+        rustdesk
+        ghostty
+      ];
     }
 
     (mkIf cfg.kde {

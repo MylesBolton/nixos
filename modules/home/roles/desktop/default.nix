@@ -27,7 +27,7 @@ in
       vlc
       wl-clipboard
       keepassxc
-      #rustdesk
+      rustdesk
     ];
   };
 }
