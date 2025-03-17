@@ -8,17 +8,11 @@
   networking.hostName = "workstation-01";
 
   roles = {
-    common.enable = true;
-    gaming.enable = true;
-  };
-  custom = {
-    system = {
-      bluetooth.enable = true;
-      desktop = {
-        enable = true;
-        gnome = true;
-      };
+    desktop = {
+      enable = true;
+      gnome.enable = true;
     };
+    gaming.enable = true;
   };
 
   boot = {

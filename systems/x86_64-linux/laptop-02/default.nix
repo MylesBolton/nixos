@@ -11,18 +11,11 @@
   ];
 
   networking.hostName = "laptop-02";
-
+  
   roles = {
-    common.enable = true;
-  };
-  custom = {
-    system = {
-      bluetooth.enable = true;
-      battery.enable = true;
-      desktop = {
-        enable = true;
-        kde = true;
-      };
+    desktop = {
+      enable = true;
+      kde.enable = true;
     };
   };
 
