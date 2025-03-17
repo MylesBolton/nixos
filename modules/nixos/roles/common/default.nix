@@ -17,20 +17,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    virtualisation.docker.enable = true;
-    environment.systemPackages = with pkgs; [
-      gopass
-      gnupg
-      gpg-tui
-      git
-      unrar
-      unzip
-      zip
-      btop
-      pciutils
-      lsscsi
-      wget
-    ];
     custom = {
       system = {
         nix.enable = true;
@@ -39,7 +25,6 @@ in
         boot.enable = true;
       };
       services = {
-        tailscale.enable = true;
         openssh.enable = true;
       };
     };

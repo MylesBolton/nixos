@@ -27,9 +27,7 @@ in
 
     home.packages = with pkgs; [
       lutris
-      winetricks
-      wineWowPackages.stable
-      vulkan-tools
+      bottles
     ];
   };
 }

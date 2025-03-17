@@ -23,8 +23,8 @@ in
       steam = {
         enable = true;
         package = pkgs.steam.override {
-          extraPkgs = p:
-            with p; [
+          extraPkgs =
+            p: with p; [
               mangohud
               gamemode
             ];
@@ -37,5 +37,12 @@ in
         ];
       };
     };
+
+    environment.systemPackages = with pkgs; [
+      winetricks
+      wineWowPackages.waylandFull
+      vulkan-tools
+    ];
+
   };
 }
