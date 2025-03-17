@@ -21,7 +21,7 @@
       battery.enable = true;
       desktop = {
         enable = true;
-        gnome = true;
+        kde = true;
       };
     };
   };
