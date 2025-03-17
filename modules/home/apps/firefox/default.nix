@@ -24,7 +24,7 @@ in
       "x-scheme-handler/http" = [ "firefox.desktop" ];
       "x-scheme-handler/https" = [ "firefox.desktop" ];
     };
-
+    stylix.targets.firefox.profileNames = ["default"];
     programs.firefox = {
       enable = true;
       languagePacks = [ "en-GB" ];
@@ -39,7 +39,7 @@ in
         };
       };
       profiles.default = {
-        name = "Default";
+        name = "default";
         isDefault = true;
         
         settings = {
@@ -67,7 +67,7 @@ in
             floccus # bookmark sync
             languagetool # spelling help
             enhanced-github # better gh
-            new-tab-override # start page - need to find one that correctly selects the urlbar so i can instantly type to search
+            custom-new-tab-page #startpage
             ublock-origin # ad block
             startup-bookmarks #opens a folder of bookmarks on startup
             markdownload #dowlaods webpages as markdown

@@ -17,6 +17,7 @@ in
   };
 
   config = mkIf cfg.enable {
+    stylix.targets.vscode.profileNames = ["default"];
     programs.vscode = {
       enable = true;
       package = pkgs.vscode;
