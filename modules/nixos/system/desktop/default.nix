@@ -33,7 +33,7 @@ in
           enable = true;
           wayland.enable = true;
           settings = {
-            HideUsers = "user";
+            users.HideUsers = "user";
           };
         };
         desktopManager.plasma6.enable = true;
