@@ -33,7 +33,7 @@ in
           enable = true;
           wayland.enable = true;
           settings = {
-            users.HideUsers = "user";
+            Users.HideUsers = "user";
           };
         };
         desktopManager.plasma6.enable = true;
@@ -50,7 +50,6 @@ in
         kwallet
         kwalletmanager
       ];
-      environment.systemPackages = with pkgs; [ kdePackages.filelight ];
       programs.dconf.enable = true;
     })
 
