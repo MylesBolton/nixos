@@ -28,7 +28,8 @@ in
         CPU_BOOST_ON_BAT = 0;
         CPU_SCALING_GOVERNOR_ON_AC = "performance";
         CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-        USB_AUTOSUSPEND = 0;
+        USB_AUTOSUSPEND = -1;
+        RUNTIME_PM_DRIVER_DENYLIST="mei_me nouveau radeon xhci_hcd";
       };
     };
 
