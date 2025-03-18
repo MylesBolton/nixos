@@ -28,9 +28,9 @@ in
         CPU_BOOST_ON_BAT = 0;
         CPU_SCALING_GOVERNOR_ON_AC = "performance";
         CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-        USB_AUTOSUSPEND = -1;
-        AHCI_RUNTIME_PM_ON_AC=on;
-        USB_EXLUDE_PHONE=1;      
+        USB_AUTOSUSPEND = 0;
+        AHCI_RUNTIME_PM_ON_AC = 1;
+        USB_EXLUDE_PHONE = 1;      
         };
     };
 
