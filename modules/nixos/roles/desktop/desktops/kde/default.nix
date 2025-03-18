@@ -23,9 +23,9 @@ in
         displayManager.sddm = {
           enable = true;
           wayland.enable = true;
-          settings = {
-            Users.HideUsers = "user";
-          };
+          #settings = {
+          #  Users.HideUsers = "user";
+          #};
         };
         desktopManager.plasma6.enable = true;
         displayManager.defaultSession = "plasma";
@@ -40,7 +40,6 @@ in
         kate
         khelpcenter
         spectacle
-        krdp
       ];
       programs.dconf.enable = true;
     };
