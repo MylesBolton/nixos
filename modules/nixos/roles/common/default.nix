@@ -32,6 +32,19 @@ in
         initialPassword = "1337";
       };
     };
+    environment.systemPackages = with pkgs; [
+      gopass
+      gnupg
+      gpg-tui
+      git
+      unrar
+      unzip
+      zip
+      btop
+      pciutils
+      lsscsi
+      wget
+    ];
     styles.stylix.enable = true;
   };
 }

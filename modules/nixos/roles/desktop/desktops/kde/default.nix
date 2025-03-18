@@ -17,15 +17,15 @@ in
 
   config = mkIf cfg.enable {
       services = {
-        #xserver = {
-        #  excludePackages = [ pkgs.xterm ];
-        #};
+        xserver = {
+          excludePackages = [ pkgs.xterm ];
+        };
         displayManager.sddm = {
           enable = true;
           wayland.enable = true;
-          #settings = {
-          #  Users.HideUsers = "user";
-          #};
+          settings = {
+            Users.HideUsers = "user";
+          };
         };
         desktopManager.plasma6.enable = true;
         displayManager.defaultSession = "plasma";

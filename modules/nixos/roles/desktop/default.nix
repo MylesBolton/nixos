@@ -28,7 +28,6 @@ in
         virtualisation.podman.enable = true;
       };
       system = {
-        boot.plymouth = true;
         battery.enable = true;
       };
     };

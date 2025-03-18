@@ -22,7 +22,7 @@
   roles = {
     desktop = {
       enable = true;
-      kde.enable = true;
+      gnome.enable = true;
     };
   };
 

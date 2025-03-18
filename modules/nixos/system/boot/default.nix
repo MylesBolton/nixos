@@ -14,7 +14,6 @@ in
 {
   options.custom.system.boot = with types; {
     enable = mkBoolOpt false "Whether or not to enable booting.";
-    plymouth = mkBoolOpt false "Whether or not to enable plymouth boot screen.";
   };
 
   config = mkIf cfg.enable {

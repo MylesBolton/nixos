@@ -19,20 +19,6 @@ in
   config = mkIf cfg.enable {
     custom.system.nix.enable = true;
     cli.shells.fish.enable = true;
-    home.packages = with pkgs; [
-      gopass
-      gnupg
-      gpg-tui
-      git
-      unrar
-      unzip
-      zip
-      btop
-      pciutils
-      lsscsi
-      wget
-      docker
-    ];
     styles.stylix.enable = true;
   };
 }
