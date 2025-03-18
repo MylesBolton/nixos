@@ -39,7 +39,7 @@ in
         thunderbird
         vlc
         wl-clipboard
-        rustdesk
+        #rustdesk
         ghostty   
     ];
 
