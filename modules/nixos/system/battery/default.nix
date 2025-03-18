@@ -29,8 +29,9 @@ in
         CPU_SCALING_GOVERNOR_ON_AC = "performance";
         CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
         USB_AUTOSUSPEND = -1;
-        RUNTIME_PM_DRIVER_DENYLIST="mei_me nouveau radeon xhci_hcd";
-      };
+        AHCI_RUNTIME_PM_ON_AC=on;
+        USB_EXLUDE_PHONE=1;      
+        };
     };
 
     # Disable GNOMEs power management
