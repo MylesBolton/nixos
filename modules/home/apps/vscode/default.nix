@@ -55,7 +55,7 @@ in
             "formatterPath" = "nixfmt";
             "serverPath" = "nil";
           };
-          "projectManager.git.baseFolders" = [ "/home/user/git" ];
+          "projectManager.git.baseFolders" = [ "~/git" ];
           "[nix]" = {
             "editor.defaultFormatter" = "brettm12345.nixfmt-vscode";
           };
