@@ -56,6 +56,9 @@ in
             "serverPath" = "nil";
           };
           "projectManager.git.baseFolders" = [ "/home/user/git" ];
+          "[nix]" = {
+            "editor.defaultFormatter" = "brettm12345.nixfmt-vscode";
+          };
         };
         keybindings = [
           {
