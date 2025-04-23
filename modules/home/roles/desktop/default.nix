@@ -28,7 +28,6 @@ in
       wl-clipboard
       keepassxc
       #rustdesk
-      anki
     ];
   };
 }

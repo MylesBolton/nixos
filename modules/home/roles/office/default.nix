@@ -24,6 +24,7 @@ in
       obsidian
       glabels-qt
       ptouch-driver
+      anki-bin
     ];
   };
 }
