@@ -44,6 +44,7 @@ in
       pciutils
       lsscsi
       wget
+      unrar
     ];
     styles.stylix.enable = true;
   };
