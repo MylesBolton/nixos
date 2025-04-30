@@ -5,7 +5,7 @@
     ./hardware-configuration.nix
   ];
 
-  networking.hostName = "vm-phion-security-01";
+  networking.hostName = "vm-test-01";
 
   roles = {
     server.enable = true;
