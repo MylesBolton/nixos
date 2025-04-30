@@ -19,6 +19,13 @@
 
   styles.stylix.enable = true;
 
+  boot = {
+    initrd.availableKernelModules = [
+      "usbhid"
+      "usb_storage"
+    ];
+  };
+
   fileSystems."/nix/.rw-store" = {
     fsType = "tmpfs";
     options = [
