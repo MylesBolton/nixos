@@ -24,7 +24,7 @@ in
       "x-scheme-handler/http" = [ "firefox.desktop" ];
       "x-scheme-handler/https" = [ "firefox.desktop" ];
     };
-    stylix.targets.firefox.profileNames = ["default"];
+    stylix.targets.firefox.profileNames = [ "default" ];
     programs.firefox = {
       enable = true;
       languagePacks = [ "en-GB" ];
@@ -41,7 +41,7 @@ in
       profiles.default = {
         name = "default";
         isDefault = true;
-        
+
         settings = {
           "browser.startup.homepage" = "https://startpage.mylesbolton.com/";
           "browser.search.region" = "GB";
@@ -67,11 +67,10 @@ in
             floccus # bookmark sync
             languagetool # spelling help
             enhanced-github # better gh
-            custom-new-tab-page #startpage
+            custom-new-tab-page # startpage
             ublock-origin # ad block
-            startup-bookmarks #opens a folder of bookmarks on startup
-            markdownload #dowlaods webpages as markdown
-            aria2-integration #multi-protocol downlaod util 
+            startup-bookmarks # opens a folder of bookmarks on startup
+            markdownload # dowlaods webpages as markdown
 
             #yt specific
             enhancer-for-youtube # 1080p 2.5x speed mods
