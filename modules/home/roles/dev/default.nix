@@ -23,6 +23,7 @@ in
       code-cursor
       nixfmt-rfc-style
       nil
+      ventoy-full
     ];
   };
 }
