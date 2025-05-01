@@ -1,11 +1,13 @@
-{pkgs, namespace, ...}: {
+{ pkgs, namespace, ... }:
+{
 
   roles = {
     common.enable = true;
     desktop.enable = true;
     office.enable = true;
+    rot.enable = true;
   };
-  
+
   custom.user = {
     enable = true;
     name = "aj";

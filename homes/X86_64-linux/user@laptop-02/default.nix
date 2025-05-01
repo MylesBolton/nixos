@@ -1,10 +1,11 @@
-{pkgs, namespace, ...}: {
+{ pkgs, namespace, ... }:
+{
 
   roles = {
-    #common.enable = true;
-    #desktop.enable = true;
+    common.enable = true;
+    desktop.enable = true;
   };
-  
+
   custom.user = {
     enable = true;
     name = "user";
