@@ -26,6 +26,8 @@ in {
         tsu = "tailscale up";
         tsd = "tailscale down";
         tss = "tailscale status";
+        comstat = "journalctl -f -u comin.service";
+        homstat = "journalctl -f -u home-manager-user.service"
       };
 
       functions = { };
