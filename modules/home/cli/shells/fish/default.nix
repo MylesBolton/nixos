@@ -11,7 +11,8 @@ with lib.custom;
 let
   inherit (config.lib.stylix) colors;
   cfg = config.cli.shells.fish;
-in {
+in
+{
   options.cli.shells.fish = with types; {
     enable = mkBoolOpt false "enable fish shell";
   };
@@ -27,7 +28,7 @@ in {
         tsd = "tailscale down";
         tss = "tailscale status";
         comstat = "journalctl -f -u comin.service";
-        homstat = "journalctl -f -u home-manager-user.service"
+        homstat = "journalctl -f -u home-manager-user.service";
       };
 
       functions = { };
@@ -49,4 +50,3 @@ in {
     };
   };
 }
-
