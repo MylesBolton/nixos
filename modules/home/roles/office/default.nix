@@ -25,6 +25,7 @@ in
       glabels-qt
       ptouch-driver
       anki-bin
+      orca-slicer
     ];
   };
 }
