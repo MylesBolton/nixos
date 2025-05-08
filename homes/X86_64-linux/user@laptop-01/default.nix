@@ -11,6 +11,8 @@
     dev.enable = true;
   };
 
+  styles.stylix.wallpaper = "tree";
+
   custom.user = {
     enable = true;
     name = "user";

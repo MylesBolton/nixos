@@ -6,6 +6,8 @@
   namespace,
   ...
 }:
+with lib;
+with lib.custom;
 let
   cfg = config.styles.stylix;
 in
@@ -14,8 +16,9 @@ in
     stylix.homeManagerModules.stylix
   ];
 
-  options.styles.stylix = {
-    enable = lib.mkEnableOption "Enable stylix";
+  options.styles.stylix = with types; {
+    enable = mkBoolOpt false "Enable stylix";
+    wallpaper = mkOpt str "jellyfish" "wallpaper name";
   };
 
   config = lib.mkIf cfg.enable {
@@ -24,7 +27,7 @@ in
       autoEnable = true;
       base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
-      image = pkgs.custom.wallpapers.main;
+      image = pkgs.custom.wallpapers.${cfg.wallpaper};
 
       cursor = {
         name = "Bibata-Modern-Classic";
@@ -33,7 +36,7 @@ in
       };
 
       fonts = {
-        
+
         serif = {
           package = pkgs.dejavu_fonts;
           name = "DejaVu Serif";
