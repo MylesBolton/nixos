@@ -8,6 +8,7 @@
     gaming.enable = true;
     social.enable = true;
     rot.enable = true;
+    cad.enable = true;
   };
 
   custom.user = {

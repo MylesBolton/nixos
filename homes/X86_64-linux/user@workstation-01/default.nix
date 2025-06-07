@@ -1,4 +1,5 @@
-{pkgs, namespace, ...}: {
+{ pkgs, namespace, ... }:
+{
 
   roles = {
     common.enable = true;
@@ -9,12 +10,13 @@
     rot.enable = true;
     dev.enable = true;
     ai.enable = true;
+    cad.enable = true;
   };
 
   custom.user = {
-      enable = true;
-      name = "user";
-    };
-    
+    enable = true;
+    name = "user";
+  };
+
   home.stateVersion = "24.05";
 }

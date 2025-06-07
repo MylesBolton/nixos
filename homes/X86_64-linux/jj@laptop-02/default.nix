@@ -9,6 +9,7 @@
     social.enable = true;
     rot.enable = true;
     dev.enable = true;
+    cad.enable = true;
   };
 
   custom.user = {
