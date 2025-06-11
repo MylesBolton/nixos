@@ -16,40 +16,84 @@
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
-                mountOptions = [
-                  "defaults"
-                ];
+                mountOptions = [ "defaults" ];
               };
             };
             root = {
               size = "100%";
               content = {
                 type = "btrfs";
-                extraArgs = ["-L" "nixos" "-f"];
+                extraArgs = [
+                  "-L"
+                  "nixos_root"
+                  "-f"
+                ]; # Changed label
                 subvolumes = {
                   "/root" = {
                     mountpoint = "/";
-                    mountOptions = ["subvol=root" "compress=zstd" "noatime"];
-                  };
-                  "/home" = {
-                    mountpoint = "/home";
-                    mountOptions = ["subvol=home" "compress=zstd" "noatime"];
+                    mountOptions = [
+                      "subvol=root"
+                      "compress=zstd"
+                      "noatime"
+                    ];
                   };
                   "/nix" = {
                     mountpoint = "/nix";
-                    mountOptions = ["subvol=nix" "compress=zstd" "noatime"];
-                  };
-                  "/persist" = {
-                    mountpoint = "/persist";
-                    mountOptions = ["subvol=persist" "compress=zstd" "noatime"];
+                    mountOptions = [
+                      "subvol=nix"
+                      "compress=zstd"
+                      "noatime"
+                    ];
                   };
                   "/log" = {
                     mountpoint = "/var/log";
-                    mountOptions = ["subvol=log" "compress=zstd" "noatime"];
+                    mountOptions = [
+                      "subvol=log"
+                      "compress=zstd"
+                      "noatime"
+                    ];
                   };
                   "/swap" = {
                     mountpoint = "/swap";
                     swap.swapfile.size = "16G";
+                  };
+                };
+              };
+            };
+          };
+        };
+      };
+      nvme1n1 = {
+        type = "disk";
+        device = "/dev/nvme1n1";
+        content = {
+          type = "gpt";
+          partitions = {
+            data = {
+              size = "100%";
+              content = {
+                type = "btrfs";
+                extraArgs = [
+                  "-L"
+                  "nixos_data"
+                  "-f"
+                ];
+                subvolumes = {
+                  "/home" = {
+                    mountpoint = "/home";
+                    mountOptions = [
+                      "subvol=home"
+                      "compress=zstd"
+                      "noatime"
+                    ];
+                  };
+                  "/persist" = {
+                    mountpoint = "/persist";
+                    mountOptions = [
+                      "subvol=persist"
+                      "compress=zstd"
+                      "noatime"
+                    ];
                   };
                 };
               };
