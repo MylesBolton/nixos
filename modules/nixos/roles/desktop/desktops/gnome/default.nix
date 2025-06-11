@@ -16,47 +16,49 @@ in
   };
 
   config = mkIf cfg.enable {
-      services.xserver = {
+    services = {
+      xserver = {
         enable = true;
         excludePackages = [ pkgs.xterm ];
-        displayManager.gdm = {
-          enable = true;
-          settings.greeter = {
-            Exclude = "user";
-          };
-        };
-        desktopManager.gnome.enable = true;
       };
-
-      environment.systemPackages = with pkgs.gnomeExtensions; [
-        blur-my-shell
-        headsetcontrol
-        tactile
-        syncthing-indicator
-        dash-to-dock
-        caffeine
-        sound-percentage
-        gsconnect
-      ];
-      environment.gnome.excludePackages = (
-        with pkgs;
-        [
-          atomix
-          cheese
-          epiphany
-          evince
-          geary
-          gedit
-          gnome-characters
-          gnome-music
-          gnome-photos
-          gnome-terminal
-          gnome-tour
-          hitori
-          iagno
-          tali
-          totem
-        ]
-      );
+      displayManager.gdm = {
+        enable = true;
+        settings.greeter = {
+          Exclude = "user";
+        };
+      };
+      desktopManager.gnome.enable = true;
     };
+
+    environment.systemPackages = with pkgs.gnomeExtensions; [
+      blur-my-shell
+      headsetcontrol
+      tactile
+      syncthing-indicator
+      dash-to-dock
+      caffeine
+      sound-percentage
+      gsconnect
+    ];
+    environment.gnome.excludePackages = (
+      with pkgs;
+      [
+        atomix
+        cheese
+        epiphany
+        evince
+        geary
+        gedit
+        gnome-characters
+        gnome-music
+        gnome-photos
+        gnome-terminal
+        gnome-tour
+        hitori
+        iagno
+        tali
+        totem
+      ]
+    );
+  };
 }
