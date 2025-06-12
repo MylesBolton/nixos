@@ -20,6 +20,14 @@ in
     networking = {
       networkmanager.enable = true;
       firewall.enable = true;
+      wireless = {
+        enable = true;
+        networks = {
+          "Guest WIFI" = {
+            psk = "ThePassword";
+          };
+        };
+      };
     };
   };
 }
