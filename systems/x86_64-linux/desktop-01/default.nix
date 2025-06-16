@@ -7,6 +7,12 @@
 
   networking.hostName = "desktop-01";
 
+  custom.system.networking.wifi = {
+    enable = true;
+    guest = true;
+    home = true;
+  };
+
   roles = {
     desktop = {
       enable = true;
