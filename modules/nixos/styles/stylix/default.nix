@@ -31,26 +31,26 @@ in
       };
 
       fonts = {
+
         serif = {
-          package = pkgs.dejavu_fonts;
-          name = "DejaVu Serif";
+          package = pkgs.atkinson-hyperlegible-next;
+          name = "atkinson hyperlegible";
         };
 
         sansSerif = {
-          package = pkgs.dejavu_fonts;
-          name = "DejaVu Sans";
+          package = pkgs.atkinson-hyperlegible-next;
+          name = "atkinson hyperlegible";
         };
 
         monospace = {
-          package = pkgs.b612;
-          name = "b612 Font";
+          package = pkgs.atkinson-hyperlegible-mono;
+          name = "atkinson hyperlegible mono";
         };
 
         emoji = {
           package = pkgs.openmoji-color;
           name = "OpenMoji Color";
         };
-
       };
     };
   };

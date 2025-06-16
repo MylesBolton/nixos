@@ -33,28 +33,15 @@ in
           brettm12345.nixfmt-vscode
         ];
         userSettings = {
-          "editor" = {
-            "formatOnPaste" = true;
-            "formatOnSave" = true;
-          };
-          "git" = {
-            "autofetch" = true;
-            "enableSmartCommit" = true;
-          };
-          "workbench" = {
-            "iconTheme" = "catppuccin-mocha";
-          };
-          "terminal" = {
-            "integrated" = {
-              "defaultProfile" = {
-                "linux" = "fish";
-              };
-            };
-          };
-          "nix" = {
-            "formatterPath" = "nixfmt";
-            "serverPath" = "nil";
-          };
+          "editor.formatOnPaste" = true;
+          "editor.formatOnSave" = true;
+          "git.autofetch" = true;
+          "git.enableSmartCommit" = true;
+          "git.confirmSync" = false;
+          "workbench.iconTheme" = "catppuccin-mocha";
+          "terminal.integrated.defaultProfile.linux" = "fish";
+          "nix.formatterPath" = "nixfmt";
+          "nix.serverPath" = "nil";
           "projectManager.git.baseFolders" = [ "~/git" ];
           "[nix]" = {
             "editor.defaultFormatter" = "brettm12345.nixfmt-vscode";
