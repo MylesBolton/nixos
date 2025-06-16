@@ -43,6 +43,7 @@ in
       winetricks
       wineWowPackages.waylandFull
       vulkan-tools
+      intel-gpu-tools
     ];
 
   };
