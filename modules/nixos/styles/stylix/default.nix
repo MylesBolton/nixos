@@ -34,12 +34,12 @@ in
 
         serif = {
           package = pkgs.atkinson-hyperlegible-next;
-          name = "Atkinson Hyperlegible";
+          name = "Atkinson Hyperlegible Next";
         };
 
         sansSerif = {
           package = pkgs.atkinson-hyperlegible-next;
-          name = "Atkinson Hyperlegible";
+          name = "Atkinson Hyperlegible Next";
         };
 
         monospace = {
