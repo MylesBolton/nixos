@@ -33,7 +33,6 @@ in
           brettm12345.nixfmt-vscode
           bradlc.vscode-tailwindcss
           dbaeumer.vscode-eslint
-          skyapps.fish-vscode
           tailscale.vscode-tailscale
         ];
         userSettings = {
@@ -50,6 +49,9 @@ in
           "[nix]" = {
             "editor.defaultFormatter" = "brettm12345.nixfmt-vscode";
           };
+          "[typescriptreact]" = {
+            "editor.defaultFormatter" = "esbenp.prettier-vscode"
+          }
         };
         keybindings = [
           {
