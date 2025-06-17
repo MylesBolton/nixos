@@ -23,6 +23,11 @@ in
       code-cursor
       nixfmt-rfc-style
       nil
+      typescript
+      typescript-language-server
+      shadcn
+      tailwindcss
+      bun
       #ventoy-full
     ];
   };

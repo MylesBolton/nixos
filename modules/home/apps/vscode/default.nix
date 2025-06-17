@@ -31,6 +31,11 @@ in
           jnoortheen.nix-ide
           github.vscode-github-actions
           brettm12345.nixfmt-vscode
+          oven.bun-vscode
+          ms-vscode.vscode-typescript-next
+          rvest.vs-code-prettier-eslint
+          bradlc.vscode-tailwindcss
+          dbaeumer.vscode-eslint
         ];
         userSettings = {
           "editor.formatOnPaste" = true;
