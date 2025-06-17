@@ -39,17 +39,17 @@ in
 
         serif = {
           package = pkgs.atkinson-hyperlegible-next;
-          name = "atkinson hyperlegible";
+          name = "Atkinson Hyperlegible";
         };
 
         sansSerif = {
           package = pkgs.atkinson-hyperlegible-next;
-          name = "atkinson hyperlegible";
+          name = "Atkinson Hyperlegible";
         };
 
         monospace = {
-          package = pkgs.atkinson-hyperlegible-mono;
-          name = "atkinson hyperlegible mono";
+          package = pkgs.nerd-fonts.atkynson-mono;
+          name = "AtkynsonMono Nerd Font";
         };
 
         emoji = {
@@ -57,6 +57,15 @@ in
           name = "OpenMoji Color";
         };
       };
+
+      opacity = {
+        applications = 0.95;
+        terminal = 0.85;
+        desktop = 1.0;
+        popups = 0.95;
+      };
+
+      polarity = "dark";
     };
   };
 }
