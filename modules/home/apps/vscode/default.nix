@@ -50,8 +50,8 @@ in
             "editor.defaultFormatter" = "brettm12345.nixfmt-vscode";
           };
           "[typescriptreact]" = {
-            "editor.defaultFormatter" = "esbenp.prettier-vscode"
-          }
+            "editor.defaultFormatter" = "esbenp.prettier-vscode";
+          };
         };
         keybindings = [
           {
