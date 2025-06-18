@@ -10,7 +10,7 @@
     ./hardware-configuration.nix
   ];
 
-  networking.hostName = "laptop-02";
+  networking.hostName = "laptop-03";
 
   custom.system.networking.wifi = {
     enable = true;
