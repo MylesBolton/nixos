@@ -18,5 +18,8 @@ in
 
   config = mkIf cfg.enable {
     custom.services.ollama.enable = true;
+    home.packages = with pkgs; [
+      koboldcpp
+    ];
   };
 }
