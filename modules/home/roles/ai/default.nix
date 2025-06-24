@@ -20,6 +20,7 @@ in
     custom.services.ollama.enable = true;
     home.packages = with pkgs; [
       koboldcpp
+      aider-chat-full
     ];
   };
 }
