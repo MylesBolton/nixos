@@ -25,7 +25,6 @@ in
       nil
       typescript
       typescript-language-server
-      shadcn
       tailwindcss
       bun
       #ventoy-full
