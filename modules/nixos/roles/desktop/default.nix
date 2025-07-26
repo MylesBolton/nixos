@@ -20,7 +20,7 @@ in
     roles = {
       common.enable = true;
     };
-    
+
     custom = {
       services = {
         avahi.enable = true;
@@ -33,13 +33,13 @@ in
     };
 
     ##### Default #####
-      environment.systemPackages = with pkgs; [
-        firefox
-        thunderbird
-        vlc
-        wl-clipboard
-        #rustdesk
-        ghostty   
+    environment.systemPackages = with pkgs; [
+      firefox
+      thunderbird
+      vlc
+      wl-clipboard
+      #rustdesk
+      ghostty
     ];
 
     services = {

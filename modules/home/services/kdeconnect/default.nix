@@ -10,7 +10,8 @@ with lib;
 with lib.custom;
 let
   cfg = config.custom.services.kdeconnect;
-in {
+in
+{
   options.custom.services.kdeconnect = with types; {
     enable = mkBoolOpt false "Whether or not to manage kdeconnect";
   };

@@ -17,7 +17,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    
+
     home.packages = with pkgs; [
       nix-output-monitor
       nvd
@@ -31,7 +31,10 @@ in
 
     nix = {
       settings = {
-        experimental-features = ["nix-command" "flakes"];
+        experimental-features = [
+          "nix-command"
+          "flakes"
+        ];
         warn-dirty = false;
         use-xdg-base-directories = true;
       };
@@ -39,9 +42,8 @@ in
 
     news = {
       display = "silent";
-      json = lib.mkForce {};
-      entries = lib.mkForce [];
+      json = lib.mkForce { };
+      entries = lib.mkForce [ ];
     };
   };
 }
-

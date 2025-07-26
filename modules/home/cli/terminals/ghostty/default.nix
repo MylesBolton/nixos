@@ -5,9 +5,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.cli.terminals.ghostty;
-in {
+in
+{
   options.cli.terminals.ghostty = {
     enable = mkEnableOption "enable ghostty terminal emulator";
   };

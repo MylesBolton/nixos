@@ -30,8 +30,8 @@ in
         CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
         USB_AUTOSUSPEND = 0;
         AHCI_RUNTIME_PM_ON_AC = 1;
-        USB_EXLUDE_PHONE = 1;      
-        };
+        USB_EXLUDE_PHONE = 1;
+      };
     };
 
     # Disable GNOMEs power management

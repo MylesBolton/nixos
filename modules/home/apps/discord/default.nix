@@ -7,15 +7,19 @@
   namespace,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.apps.discord;
-in {
+in
+{
   options.apps.discord = {
     enable = mkEnableOption "enable discord";
   };
 
   config = mkIf cfg.enable {
-    xdg.configFile."BetterDicord/data/stable/custom.css" = {source = ./custom.css;};
-    home.packages = with pkgs; [goofcord];
+    xdg.configFile."BetterDicord/data/stable/custom.css" = {
+      source = ./custom.css;
+    };
+    home.packages = with pkgs; [ goofcord ];
   };
 }

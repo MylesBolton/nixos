@@ -16,13 +16,13 @@ in
     enable = mkBoolOpt false "Enable ssh";
   };
 
-  config = mkIf cfg.enable {  
+  config = mkIf cfg.enable {
     networking.firewall = {
-      allowedTCPPorts = [22];
-    }; 
+      allowedTCPPorts = [ 22 ];
+    };
     services.openssh = {
       enable = true;
-      ports = [22];
+      ports = [ 22 ];
 
       settings = {
         PasswordAuthentication = false;

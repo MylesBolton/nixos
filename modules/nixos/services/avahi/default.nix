@@ -3,9 +3,11 @@
   config,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.custom.services.avahi;
-in {
+in
+{
   options.custom.services.avahi = {
     enable = mkEnableOption "Enable The Avahi service";
   };
