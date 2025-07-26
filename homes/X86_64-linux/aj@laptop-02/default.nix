@@ -8,6 +8,8 @@
     rot.enable = true;
   };
 
+  styles.stylix.wallpaper = "soft-rose";
+
   custom.user = {
     enable = true;
     name = "aj";

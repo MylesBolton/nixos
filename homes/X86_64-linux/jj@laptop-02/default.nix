@@ -11,6 +11,7 @@
     dev.enable = true;
     cad.enable = true;
   };
+  styles.stylix.wallpaper = "panes";
 
   custom.user = {
     enable = true;

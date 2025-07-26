@@ -10,6 +10,7 @@
     rot.enable = true;
     cad.enable = true;
   };
+  styles.stylix.wallpaper = "dark-star";
 
   custom.user = {
     enable = true;
