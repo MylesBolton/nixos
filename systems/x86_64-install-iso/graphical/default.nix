@@ -1,32 +1,20 @@
 { lib, namespace, ... }:
 {
 
-  system = {
-    custom = {
-      nix.enable = true;
-      networking.enable = true;
-      locale.enable = true;
-      boot.enable = true;
-      bluetooth.enable = true;
-      battery.enable = true;
-      desktop = {
-        enable = true;
-        gnome = true;
-      };
+  roles = {
+    desktop = {
+      enable = true;
+      gnome.enable = true;
     };
   };
 
-  services = {
-    openssh.enable = true;
-    custom = {
-      tailscale.enable = true;
-    };
-  };
   styles.stylix.enable = true;
 
-  user = {
-    name = "nixos";
-    initialPassword = "1337";
+  boot = {
+    initrd.availableKernelModules = [
+      "usbhid"
+      "usb_storage"
+    ];
   };
 
   fileSystems."/nix/.rw-store" = {

@@ -29,6 +29,12 @@ in
       };
       system = {
         battery.enable = true;
+        networking = {
+          wifi = {
+            enable = true;
+            guest = true;
+          };
+        };
       };
     };
 

@@ -1,19 +1,8 @@
 { lib, namespace, ... }:
 {
-  custom = {
-    user = {
-      name = "nixos";
-      initialPassword = "1337";
-    };
-    system = {
-      nix.enable = true;
-      networking.enable = true;
-      locale.enable = true;
-      boot.enable = true;
-    };
-    services = {
-      openssh.enable = true;
-      tailscale.enable = true;
+  roles = {
+    common = {
+      enable = true;
     };
   };
 
