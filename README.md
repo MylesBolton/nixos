@@ -10,7 +10,7 @@ nix build .#install-isoConfigurations.minimal
 nix build .#install-isoConfigurations.graphical
 
 #install iso to usb
-dd if=result/iso/*.iso of=/dev/sda status=progress
+dd if=result/iso/* of=/dev/* status=progress
 ```
 
 ## Credits
