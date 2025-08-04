@@ -12,6 +12,10 @@
 
   networking.hostName = "laptop-03";
 
+  snowfallorg.users = {
+    jj.admin = false;
+  };
+
   custom.system.networking.wifi = {
     enable = true;
     guest = true;
