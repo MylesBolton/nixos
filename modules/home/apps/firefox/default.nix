@@ -26,6 +26,10 @@ in
     };
     stylix.targets.firefox.profileNames = [ "default" ];
     programs.firefox = {
+      nativeMessagingHosts = [
+        "fx_cast"
+        "gsconnect"
+      ];
       enable = true;
       languagePacks = [ "en-GB" ];
       policies = {
