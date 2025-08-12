@@ -22,6 +22,7 @@ in
       jellyfin-media-player
       spotify
       spotify-tray
+      mkchromecast
     ];
   };
 }

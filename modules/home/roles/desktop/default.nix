@@ -27,7 +27,6 @@ in
       vlc
       wl-clipboard
       keepassxc
-      mkchromecast
       #rustdesk
     ];
     dconf.settings = {
