@@ -27,8 +27,8 @@ in
     stylix.targets.firefox.profileNames = [ "default" ];
     programs.firefox = {
       nativeMessagingHosts = [
-        "fx_cast"
-        "GSConnect"
+        pkgs.fx-cast-bridge
+        pkgs.gnomeExtensions.gsconnect
       ];
       enable = true;
       languagePacks = [ "en-GB" ];
