@@ -73,7 +73,7 @@ in
             markdownload # dowlaods webpages as markdown
 
             #yt specific
-            enhancer-for-youtube # 1080p 2.5x speed mods
+            #enhancer-for-youtube # 1080p 2.5x speed mods
             youtube-recommended-videos # remove yt brain rot
             sponsorblock # remove yt sponsor spots
 
