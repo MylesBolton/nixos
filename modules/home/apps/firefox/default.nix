@@ -28,7 +28,7 @@ in
     programs.firefox = {
       nativeMessagingHosts = [
         "fx_cast"
-        "gsconnect"
+        "GSConnect"
       ];
       enable = true;
       languagePacks = [ "en-GB" ];
