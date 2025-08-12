@@ -27,6 +27,7 @@ in
       typescript-language-server
       tailwindcss
       bun
+      unifi
     ];
   };
 }
