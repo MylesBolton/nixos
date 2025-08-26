@@ -43,21 +43,22 @@ in
     environment.gnome.excludePackages = (
       with pkgs;
       [
-        atomix
-        cheese
+        baobab
+        decibels
         epiphany
-        evince
-        geary
-        gedit
+        gnome-text-editor
+        gnome-calendar
         gnome-characters
+        gnome-contacts
+        gnome-font-viewer
+        gnome-logs
+        gnome-maps
         gnome-music
-        gnome-photos
-        gnome-terminal
-        gnome-tour
-        hitori
-        iagno
-        tali
+        gnome-weather
+        loupe
+        gnome-connections
         totem
+        yelp
       ]
     );
   };
