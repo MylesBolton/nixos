@@ -28,7 +28,6 @@ in
         virtualisation.podman.enable = true;
       };
       system = {
-        battery.enable = true;
         networking = {
           wifi = {
             enable = true;
@@ -38,14 +37,14 @@ in
       };
     };
 
-    ##### Default #####
     environment.systemPackages = with pkgs; [
       firefox
       thunderbird
       vlc
       wl-clipboard
-      #rustdesk
+      rustdesk-flutter
       ghostty
+      ventoy-full-gtk
     ];
 
     services = {
