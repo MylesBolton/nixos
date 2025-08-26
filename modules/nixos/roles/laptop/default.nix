@@ -17,8 +17,10 @@ in
   };
 
   config = mkIf cfg.enable {
-    system = {
-      battery.enable = true;
+    custom = {
+      system = {
+        battery.enable = true;
+      };
     };
   };
 }
