@@ -45,7 +45,6 @@ in
       lsscsi
       wget
       curl
-      vim
       nmap
     ];
     styles.stylix.enable = true;
