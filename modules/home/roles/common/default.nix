@@ -20,12 +20,5 @@ in
     custom.system.nix.enable = true;
     cli.shells.fish.enable = true;
     styles.stylix.enable = true;
-    xsession.numlock.enable = true;
-    dconf.settings = {
-      "org/gnome/desktop/peripherals/keyboard" = {
-        numlock-state = true;
-        remember-numlock-state = true;
-      };
-    };
   };
 }

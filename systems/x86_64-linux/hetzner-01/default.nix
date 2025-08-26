@@ -11,7 +11,7 @@
   ];
   networking.hostName = "hetzner-01";
   roles = {
-    common.enable = true;
+    server.enable = true;
   };
   boot = {
     supportedFilesystems = lib.mkForce [ "btrfs" ];
