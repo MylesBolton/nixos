@@ -15,6 +15,12 @@
     gaming.enable = true;
   };
 
+  environment.systemPackages = with pkgs; [
+    intel-media-driver
+    libvpl
+    intel-gpu-tools
+  ];
+
   boot = {
     supportedFilesystems = lib.mkForce [ "btrfs" ];
     kernelPackages = pkgs.linuxPackages_latest;
