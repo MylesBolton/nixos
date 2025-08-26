@@ -44,7 +44,9 @@ in
       pciutils
       lsscsi
       wget
-      unrar
+      curl
+      vim
+      nmap
     ];
     styles.stylix.enable = true;
   };
