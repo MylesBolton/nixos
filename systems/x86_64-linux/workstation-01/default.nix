@@ -16,9 +16,17 @@
   };
 
   environment.systemPackages = with pkgs; [
-    intel-media-driver
-    libvpl
     intel-gpu-tools
+  ];
+
+  hardware.graphics.extraPackages = with pkgs; [
+    intel-media-driver
+    intel-compute-runtime
+    vpl-gpu-rt
+  ];
+
+  hardware.graphics.extraPackages32 = with pkgs.pkgsi686Linux; [
+    intel-media-driver
   ];
 
   boot = {
