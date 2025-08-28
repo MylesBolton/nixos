@@ -21,9 +21,7 @@
     "sg"
     "xe"
   ];
-  boot.kernelParams = [
-    "i915.enable_guc=2"
-  ];
+  boot.kernelParams = [ ];
   boot.extraModulePackages = [ ];
   networking.useDHCP = lib.mkDefault true;
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

@@ -26,6 +26,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixgl.url = "github:nix-community/nixGL";
     comin = {
       url = "github:nlewo/comin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -73,6 +74,7 @@
 
       overlays = with inputs; [
         nur.overlays.default
+        nixgl.overlay
       ];
 
       systems.modules.nixos = with inputs; [
