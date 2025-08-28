@@ -15,10 +15,11 @@
     "usbhid"
     "sr_mod"
   ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.kernelModules = [ "xe" ];
   boot.kernelModules = [
     "kvm-intel"
     "sg"
+    "xe"
   ];
   boot.kernelParams = [ ];
   boot.extraModulePackages = [ ];
