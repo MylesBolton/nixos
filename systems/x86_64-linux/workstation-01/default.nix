@@ -17,17 +17,21 @@
 
   environment.systemPackages = with pkgs; [
     intel-gpu-tools
+    clinfo
+    glxinfo
+    nvtopPackages.intel
+    vulkan-tools
   ];
 
   hardware.graphics.extraPackages = with pkgs; [
-    intel-media-driver
-    intel-compute-runtime
+    #intel-media-driver
+    #intel-compute-runtime
     vpl-gpu-rt
   ];
 
-  hardware.graphics.extraPackages32 = with pkgs.pkgsi686Linux; [
-    intel-media-driver
-  ];
+  #hardware.graphics.extraPackages32 = with pkgs.pkgsi686Linux; [
+  #  intel-media-driver
+  #];
 
   boot = {
     supportedFilesystems = lib.mkForce [ "btrfs" ];
