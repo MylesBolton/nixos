@@ -27,10 +27,12 @@
     intel-media-driver
     intel-compute-runtime
     vpl-gpu-rt
+    libvdpau-va-gl
   ];
 
   hardware.graphics.extraPackages32 = with pkgs.pkgsi686Linux; [
     intel-media-driver
+    libvdpau-va-gl
   ];
 
   boot = {
