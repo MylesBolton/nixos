@@ -15,6 +15,10 @@
     gaming.enable = true;
   };
 
+  environment.variables = {
+    GSK_RENDERER = "gl";
+  };
+
   environment.systemPackages = with pkgs; [
     intel-gpu-tools
     clinfo
