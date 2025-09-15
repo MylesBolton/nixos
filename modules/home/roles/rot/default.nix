@@ -19,7 +19,7 @@ in
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       netflix
-      jellyfin-media-player
+      jellyflix
       spotify
       spotify-tray
       fx-cast-bridge
