@@ -41,7 +41,7 @@ in
           "git.autofetch" = true;
           "git.enableSmartCommit" = true;
           "git.confirmSync" = false;
-          "workbench.iconTheme" = "catppuccin-mocha";
+          "geminicodeassist.project" = "radiant-wall-473314-m8";
           "terminal.integrated.defaultProfile.linux" = "fish";
           "nix.formatterPath" = "nixfmt";
           "nix.serverPath" = "nil";
