@@ -34,6 +34,8 @@ in
           bradlc.vscode-tailwindcss
           dbaeumer.vscode-eslint
           tailscale.vscode-tailscale
+          google.geminicodeassist
+          apertia.vscode-aider
         ];
         userSettings = {
           "editor.formatOnPaste" = true;
