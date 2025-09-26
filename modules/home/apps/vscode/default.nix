@@ -34,8 +34,9 @@ in
           bradlc.vscode-tailwindcss
           dbaeumer.vscode-eslint
           tailscale.vscode-tailscale
-          google.geminicodeassist
-          apertia.vscode-aider
+          ms-vscode-remote.remote-containers
+          ms-vscode-remote.remote-ssh
+          ms-vscode-remote.remote-ssh-edit
         ];
         userSettings = {
           "editor.formatOnPaste" = true;
