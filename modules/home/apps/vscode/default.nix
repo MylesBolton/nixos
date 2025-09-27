@@ -36,7 +36,6 @@ in
           tailscale.vscode-tailscale
           ms-vscode-remote.remote-containers
           ms-vscode-remote.remote-ssh
-          ms-vscode-remote.remote-ssh-edit
         ];
         userSettings = {
           "editor.formatOnPaste" = true;
