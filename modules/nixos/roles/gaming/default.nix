@@ -48,6 +48,7 @@ in
     environment.systemPackages = with pkgs; [
       steamtinkerlaunch
       winetricks
+      protontricks
       wineWowPackages.waylandFull
     ];
   };
