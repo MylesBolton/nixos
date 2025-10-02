@@ -28,6 +28,7 @@ in
     home.packages = with pkgs; [
       lutris
       bottles
+      uesave
     ];
   };
 }
