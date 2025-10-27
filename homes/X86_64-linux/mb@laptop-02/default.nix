@@ -10,6 +10,7 @@
     rot.enable = true;
     dev.enable = true;
     cad.enable = true;
+    priv.enable = true;
   };
 
   custom.user = {

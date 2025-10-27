@@ -9,8 +9,8 @@
     social.enable = true;
     rot.enable = true;
     dev.enable = true;
-    ai.enable = true;
     cad.enable = true;
+    priv.enable = true;
   };
 
   custom.user = {
