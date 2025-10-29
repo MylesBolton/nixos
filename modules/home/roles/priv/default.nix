@@ -9,19 +9,17 @@
 with lib;
 with lib.custom;
 let
-  cfg = config.roles.dev;
+  cfg = config.roles.priv;
 in
 {
-  options.roles.dev = with types; {
-    enable = mkBoolOpt false "enable dev role";
+  options.roles.priv = with types; {
+    enable = mkBoolOpt false "enable priv role";
   };
 
   config = mkIf cfg.enable {
-    apps.vscode.enable = true;
     home.packages = with pkgs; [
       tor-browser
       onioncircuits
-
     ];
   };
 }
