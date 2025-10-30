@@ -10,6 +10,7 @@
       url = "github:rafaelmardojai/firefox-gnome-theme";
       flake = false;
     };
+
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -31,17 +32,15 @@
       url = "github:nlewo/comin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    sops-nix = {
-      url = "github:mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    agenix.url = "github:ryantm/agenix";
     nixos-anywhere = {
       url = "github:numtide/nixos-anywhere";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.disko.follows = "disko";
     };
-    ghostty = {
-      url = "github:ghostty-org/ghostty";
+    nixpkgs-patch-qgnomeplatform-qt6-fix-build = {
+      url = "https://github.com/NixOS/nixpkgs/pull/455370.diff";
+      flake = false;
     };
   };
 
@@ -81,7 +80,7 @@
         stylix.nixosModules.stylix
         home-manager.nixosModules.home-manager
         disko.nixosModules.disko
-        sops-nix.nixosModules.sops
+        agenix.nixosModules.default
         comin.nixosModules.comin
         (
           { ... }:
@@ -92,9 +91,9 @@
                 {
                   name = "origin";
                   url = "https://github.com/MylesBolton/nixos.git";
-                  #auth.access_token_path = "/filepath/to/your/access/token";
+                  auth.access_token_path = "/persits/secrets/comin/token";
                   branches.main.name = "main";
-                  branches.testing.name = "testing";
+                  branches.testing.name = "beta";
                   poller.period = 300;
                 }
               ];

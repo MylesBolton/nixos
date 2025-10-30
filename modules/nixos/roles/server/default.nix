@@ -24,7 +24,6 @@ in
     custom = {
       services = {
         tailscale.enable = true;
-        virtualisation.podman.enable = true;
       };
     };
   };
