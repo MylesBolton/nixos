@@ -20,7 +20,6 @@ in
     apps.vscode.enable = true;
     home.packages = with pkgs; [
       xpipe
-      code-cursor
       nixfmt-rfc-style
       nil
       typescript
