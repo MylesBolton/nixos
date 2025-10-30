@@ -89,7 +89,7 @@
                   auth.access_token_path = "/persits/secrets/comin/token";
                   branches.main.name = "main";
                   branches.testing.name = "beta";
-                  poller.period = 300;
+                  poller.period = 1200;
                 }
               ];
             };
