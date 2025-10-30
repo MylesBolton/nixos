@@ -22,7 +22,7 @@
   environment.systemPackages = with pkgs; [
     intel-gpu-tools
     clinfo
-    glxinfo
+    mesa-demos
     nvtopPackages.intel
     vulkan-tools
   ];
