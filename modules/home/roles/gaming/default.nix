@@ -29,7 +29,6 @@ in
       lutris
       bottles
       uesave
-      factorio-space-age
     ];
   };
 }

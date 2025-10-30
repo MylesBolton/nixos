@@ -50,6 +50,7 @@ in
       winetricks
       protontricks
       wineWowPackages.waylandFull
+      factorio-space-age
     ];
   };
 }
