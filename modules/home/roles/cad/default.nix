@@ -21,6 +21,7 @@ in
       orca-slicer
       openscad
       freecad
+      librecad
     ];
   };
 }

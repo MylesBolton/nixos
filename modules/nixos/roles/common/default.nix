@@ -32,6 +32,10 @@ in
         initialPassword = "1337";
       };
     };
+    fonts = {
+      packages = builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+      enableDefaultPackages = true;
+    };
     environment.systemPackages = with pkgs; [
       gopass
       gnupg

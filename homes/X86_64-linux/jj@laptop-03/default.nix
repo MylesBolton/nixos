@@ -11,8 +11,12 @@
     dev.enable = true;
     cad.enable = true;
   };
-  styles.stylix.wallpaper = "panes";
-
+  styles.stylix = {
+    wallpaper = "panes";
+  };
+  home.packages = with pkgs; [
+    vista-fonts
+  ];
   custom.user = {
     enable = true;
     name = "jj";
