@@ -363,11 +363,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1761845621,
-        "narHash": "sha256-d+R4MHsGmdebvSMsYUFWONsZSlUbOo8Zq/wjMdMiIac=",
+        "lastModified": 1761878381,
+        "narHash": "sha256-lCRaipHgszaFZ1Cs8fdGJguVycCisBAf2HEFgip5+xU=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "97e3022a8d2c09313fa49847f6da4d76abcfc72d",
+        "rev": "4ac96eb21c101a3e5b77ba105febc5641a8959aa",
         "type": "github"
       },
       "original": {
@@ -552,18 +552,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-patch-qgnomeplatform-qt6-fix-build": {
-      "flake": false,
-      "locked": {
-        "narHash": "sha256-+QGicgBjQf02Czjf/tZkPCRgPuS16oe54kf2IovG7Vs=",
-        "type": "file",
-        "url": "https://github.com/NixOS/nixpkgs/pull/455370.diff"
-      },
-      "original": {
-        "type": "file",
-        "url": "https://github.com/NixOS/nixpkgs/pull/455370.diff"
-      }
-    },
     "nixpkgs-unstable": {
       "locked": {
         "lastModified": 1761672384,
@@ -597,11 +585,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1761852947,
-        "narHash": "sha256-m/Rsmk9ig/6paZlHPWSFwg4qhzMgfBUA3+Dlx4DV9o0=",
+        "lastModified": 1761921296,
+        "narHash": "sha256-/vwcZbcC3LD/KDYjAtkhi3pWvpv6GzKwPdm+ilbaw0E=",
         "owner": "Nixos",
         "repo": "nixpkgs",
-        "rev": "3f83e499729238b96f09f5f6477590ddec322e86",
+        "rev": "e987844d34e5200f799eb1e9e485548e2f9d0716",
         "type": "github"
       },
       "original": {
@@ -648,11 +636,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1761850498,
-        "narHash": "sha256-gZlzJagcLK3btFn54XfBSPiZ6l039LY15tmpLc+iAJE=",
+        "lastModified": 1761915742,
+        "narHash": "sha256-wlhSCSq2plxAa22BK74v2IE7IUuXm4xmjB/IsCfSHjk=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "ef8e054a7de121ad73a8a40ede989dc5852c295b",
+        "rev": "c0ca0f86a5b136817b369908679ef5b2432307ee",
         "type": "github"
       },
       "original": {
@@ -697,7 +685,6 @@
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_3",
-        "nixpkgs-patch-qgnomeplatform-qt6-fix-build": "nixpkgs-patch-qgnomeplatform-qt6-fix-build",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nur": "nur",
         "snowfall-lib": "snowfall-lib",
