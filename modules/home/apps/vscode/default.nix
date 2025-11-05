@@ -39,6 +39,7 @@ in
           ms-vscode-remote.remote-ssh
           google.geminicodeassist
           google.gemini-cli-vscode-ide-companion
+          eamodio.gitlens
         ];
         userSettings = {
           "editor.formatOnPaste" = true;
