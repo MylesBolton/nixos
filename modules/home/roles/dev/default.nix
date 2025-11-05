@@ -27,6 +27,7 @@ in
       tailwindcss
       bun
       scanmem
+      gemini-cli
     ];
   };
 }

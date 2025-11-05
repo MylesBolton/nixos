@@ -37,6 +37,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.disko.follows = "disko";
     };
+    nix-vscode-extensions = {
+      url = "github:nix-community/nix-vscode-extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -68,6 +72,7 @@
 
       overlays = with inputs; [
         nur.overlays.default
+        nix-vscode-extensions.overlays.default
         nixgl.overlay
       ];
 

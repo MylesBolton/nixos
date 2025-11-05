@@ -22,7 +22,8 @@ in
       enable = true;
       package = pkgs.vscode;
       profiles.default = {
-        extensions = with pkgs.vscode-extensions; [
+        extensions = with pkgs.vscode-marketplace; [
+          mkhl.direnv
           alefragnani.project-manager
           ms-azuretools.vscode-docker
           esbenp.prettier-vscode
@@ -36,6 +37,8 @@ in
           tailscale.vscode-tailscale
           ms-vscode-remote.remote-containers
           ms-vscode-remote.remote-ssh
+          google.geminicodeassist
+          google.gemini-cli-vscode-ide-companion
         ];
         userSettings = {
           "editor.formatOnPaste" = true;
@@ -43,7 +46,6 @@ in
           "git.autofetch" = true;
           "git.enableSmartCommit" = true;
           "git.confirmSync" = false;
-          "geminicodeassist.project" = "radiant-wall-473314-m8";
           "terminal.integrated.defaultProfile.linux" = "fish";
           "nix.formatterPath" = "nixfmt";
           "nix.serverPath" = "nil";
