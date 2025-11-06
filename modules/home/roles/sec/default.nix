@@ -24,7 +24,6 @@ in
       smap
       wireshark-cli
       tcpdump
-      junkie
       aircrack-ng
       bettercap
       hping
