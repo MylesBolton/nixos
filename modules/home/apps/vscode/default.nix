@@ -22,8 +22,8 @@ in
       enable = true;
       package = pkgs.vscode;
       profiles.default = {
-        extensions = with pkgs.vscode-extensions; [
-          #mkhl.direnv
+        extensions = with pkgs.vscode-marketplace; [
+          mkhl.direnv
           alefragnani.project-manager
           ms-azuretools.vscode-docker
           esbenp.prettier-vscode
@@ -37,8 +37,8 @@ in
           tailscale.vscode-tailscale
           ms-vscode-remote.remote-containers
           ms-vscode-remote.remote-ssh
-          #google.geminicodeassist
-          #google.gemini-cli-vscode-ide-companion
+          google.geminicodeassist
+          google.gemini-cli-vscode-ide-companion
         ];
         userSettings = {
           "editor.formatOnPaste" = true;
