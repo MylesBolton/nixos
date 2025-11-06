@@ -41,7 +41,6 @@ in
       radare2
       iaito
       binwalk
-      autopsy
       sleuthkit
       cyberchef
       exploitdb
