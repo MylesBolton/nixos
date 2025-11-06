@@ -89,7 +89,6 @@
                   url = "https://github.com/MylesBolton/nixos.git";
                   #auth.access_token_path = "/persits/secrets/comin/token";
                   branches.main.name = "main";
-                  branches.testing.name = "beta";
                   poller.period = 1200;
                 }
               ];

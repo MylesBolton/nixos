@@ -11,6 +11,7 @@
     dev.enable = true;
     cad.enable = true;
     priv.enable = true;
+    sec.enable = true;
   };
 
   custom.user = {
