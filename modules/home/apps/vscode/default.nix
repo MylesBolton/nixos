@@ -37,7 +37,6 @@ in
           tailscale.vscode-tailscale
           ms-vscode-remote.remote-containers
           ms-vscode-remote.remote-ssh
-          google.geminicodeassist
           google.gemini-cli-vscode-ide-companion
         ];
         userSettings = {
