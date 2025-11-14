@@ -22,6 +22,8 @@ in
       openscad
       freecad
       librecad
+      librepcb
+      kicad
     ];
   };
 }
