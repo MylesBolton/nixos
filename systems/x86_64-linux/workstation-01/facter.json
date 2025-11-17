@@ -23,8 +23,8 @@
     },
     "bluetooth": [
       {
-        "index": 63,
-        "attached_to": 69,
+        "index": 64,
+        "attached_to": 70,
         "class_list": [
           "usb",
           "bluetooth"
@@ -102,8 +102,8 @@
         "module_alias": "usb:v8087p0032d0000dcE0dsc01dp01icE0isc01ip01in00"
       },
       {
-        "index": 70,
-        "attached_to": 69,
+        "index": 71,
+        "attached_to": 70,
         "class_list": [
           "usb",
           "bluetooth"
@@ -1091,7 +1091,7 @@
     ],
     "cdrom": [
       {
-        "index": 54,
+        "index": 55,
         "attached_to": 25,
         "class_list": [
           "cdrom",
@@ -1321,7 +1321,7 @@
         "fpu_exception": false,
         "cpuid_level": 22,
         "write_protect": false,
-        "tlb_size": 32767,
+        "tlb_size": 32638,
         "clflush_size": 64,
         "cache_alignment": 64,
         "address_sizes": {
@@ -1332,7 +1332,7 @@
     ],
     "disk": [
       {
-        "index": 53,
+        "index": 54,
         "attached_to": 41,
         "class_list": [
           "disk",
@@ -1413,7 +1413,7 @@
         ]
       },
       {
-        "index": 55,
+        "index": 56,
         "attached_to": 35,
         "class_list": [
           "disk",
@@ -1562,12 +1562,89 @@
           "xe"
         ],
         "module_alias": "pci:v00008086d0000E20Bsv00001849sd00006021bc03sc00i00"
+      },
+      {
+        "index": 48,
+        "attached_to": 0,
+        "class_list": [
+          "graphics_card",
+          "pci"
+        ],
+        "bus_type": {
+          "hex": "0004",
+          "name": "PCI",
+          "value": 4
+        },
+        "slot": {
+          "bus": 0,
+          "number": 2
+        },
+        "base_class": {
+          "hex": "0003",
+          "name": "Display controller",
+          "value": 3
+        },
+        "sub_class": {
+          "hex": "0080",
+          "name": "Display controller",
+          "value": 128
+        },
+        "vendor": {
+          "hex": "8086",
+          "name": "Intel Corporation",
+          "value": 32902
+        },
+        "sub_vendor": {
+          "hex": "1458",
+          "value": 5208
+        },
+        "device": {
+          "hex": "9bc5",
+          "value": 39877
+        },
+        "sub_device": {
+          "hex": "d000",
+          "value": 53248
+        },
+        "revision": {
+          "hex": "0005",
+          "value": 5
+        },
+        "model": "Intel Display controller",
+        "sysfs_id": "/devices/pci0000:00/0000:00:02.0",
+        "sysfs_bus_id": "0000:00:02.0",
+        "resources": [
+          {
+            "type": "io",
+            "base": 12288,
+            "range": 64,
+            "enabled": true,
+            "access": "read_write"
+          }
+        ],
+        "detail": {
+          "function": 0,
+          "command": 1031,
+          "header_type": 0,
+          "secondary_bus": 0,
+          "prog_if": 0
+        },
+        "driver": "i915",
+        "driver_module": "i915",
+        "drivers": [
+          "i915"
+        ],
+        "driver_modules": [
+          "i915"
+        ],
+        "module_alias": "pci:v00008086d00009BC5sv00001458sd0000D000bc03sc80i00",
+        "label": "Onboard - Video"
       }
     ],
     "hub": [
       {
-        "index": 56,
-        "attached_to": 69,
+        "index": 57,
+        "attached_to": 70,
         "class_list": [
           "usb",
           "hub"
@@ -1652,8 +1729,8 @@
         "module_alias": "usb:v0BDAp5411d0124dc09dsc00dp02ic09isc00ip02in00"
       },
       {
-        "index": 57,
-        "attached_to": 72,
+        "index": 58,
+        "attached_to": 73,
         "class_list": [
           "usb",
           "hub"
@@ -1728,8 +1805,8 @@
         "module_alias": "usb:v0BDAp0411d0124dc09dsc00dp03ic09isc00ip00in00"
       },
       {
-        "index": 62,
-        "attached_to": 69,
+        "index": 63,
+        "attached_to": 70,
         "class_list": [
           "usb",
           "hub"
@@ -1814,8 +1891,8 @@
         "module_alias": "usb:v0BDAp5411d0124dc09dsc00dp02ic09isc00ip02in00"
       },
       {
-        "index": 64,
-        "attached_to": 72,
+        "index": 65,
+        "attached_to": 73,
         "class_list": [
           "usb",
           "hub"
@@ -1890,8 +1967,8 @@
         "module_alias": "usb:v0BDAp0411d0124dc09dsc00dp03ic09isc00ip00in00"
       },
       {
-        "index": 69,
-        "attached_to": 48,
+        "index": 70,
+        "attached_to": 49,
         "class_list": [
           "usb",
           "hub"
@@ -1977,8 +2054,8 @@
         "module_alias": "usb:v1D6Bp0002d0617dc09dsc00dp01ic09isc00ip00in00"
       },
       {
-        "index": 71,
-        "attached_to": 69,
+        "index": 72,
+        "attached_to": 70,
         "class_list": [
           "usb",
           "hub"
@@ -2062,8 +2139,8 @@
         "module_alias": "usb:v05E3p0608d8536dc09dsc00dp01ic09isc00ip00in00"
       },
       {
-        "index": 72,
-        "attached_to": 48,
+        "index": 73,
+        "attached_to": 49,
         "class_list": [
           "usb",
           "hub"
@@ -2141,8 +2218,8 @@
     ],
     "keyboard": [
       {
-        "index": 68,
-        "attached_to": 62,
+        "index": 69,
+        "attached_to": 63,
         "class_list": [
           "keyboard",
           "usb"
@@ -2269,222 +2346,6 @@
       }
     ],
     "monitor": [
-      {
-        "index": 50,
-        "attached_to": 24,
-        "class_list": [
-          "monitor"
-        ],
-        "base_class": {
-          "hex": "0100",
-          "name": "Monitor",
-          "value": 256
-        },
-        "sub_class": {
-          "hex": "0002",
-          "name": "LCD Monitor",
-          "value": 2
-        },
-        "vendor": {
-          "hex": "3669",
-          "value": 13929
-        },
-        "device": {
-          "hex": "3ba4",
-          "name": "MSI G241",
-          "value": 15268
-        },
-        "serial": "1748",
-        "model": "MSI G241",
-        "resources": [
-          {
-            "type": "monitor",
-            "width": 1024,
-            "height": 768,
-            "vertical_frequency": 60,
-            "interlaced": false
-          },
-          {
-            "type": "monitor",
-            "width": 1024,
-            "height": 768,
-            "vertical_frequency": 70,
-            "interlaced": false
-          },
-          {
-            "type": "monitor",
-            "width": 1024,
-            "height": 768,
-            "vertical_frequency": 75,
-            "interlaced": false
-          },
-          {
-            "type": "monitor",
-            "width": 1152,
-            "height": 864,
-            "vertical_frequency": 75,
-            "interlaced": false
-          },
-          {
-            "type": "monitor",
-            "width": 1280,
-            "height": 1024,
-            "vertical_frequency": 60,
-            "interlaced": false
-          },
-          {
-            "type": "monitor",
-            "width": 1280,
-            "height": 1024,
-            "vertical_frequency": 75,
-            "interlaced": false
-          },
-          {
-            "type": "monitor",
-            "width": 1280,
-            "height": 960,
-            "vertical_frequency": 60,
-            "interlaced": false
-          },
-          {
-            "type": "monitor",
-            "width": 1920,
-            "height": 1080,
-            "vertical_frequency": 60,
-            "interlaced": false
-          },
-          {
-            "type": "monitor",
-            "width": 640,
-            "height": 480,
-            "vertical_frequency": 60,
-            "interlaced": false
-          },
-          {
-            "type": "monitor",
-            "width": 640,
-            "height": 480,
-            "vertical_frequency": 67,
-            "interlaced": false
-          },
-          {
-            "type": "monitor",
-            "width": 640,
-            "height": 480,
-            "vertical_frequency": 72,
-            "interlaced": false
-          },
-          {
-            "type": "monitor",
-            "width": 640,
-            "height": 480,
-            "vertical_frequency": 75,
-            "interlaced": false
-          },
-          {
-            "type": "monitor",
-            "width": 720,
-            "height": 400,
-            "vertical_frequency": 70,
-            "interlaced": false
-          },
-          {
-            "type": "monitor",
-            "width": 800,
-            "height": 600,
-            "vertical_frequency": 56,
-            "interlaced": false
-          },
-          {
-            "type": "monitor",
-            "width": 800,
-            "height": 600,
-            "vertical_frequency": 60,
-            "interlaced": false
-          },
-          {
-            "type": "monitor",
-            "width": 800,
-            "height": 600,
-            "vertical_frequency": 72,
-            "interlaced": false
-          },
-          {
-            "type": "monitor",
-            "width": 800,
-            "height": 600,
-            "vertical_frequency": 75,
-            "interlaced": false
-          },
-          {
-            "type": "size",
-            "unit": "mm",
-            "value_1": 527,
-            "value_2": 296
-          }
-        ],
-        "detail": {
-          "manufacture_year": 2021,
-          "manufacture_week": 10,
-          "vertical_sync": {
-            "min": 48,
-            "max": 144
-          },
-          "horizontal_sync": {
-            "min": 180,
-            "max": 180
-          },
-          "horizontal_sync_timings": {
-            "disp": 1920,
-            "sync_start": 1928,
-            "sync_end": 1960,
-            "total": 2000
-          },
-          "vertical_sync_timings": {
-            "disp": 1080,
-            "sync_start": 1143,
-            "sync_end": 1151,
-            "total": 1157
-          },
-          "clock": 332880,
-          "width": 1920,
-          "height": 1080,
-          "width_millimetres": 527,
-          "height_millimetres": 296,
-          "horizontal_flag": 45,
-          "vertical_flag": 43,
-          "vendor": "",
-          "name": "MSI G241"
-        },
-        "driver_info": {
-          "type": "display",
-          "width": 1920,
-          "height": 1080,
-          "vertical_sync": {
-            "min": 48,
-            "max": 144
-          },
-          "horizontal_sync": {
-            "min": 180,
-            "max": 180
-          },
-          "bandwidth": 0,
-          "horizontal_sync_timings": {
-            "disp": 1920,
-            "sync_start": 1928,
-            "sync_end": 1960,
-            "total": 2000
-          },
-          "vertical_sync_timings": {
-            "disp": 1080,
-            "sync_start": 1143,
-            "sync_end": 1151,
-            "total": 1157
-          },
-          "horizontal_flag": 45,
-          "vertical_flag": 43
-        }
-      },
       {
         "index": 51,
         "attached_to": 24,
@@ -2931,12 +2792,228 @@
           "horizontal_flag": 45,
           "vertical_flag": 43
         }
+      },
+      {
+        "index": 53,
+        "attached_to": 24,
+        "class_list": [
+          "monitor"
+        ],
+        "base_class": {
+          "hex": "0100",
+          "name": "Monitor",
+          "value": 256
+        },
+        "sub_class": {
+          "hex": "0002",
+          "name": "LCD Monitor",
+          "value": 2
+        },
+        "vendor": {
+          "hex": "3669",
+          "value": 13929
+        },
+        "device": {
+          "hex": "3ba4",
+          "name": "MSI G241",
+          "value": 15268
+        },
+        "serial": "1748",
+        "model": "MSI G241",
+        "resources": [
+          {
+            "type": "monitor",
+            "width": 1024,
+            "height": 768,
+            "vertical_frequency": 60,
+            "interlaced": false
+          },
+          {
+            "type": "monitor",
+            "width": 1024,
+            "height": 768,
+            "vertical_frequency": 70,
+            "interlaced": false
+          },
+          {
+            "type": "monitor",
+            "width": 1024,
+            "height": 768,
+            "vertical_frequency": 75,
+            "interlaced": false
+          },
+          {
+            "type": "monitor",
+            "width": 1152,
+            "height": 864,
+            "vertical_frequency": 75,
+            "interlaced": false
+          },
+          {
+            "type": "monitor",
+            "width": 1280,
+            "height": 1024,
+            "vertical_frequency": 60,
+            "interlaced": false
+          },
+          {
+            "type": "monitor",
+            "width": 1280,
+            "height": 1024,
+            "vertical_frequency": 75,
+            "interlaced": false
+          },
+          {
+            "type": "monitor",
+            "width": 1280,
+            "height": 960,
+            "vertical_frequency": 60,
+            "interlaced": false
+          },
+          {
+            "type": "monitor",
+            "width": 1920,
+            "height": 1080,
+            "vertical_frequency": 60,
+            "interlaced": false
+          },
+          {
+            "type": "monitor",
+            "width": 640,
+            "height": 480,
+            "vertical_frequency": 60,
+            "interlaced": false
+          },
+          {
+            "type": "monitor",
+            "width": 640,
+            "height": 480,
+            "vertical_frequency": 67,
+            "interlaced": false
+          },
+          {
+            "type": "monitor",
+            "width": 640,
+            "height": 480,
+            "vertical_frequency": 72,
+            "interlaced": false
+          },
+          {
+            "type": "monitor",
+            "width": 640,
+            "height": 480,
+            "vertical_frequency": 75,
+            "interlaced": false
+          },
+          {
+            "type": "monitor",
+            "width": 720,
+            "height": 400,
+            "vertical_frequency": 70,
+            "interlaced": false
+          },
+          {
+            "type": "monitor",
+            "width": 800,
+            "height": 600,
+            "vertical_frequency": 56,
+            "interlaced": false
+          },
+          {
+            "type": "monitor",
+            "width": 800,
+            "height": 600,
+            "vertical_frequency": 60,
+            "interlaced": false
+          },
+          {
+            "type": "monitor",
+            "width": 800,
+            "height": 600,
+            "vertical_frequency": 72,
+            "interlaced": false
+          },
+          {
+            "type": "monitor",
+            "width": 800,
+            "height": 600,
+            "vertical_frequency": 75,
+            "interlaced": false
+          },
+          {
+            "type": "size",
+            "unit": "mm",
+            "value_1": 527,
+            "value_2": 296
+          }
+        ],
+        "detail": {
+          "manufacture_year": 2021,
+          "manufacture_week": 10,
+          "vertical_sync": {
+            "min": 48,
+            "max": 144
+          },
+          "horizontal_sync": {
+            "min": 180,
+            "max": 180
+          },
+          "horizontal_sync_timings": {
+            "disp": 1920,
+            "sync_start": 1928,
+            "sync_end": 1960,
+            "total": 2000
+          },
+          "vertical_sync_timings": {
+            "disp": 1080,
+            "sync_start": 1143,
+            "sync_end": 1151,
+            "total": 1157
+          },
+          "clock": 332880,
+          "width": 1920,
+          "height": 1080,
+          "width_millimetres": 527,
+          "height_millimetres": 296,
+          "horizontal_flag": 45,
+          "vertical_flag": 43,
+          "vendor": "",
+          "name": "MSI G241"
+        },
+        "driver_info": {
+          "type": "display",
+          "width": 1920,
+          "height": 1080,
+          "vertical_sync": {
+            "min": 48,
+            "max": 144
+          },
+          "horizontal_sync": {
+            "min": 180,
+            "max": 180
+          },
+          "bandwidth": 0,
+          "horizontal_sync_timings": {
+            "disp": 1920,
+            "sync_start": 1928,
+            "sync_end": 1960,
+            "total": 2000
+          },
+          "vertical_sync_timings": {
+            "disp": 1080,
+            "sync_start": 1143,
+            "sync_end": 1151,
+            "total": 1157
+          },
+          "horizontal_flag": 45,
+          "vertical_flag": 43
+        }
       }
     ],
     "mouse": [
       {
-        "index": 66,
-        "attached_to": 56,
+        "index": 67,
+        "attached_to": 57,
         "class_list": [
           "mouse",
           "usb"
@@ -3292,7 +3369,7 @@
     ],
     "network_interface": [
       {
-        "index": 74,
+        "index": 75,
         "attached_to": 31,
         "class_list": [
           "network_interface"
@@ -3577,7 +3654,7 @@
         "label": "Onboard - Other"
       },
       {
-        "index": 49,
+        "index": 50,
         "attached_to": 0,
         "class_list": [
           "pci",
@@ -3785,8 +3862,8 @@
         "module_alias": "pci:v00008086d0000E2F7sv00001849sd00006021bc04sc03i00"
       },
       {
-        "index": 59,
-        "attached_to": 62,
+        "index": 60,
+        "attached_to": 63,
         "class_list": [
           "sound",
           "usb"
@@ -3876,8 +3953,8 @@
         "module_alias": "usb:v08BBp2902d0100dc00dsc00dp00ic01isc02ip00in02"
       },
       {
-        "index": 61,
-        "attached_to": 62,
+        "index": 62,
+        "attached_to": 63,
         "class_list": [
           "sound",
           "usb"
@@ -3967,8 +4044,8 @@
         "module_alias": "usb:v08BBp2902d0100dc00dsc00dp00ic01isc01ip00in00"
       },
       {
-        "index": 67,
-        "attached_to": 62,
+        "index": 68,
+        "attached_to": 63,
         "class_list": [
           "sound",
           "usb"
@@ -4115,21 +4192,21 @@
         "resources": [
           {
             "type": "io",
-            "base": 12320,
+            "base": 12384,
             "range": 32,
             "enabled": true,
             "access": "read_write"
           },
           {
             "type": "io",
-            "base": 12352,
+            "base": 12416,
             "range": 4,
             "enabled": true,
             "access": "read_write"
           },
           {
             "type": "io",
-            "base": 12368,
+            "base": 12432,
             "range": 8,
             "enabled": true,
             "access": "read_write"
@@ -4297,8 +4374,8 @@
     },
     "usb": [
       {
-        "index": 58,
-        "attached_to": 56,
+        "index": 59,
+        "attached_to": 57,
         "class_list": [
           "usb",
           "unknown"
@@ -4345,7 +4422,7 @@
           "/dev/input/by-id/usb-Logitech_G502_HERO_Gaming_Mouse_1882325B3132-if01-event-kbd",
           "/dev/input/by-path/pci-0000:00:14.0-usb-0:9.1:1.1-event-kbd",
           "/dev/input/by-path/pci-0000:00:14.0-usbv2-0:9.1:1.1-event-kbd",
-          "/dev/input/event1"
+          "/dev/input/event2"
         ],
         "resources": [
           {
@@ -4395,8 +4472,8 @@
         "module_alias": "usb:v046DpC08Bd2703dc00dsc00dp00ic03isc00ip00in01"
       },
       {
-        "index": 60,
-        "attached_to": 62,
+        "index": 61,
+        "attached_to": 63,
         "class_list": [
           "usb",
           "unknown"
@@ -4487,8 +4564,8 @@
         "module_alias": "usb:v1B1Cp1B2Dd0329dc00dsc00dp00ic03isc00ip00in01"
       },
       {
-        "index": 65,
-        "attached_to": 62,
+        "index": 66,
+        "attached_to": 63,
         "class_list": [
           "usb",
           "unknown"
@@ -4534,7 +4611,7 @@
           "/dev/input/by-id/usb-Burr-Brown_from_TI_USB_Audio_CODEC-event-if03",
           "/dev/input/by-path/pci-0000:00:14.0-usb-0:10.4:1.3-event",
           "/dev/input/by-path/pci-0000:00:14.0-usbv2-0:10.4:1.3-event",
-          "/dev/input/event6"
+          "/dev/input/event7"
         ],
         "resources": [
           {
@@ -4584,8 +4661,8 @@
         "module_alias": "usb:v08BBp2902d0100dc00dsc00dp00ic03isc00ip00in03"
       },
       {
-        "index": 73,
-        "attached_to": 69,
+        "index": 74,
+        "attached_to": 70,
         "class_list": [
           "usb",
           "unknown"
@@ -4677,7 +4754,7 @@
     ],
     "usb_controller": [
       {
-        "index": 48,
+        "index": 49,
         "attached_to": 0,
         "class_list": [
           "usb_controller",
@@ -4964,28 +5041,28 @@
     },
     "group_associations": [
       {
-        "handle": 135,
+        "handle": 136,
         "name": "$MEI",
         "handles": [
           0
         ]
       },
       {
-        "handle": 138,
+        "handle": 139,
         "name": "Firmware Version Info",
         "handles": [
           309237645383,
           313532612680,
           317827579977,
           322122547274,
-          386547056715,
-          4471060955226
+          390842024011,
+          4488240824411
         ]
       }
     ],
     "language": [
       {
-        "handle": 92,
+        "handle": 93,
         "languages": [
           "en|US|iso8859-1",
           "zh|TW|unicode",
@@ -5526,7 +5603,7 @@
         "internal_reference_designator": "J1G6 - AC JACK"
       },
       {
-        "handle": 93,
+        "handle": 94,
         "port_type": {
           "hex": "000d",
           "name": "Keyboard Port",
@@ -5541,7 +5618,7 @@
         "external_reference_designator": "Keyboard"
       },
       {
-        "handle": 94,
+        "handle": 95,
         "port_type": {
           "hex": "000e",
           "name": "Mouse Port",
@@ -5556,7 +5633,7 @@
         "external_reference_designator": "Mouse"
       },
       {
-        "handle": 95,
+        "handle": 96,
         "port_type": {
           "hex": "0009",
           "name": "Serial Port 16550A Compatible",
@@ -5571,7 +5648,7 @@
         "external_reference_designator": "COM 1"
       },
       {
-        "handle": 96,
+        "handle": 97,
         "port_type": {
           "hex": "001c",
           "name": "Video Port",
@@ -5591,7 +5668,7 @@
         "external_reference_designator": "Video"
       },
       {
-        "handle": 97,
+        "handle": 98,
         "port_type": {
           "hex": "001c",
           "name": "Video Port",
@@ -5606,7 +5683,7 @@
         "external_reference_designator": "HDMI"
       },
       {
-        "handle": 98,
+        "handle": 99,
         "port_type": {
           "hex": "0010",
           "name": "USB",
@@ -5621,7 +5698,7 @@
         "external_reference_designator": "USB1.1 - 1#"
       },
       {
-        "handle": 99,
+        "handle": 100,
         "port_type": {
           "hex": "0010",
           "name": "USB",
@@ -5636,7 +5713,7 @@
         "external_reference_designator": "USB1.1 - 2#"
       },
       {
-        "handle": 100,
+        "handle": 101,
         "port_type": {
           "hex": "0010",
           "name": "USB",
@@ -5651,7 +5728,7 @@
         "external_reference_designator": "USB1.1 - 3#"
       },
       {
-        "handle": 101,
+        "handle": 102,
         "port_type": {
           "hex": "0010",
           "name": "USB",
@@ -5666,7 +5743,7 @@
         "external_reference_designator": "USB1.1 - 4#"
       },
       {
-        "handle": 102,
+        "handle": 103,
         "port_type": {
           "hex": "0010",
           "name": "USB",
@@ -5681,7 +5758,7 @@
         "external_reference_designator": "USB1.1 - 5#"
       },
       {
-        "handle": 103,
+        "handle": 104,
         "port_type": {
           "hex": "0010",
           "name": "USB",
@@ -5696,7 +5773,7 @@
         "external_reference_designator": "USB2.0 - 1#"
       },
       {
-        "handle": 104,
+        "handle": 105,
         "port_type": {
           "hex": "0010",
           "name": "USB",
@@ -5711,7 +5788,7 @@
         "external_reference_designator": "USB2.0 - 2#"
       },
       {
-        "handle": 105,
+        "handle": 106,
         "port_type": {
           "hex": "001f",
           "name": "Network Port",
@@ -5726,7 +5803,7 @@
         "external_reference_designator": "Ethernet"
       },
       {
-        "handle": 106,
+        "handle": 107,
         "port_type": {
           "hex": "0020",
           "name": "Other",
@@ -5741,7 +5818,7 @@
         "external_reference_designator": "SATA Port 0 Direct Connect"
       },
       {
-        "handle": 107,
+        "handle": 108,
         "port_type": {
           "hex": "0020",
           "name": "Other",
@@ -5756,7 +5833,7 @@
         "external_reference_designator": "eSATA Port 4"
       },
       {
-        "handle": 108,
+        "handle": 109,
         "port_type": {
           "hex": "0020",
           "name": "Other",
@@ -5771,7 +5848,7 @@
         "external_reference_designator": "eSATA Port 3"
       },
       {
-        "handle": 109,
+        "handle": 110,
         "port_type": {
           "hex": "0020",
           "name": "Other",
@@ -5786,7 +5863,7 @@
         "external_reference_designator": "None"
       },
       {
-        "handle": 110,
+        "handle": 111,
         "port_type": {
           "hex": "0020",
           "name": "Other",
@@ -5801,7 +5878,7 @@
         "external_reference_designator": "None"
       },
       {
-        "handle": 111,
+        "handle": 112,
         "port_type": {
           "hex": "00ff",
           "name": "Other",
@@ -5816,7 +5893,7 @@
         "external_reference_designator": "AC IN"
       },
       {
-        "handle": 112,
+        "handle": 113,
         "port_type": {
           "hex": "00ff",
           "name": "Other",
@@ -5831,7 +5908,7 @@
         "external_reference_designator": "None"
       },
       {
-        "handle": 113,
+        "handle": 114,
         "port_type": {
           "hex": "00ff",
           "name": "Other",
@@ -5846,7 +5923,7 @@
         "external_reference_designator": "None"
       },
       {
-        "handle": 114,
+        "handle": 115,
         "port_type": {
           "hex": "00ff",
           "name": "Other",
@@ -5861,7 +5938,7 @@
         "external_reference_designator": "None"
       },
       {
-        "handle": 115,
+        "handle": 116,
         "port_type": {
           "hex": "00ff",
           "name": "Other",
@@ -5876,7 +5953,7 @@
         "external_reference_designator": "None"
       },
       {
-        "handle": 116,
+        "handle": 117,
         "port_type": {
           "hex": "00ff",
           "name": "Other",
@@ -5891,7 +5968,7 @@
         "external_reference_designator": "None"
       },
       {
-        "handle": 117,
+        "handle": 118,
         "port_type": {
           "hex": "00ff",
           "name": "Other",
@@ -5906,7 +5983,7 @@
         "external_reference_designator": "None"
       },
       {
-        "handle": 118,
+        "handle": 119,
         "port_type": {
           "hex": "00ff",
           "name": "Other",
@@ -5921,7 +5998,7 @@
         "external_reference_designator": "None"
       },
       {
-        "handle": 119,
+        "handle": 120,
         "port_type": {
           "hex": "00ff",
           "name": "Other",
@@ -5936,7 +6013,7 @@
         "external_reference_designator": "None"
       },
       {
-        "handle": 120,
+        "handle": 121,
         "port_type": {
           "hex": "00ff",
           "name": "Other",
@@ -5951,7 +6028,7 @@
         "external_reference_designator": "None"
       },
       {
-        "handle": 121,
+        "handle": 122,
         "port_type": {
           "hex": "00ff",
           "name": "Other",
@@ -5966,7 +6043,7 @@
         "external_reference_designator": "None"
       },
       {
-        "handle": 122,
+        "handle": 123,
         "port_type": {
           "hex": "00ff",
           "name": "Other",
@@ -5981,7 +6058,7 @@
         "external_reference_designator": "None"
       },
       {
-        "handle": 123,
+        "handle": 124,
         "port_type": {
           "hex": "00ff",
           "name": "Other",
@@ -5996,7 +6073,7 @@
         "external_reference_designator": "None"
       },
       {
-        "handle": 124,
+        "handle": 125,
         "port_type": {
           "hex": "00ff",
           "name": "Other",
@@ -6011,7 +6088,7 @@
         "external_reference_designator": "None"
       },
       {
-        "handle": 125,
+        "handle": 126,
         "port_type": {
           "hex": "00ff",
           "name": "Other",
@@ -6026,7 +6103,7 @@
         "external_reference_designator": "None"
       },
       {
-        "handle": 126,
+        "handle": 127,
         "port_type": {
           "hex": "00ff",
           "name": "Other",
@@ -6041,7 +6118,7 @@
         "external_reference_designator": "None"
       },
       {
-        "handle": 127,
+        "handle": 128,
         "port_type": {
           "hex": "00ff",
           "name": "Other",
@@ -6056,7 +6133,7 @@
         "external_reference_designator": "None"
       },
       {
-        "handle": 128,
+        "handle": 129,
         "port_type": {
           "hex": "00ff",
           "name": "Other",
@@ -6071,7 +6148,7 @@
         "external_reference_designator": "None"
       },
       {
-        "handle": 129,
+        "handle": 130,
         "port_type": {
           "hex": "00ff",
           "name": "Other",
@@ -6086,7 +6163,7 @@
         "external_reference_designator": "None"
       },
       {
-        "handle": 130,
+        "handle": 131,
         "port_type": {
           "hex": "00ff",
           "name": "Other",
@@ -6101,7 +6178,7 @@
         "external_reference_designator": "None"
       },
       {
-        "handle": 131,
+        "handle": 132,
         "port_type": {
           "hex": "00ff",
           "name": "Other",
@@ -6116,7 +6193,7 @@
         "external_reference_designator": "None"
       },
       {
-        "handle": 132,
+        "handle": 133,
         "port_type": {
           "hex": "00ff",
           "name": "Other",
@@ -6131,7 +6208,7 @@
         "external_reference_designator": "None"
       },
       {
-        "handle": 133,
+        "handle": 134,
         "port_type": {
           "hex": "00ff",
           "name": "Other",

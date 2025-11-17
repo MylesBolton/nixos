@@ -23,11 +23,11 @@ with lib.custom;
     gaming.enable = true;
   };
 
-  hardware.graphics.extraPackages = with pkgs; [
-    intel-media-driver
-    intel-compute-runtime
-    vpl-gpu-rt
-  ];
+  #hardware.graphics.extraPackages = with pkgs; [
+  #  intel-media-driver
+  #  intel-compute-runtime
+  #  vpl-gpu-rt
+  #];
 
   services.xserver.videoDrivers = [ "modesetting" ];
 
