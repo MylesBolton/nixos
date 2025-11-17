@@ -1912,7 +1912,7 @@
         },
         "vendor": {
           "hex": "1d6b",
-          "name": "Linux 6.17.7 xhci-hcd",
+          "name": "Linux 6.17.8 xhci-hcd",
           "value": 7531
         },
         "device": {
@@ -1926,7 +1926,7 @@
           "value": 0
         },
         "serial": "0000:00:14.0",
-        "model": "Linux 6.17.7 xhci-hcd xHCI Host Controller",
+        "model": "Linux 6.17.8 xhci-hcd xHCI Host Controller",
         "sysfs_id": "/devices/pci0000:00/0000:00:14.0/usb1/1-0:1.0",
         "sysfs_bus_id": "1-0:1.0",
         "resources": [
@@ -2084,7 +2084,7 @@
         },
         "vendor": {
           "hex": "1d6b",
-          "name": "Linux 6.17.7 xhci-hcd",
+          "name": "Linux 6.17.8 xhci-hcd",
           "value": 7531
         },
         "device": {
@@ -2098,7 +2098,7 @@
           "value": 0
         },
         "serial": "0000:00:14.0",
-        "model": "Linux 6.17.7 xhci-hcd xHCI Host Controller",
+        "model": "Linux 6.17.8 xhci-hcd xHCI Host Controller",
         "sysfs_id": "/devices/pci0000:00/0000:00:14.0/usb2/2-0:1.0",
         "sysfs_bus_id": "2-0:1.0",
         "detail": {
@@ -4044,7 +4044,7 @@
           },
           "interface_protocol": 0,
           "interface_number": 1,
-          "interface_alternate_setting": 0
+          "interface_alternate_setting": 1
         },
         "hotplug": "usb",
         "driver": "snd-usb-audio",
