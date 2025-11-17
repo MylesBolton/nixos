@@ -50,6 +50,7 @@ in
       wget
       curl
       nmap
+      lshw
     ];
     styles.stylix.enable = true;
   };

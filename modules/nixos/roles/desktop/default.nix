@@ -44,7 +44,7 @@ in
       wl-clipboard
       rustdesk-flutter
       ghostty
-      #ventoy-full-gtk
+      lshw-gui
     ];
 
     services = {
