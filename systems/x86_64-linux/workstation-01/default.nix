@@ -29,6 +29,10 @@ with lib.custom;
   #  vpl-gpu-rt
   #];
 
+  environment.variables = {
+    GSK_RENDERER = "gl";
+  };
+
   services.xserver.videoDrivers = [ "modesetting" ];
 
   boot = {
