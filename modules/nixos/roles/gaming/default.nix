@@ -41,8 +41,6 @@ in
     hardware.graphics = {
       enable = true;
       enable32Bit = true;
-      package = pkgs.mesa;
-      package32 = pkgs.pkgsi686Linux.mesa;
     };
 
     environment.systemPackages = with pkgs; [

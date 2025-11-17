@@ -1,5 +1,13 @@
-{ lib, pkgs, ... }:
 {
+  lib,
+  inputs,
+  pkgs,
+  ...
+}:
+with lib;
+with lib.custom;
+{
+  facter.reportPath = if (builtins.pathExists ./facter.json) then ./facter.json else null;
   imports = [
     ./disko.nix
     ./hardware-configuration.nix
@@ -15,30 +23,7 @@
     gaming.enable = true;
   };
 
-  environment.variables = {
-    GSK_RENDERER = "gl";
-  };
-
-  environment.systemPackages = with pkgs; [
-    intel-gpu-tools
-    clinfo
-    mesa-demos
-    nvtopPackages.intel
-    vulkan-tools
-  ];
-
-  hardware.graphics.extraPackages = with pkgs; [
-    intel-media-driver
-    intel-compute-runtime
-    vpl-gpu-rt
-    libvdpau-va-gl
-    intel-ocl
-  ];
-
-  hardware.graphics.extraPackages32 = with pkgs.pkgsi686Linux; [
-    intel-media-driver
-    libvdpau-va-gl
-  ];
+  services.xserver.videoDrivers = [ "modesetting" ];
 
   boot = {
     supportedFilesystems = lib.mkForce [ "btrfs" ];

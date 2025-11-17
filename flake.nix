@@ -8,6 +8,7 @@
     nixpkgs.url = "github:Nixos/nixpkgs";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
+    nixos-facter-modules.url = "github:nix-community/nixos-facter-modules";
     stylix.url = "github:danth/stylix";
     nur.url = "github:nix-community/NUR";
     nixos-generators = {
@@ -26,7 +27,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixgl.url = "github:nix-community/nixGL";
     comin = {
       url = "github:nlewo/comin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -73,7 +73,6 @@
       overlays = with inputs; [
         nur.overlays.default
         nix-vscode-extensions.overlays.default
-        nixgl.overlay
       ];
 
       systems.modules.nixos = with inputs; [
@@ -82,6 +81,7 @@
         disko.nixosModules.disko
         agenix.nixosModules.default
         comin.nixosModules.comin
+        inputs.nixos-facter-modules.nixosModules.facter
         (
           { ... }:
           {
