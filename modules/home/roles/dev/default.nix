@@ -29,6 +29,7 @@ in
       scanmem
       gemini-cli
       direnv
+      gh
     ];
   };
 }
