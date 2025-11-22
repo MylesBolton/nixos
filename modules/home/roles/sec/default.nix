@@ -18,31 +18,51 @@ in
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      burpsuite
-      nmap
-      zenmap
-      smap
-      wireshark-cli
-      tcpdump
       aircrack-ng
-      bettercap
-      hping
-      gotestwaf
-      sqlmap
-      gobuster
-      metasploit
+      arping
       armitage
-      thc-hydra
-      hydra-cli
-      mimikatz
-      hashcat
-      ghidra-bin
-      radare2
-      iaito
+      bettercap
       binwalk
-      sleuthkit
+      burpsuite
+      certgraph
+      crunch
       cyberchef
+      deepsecrets
+      dnsenum
+      enum4linux-ng
       exploitdb
+      fcrackzip
+      ghidra-bin
+      ghorg
+      gobuster
+      gotestwaf
+      hashcat
+      hcxdumptool
+      hcxtools
+      hping
+      iaito
+      john
+      ldapnomnom
+      metasploit
+      mimikatz
+      msldapdump
+      nikto
+      nmap
+      onesixtyone
+      p0f
+      radare2
+      smap
+      sleuthkit
+      sqlmap
+      sslscan
+      tcpdump
+      testssl
+      thc-hydra
+      theharvester
+      wifite2
+      wireshark
+      zap
+      zenmap
     ];
   };
 }
