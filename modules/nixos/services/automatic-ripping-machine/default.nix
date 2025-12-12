@@ -54,6 +54,10 @@ in
 
     services.atd.enable = true;
 
+    environment.systemPackages = [
+      pkgs.handbrake
+    ];
+
     services.udev.packages = [ cfg.package ];
 
     environment.etc = {
