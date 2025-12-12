@@ -15,6 +15,11 @@ with lib.custom;
 
   networking.hostName = "workstation-01";
 
+  services.automatic-ripping-machine = {
+    enable = true;
+    port = 8080;
+  };
+
   roles = {
     desktop = {
       enable = true;
