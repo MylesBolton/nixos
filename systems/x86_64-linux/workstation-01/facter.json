@@ -1556,10 +1556,12 @@
         "driver": "xe",
         "driver_module": "xe",
         "drivers": [
-          "xe"
+          "xe",
+          "i915"
         ],
         "driver_modules": [
-          "xe"
+          "xe",
+          "i915"
         ],
         "module_alias": "pci:v00008086d0000E20Bsv00001849sd00006021bc03sc00i00"
       }
