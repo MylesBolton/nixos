@@ -11,7 +11,7 @@
   ];
 
   environment.variables = {
-    #GSK_RENDERER = "vulkan"; # stops wierd driver problems for intel B580 GPU
+    GSK_RENDERER = "opengl"; # stops wierd driver problems for intel B580 GPU
     LIBVA_DRIVER_NAME = "iHD";
   };
 

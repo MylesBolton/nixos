@@ -21,9 +21,9 @@ in
       enableFishIntegration = true;
       settings = {
         font-family = "Atkinson Hyperlegible Mono";
-        font-family-bold = "Atkinson Hyperlegible Mono Bold";
-        font-family-italic = "Atkinson Hyperlegible Mono Italic";
-        font-family-bold-italic = "Atkinson Hyperlegible Mono Bold Italic";
+        font-family-bold = "Atkinson Hyperlegible Mono";
+        font-family-italic = "Atkinson Hyperlegible Mono";
+        font-family-bold-italic = "Atkinson Hyperlegible Mono";
         window-padding-x = 10;
         window-padding-y = 10;
         window-decoration = "client";

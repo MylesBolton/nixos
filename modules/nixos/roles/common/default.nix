@@ -37,6 +37,8 @@ in
       enableDefaultPackages = true;
     };
     environment.systemPackages = with pkgs; [
+      util-linux
+      inetutils
       gopass
       gnupg
       gpg-tui
