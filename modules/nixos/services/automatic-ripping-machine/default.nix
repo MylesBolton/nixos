@@ -74,7 +74,6 @@ in
         User = "arm";
         Group = "arm";
         WorkingDirectory = armHome;
-
         ExecStart = "${cfg.package}/bin/arm-ui";
         Environment = [ "ARM_CONFIG_DIR=${armHome}/config" ];
         Restart = "always";
@@ -82,24 +81,14 @@ in
       };
       preStart = ''
         mkdir -p ${armHome}/db ${armHome}/logs ${armHome}/media/{raw,transcode,completed} ${armHome}/music ${armHome}/config
-
-        if [ ! -f ${armHome}/config/arm.yaml ]; then
-          cp /etc/arm/arm.yaml ${armHome}/config/arm.yaml
-        fi
-        if [ ! -f ${armHome}/config/apprise.yaml ]; then
-          cp /etc/arm/apprise.yaml ${armHome}/config/apprise.yaml
-        fi
-        if [ ! -f ${armHome}/config/abcde.conf ]; then
-          cp /etc/arm/abcde.conf ${armHome}/config/abcde.conf
-        fi
-
+        cp /etc/arm/arm.yaml ${armHome}/config/arm.yaml
+        cp /etc/arm/apprise.yaml ${armHome}/config/apprise.yaml
+        cp /etc/arm/abcde.conf ${armHome}/config/abcde.conf
         chown -R arm:arm ${armHome}
       '';
     };
 
-    # This is required for makemkv
     nixpkgs.config.allowUnfree = true;
-
     networking.firewall.allowedTCPPorts = [ cfg.port ];
   };
 }

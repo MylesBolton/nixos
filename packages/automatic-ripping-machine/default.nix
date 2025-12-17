@@ -17,6 +17,8 @@
   wget,
   at,
   which,
+  util-linux,
+  gawk,
 }:
 
 let
@@ -62,6 +64,8 @@ let
     wget
     at
     which
+    util-linux
+    gawk
   ];
 in
 stdenv.mkDerivation rec {
@@ -93,6 +97,9 @@ stdenv.mkDerivation rec {
     sed -i 's|/bin/su -l|/bin/su -p|' "scripts/thickclient/arm_venv_wrapper.sh"
     sed -i 's|echo python3|echo \\$(which python3)|' "scripts/thickclient/arm_venv_wrapper.sh"
     sed -i '/if ! pgrep -f "runui.py"/, /fi/d' "scripts/thickclient/arm_venv_wrapper.sh"
+
+    #CD-ROM Rule
+    echo 'SUBSYSTEM=="block", KERNEL=="sr0", ENV{UDISKS_IGNORE}="1"' >> setup/51-automatic-ripping-machine-venv.rules
   '';
 
   installPhase = ''
