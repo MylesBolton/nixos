@@ -36,7 +36,6 @@ in
       };
 
       fonts = {
-
         serif = {
           package = pkgs.atkinson-hyperlegible-next;
           name = "Atkinson Hyperlegible Next";
@@ -48,8 +47,8 @@ in
         };
 
         monospace = {
-          package = pkgs.nerd-fonts.atkynson-mono;
-          name = "AtkynsonMono Nerd Font";
+          package = pkgs.atkinson-hyperlegible-mono;
+          name = "atkinson-hyperlegible-mono";
         };
 
         emoji = {

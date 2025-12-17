@@ -5,24 +5,23 @@
   namespace,
   ...
 }:
+with lib;
+with lib.custom;
 let
   cfg = config.styles.stylix;
 in
 {
-  options.styles.stylix = {
-    enable = lib.mkEnableOption "Enable stylix";
+  options.styles.stylix = with types; {
+    enable = mkBoolOpt false "Enable stylix";
   };
 
   config = lib.mkIf cfg.enable {
-    fonts.enableDefaultPackages = true;
     stylix = {
       enable = true;
       autoEnable = true;
       base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
       homeManagerIntegration.autoImport = false;
       homeManagerIntegration.followSystem = false;
-
-      image = pkgs.custom.wallpapers.main;
 
       cursor = {
         name = "Bibata-Modern-Classic";
@@ -31,7 +30,6 @@ in
       };
 
       fonts = {
-
         serif = {
           package = pkgs.atkinson-hyperlegible-next;
           name = "Atkinson Hyperlegible Next";
@@ -43,8 +41,8 @@ in
         };
 
         monospace = {
-          package = pkgs.nerd-fonts.atkynson-mono;
-          name = "AtkynsonMono Nerd Font";
+          package = pkgs.atkinson-hyperlegible-mono;
+          name = "atkinson-hyperlegible-mono";
         };
 
         emoji = {
