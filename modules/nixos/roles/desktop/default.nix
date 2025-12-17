@@ -45,6 +45,7 @@ in
       rustdesk-flutter
       ghostty
       lshw-gui
+      nvtopPackages.full
     ];
 
     services = {
