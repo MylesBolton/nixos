@@ -17,7 +17,6 @@ with lib.custom;
 
   services.automatic-ripping-machine = {
     enable = true;
-    port = 8080;
   };
 
   roles = {

@@ -5,90 +5,89 @@
   ...
 }:
 
+with lib;
+
 let
   cfg = config.services.automatic-ripping-machine;
-
-  armHome = "/home/arm";
-
-  arm-config = pkgs.runCommand "arm.yaml" { } ''
-    ${pkgs.gnused}/bin/sed \
-      -e 's|WEBSERVER_PORT: 8080|WEBSERVER_PORT: ${toString cfg.port}|' \
-      ${cfg.package}/opt/arm/setup/arm.yaml > $out
-  '';
-
-  abcde-config = "${cfg.package}/opt/arm/setup/.abcde.conf";
-
+  armPkg = pkgs.custom.automatic-ripping-machine;
 in
 {
   options.services.automatic-ripping-machine = {
-    enable = lib.mkEnableOption "Automatic Ripping Machine";
+    enable = mkEnableOption "Automatic Ripping Machine (ARM) service";
 
-    package = lib.mkOption {
-      type = lib.types.package;
-      default = pkgs.custom.automatic-ripping-machine;
-      defaultText = lib.literalExpression "pkgs.custom.automatic-ripping-machine";
-      description = "The ARM package to use.";
+    user = mkOption {
+      type = types.str;
+      default = "arm";
+      description = "User account under which ARM runs.";
     };
 
-    port = lib.mkOption {
-      type = lib.types.port;
-      default = 8080;
-      description = "Port for the ARM UI.";
+    group = mkOption {
+      type = types.str;
+      default = "cdrom";
+      description = "Group account under which ARM runs (should have access to optical drives).";
+    };
+
+    dataDir = mkOption {
+      type = types.path;
+      default = "/home/arm/config";
+      description = "Directory to store ARM configuration and database.";
+    };
+
+    mediaDir = mkOption {
+      type = types.path;
+      default = "/home/arm/media";
+      description = "Base directory where ripped media will be stored.";
     };
   };
 
-  config = lib.mkIf cfg.enable {
-    users.groups.arm = { };
-    users.users.arm = {
+  config = mkIf cfg.enable {
+    users.users.${cfg.user} = {
       isSystemUser = true;
-      group = "arm";
+      group = cfg.group;
       extraGroups = [
-        "cdrom"
         "video"
         "render"
-        "atd"
+        "cdrom"
       ];
-      home = armHome;
+      home = cfg.dataDir;
       createHome = true;
     };
 
-    services.atd.enable = true;
-
-    environment.systemPackages = [
-      pkgs.handbrake
-    ];
-
-    services.udev.packages = [ cfg.package ];
-
-    environment.etc = {
-      "arm/arm.yaml".source = arm-config;
-      "arm/apprise.yaml".source = "${cfg.package}/opt/arm/setup/apprise.yaml";
-      "arm/abcde.conf".source = abcde-config;
-    };
-
-    systemd.services.armui = {
+    systemd.services.arm-ui = {
       description = "Automatic Ripping Machine UI";
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
-      serviceConfig = {
-        User = "arm";
-        Group = "arm";
-        WorkingDirectory = armHome;
-        ExecStart = "${cfg.package}/bin/arm-ui";
-        Environment = [ "ARM_CONFIG_DIR=${armHome}/config" ];
-        Restart = "always";
-        RestartSec = "10s";
+
+      environment = {
+        ARM_CONFIG_DIR = "${cfg.dataDir}/config";
+        PYTHONPATH = "${armPkg}/share/automatic-ripping-machine";
       };
-      preStart = ''
-        mkdir -p ${armHome}/db ${armHome}/logs ${armHome}/media/{raw,transcode,completed} ${armHome}/music ${armHome}/config
-        cp /etc/arm/arm.yaml ${armHome}/config/arm.yaml
-        cp /etc/arm/apprise.yaml ${armHome}/config/apprise.yaml
-        cp /etc/arm/abcde.conf ${armHome}/config/abcde.conf
-        chown -R arm:arm ${armHome}
-      '';
+
+      serviceConfig = {
+        User = cfg.user;
+        Group = cfg.group;
+        WorkingDirectory = cfg.dataDir;
+        ExecStart = "${armPkg}/bin/arm-ui";
+        Restart = "always";
+        RestartSec = "10";
+        preStart = ''
+          if [ ! -d "${cfg.dataDir}/config" ]; then
+            mkdir -p ${cfg.dataDir}/{db,logs,config}
+          fi
+          if [ ! -d "${cfg.mediaDir}" ]; then
+            mkdir -p ${cfg.mediaDir}/{music,media/raw,media/transcode,media/completed}
+          fi
+          chown -R ${cfg.user}:${cfg.group} ${cfg.dataDir}
+          chown -R ${cfg.user}:${cfg.group} ${cfg.mediaDir}
+          ln -sf $out/share/automatic-ripping-machine/setup/arm.yaml ${cfg.dataDir}/config/arm.yaml
+          ln -sf $out/share/automatic-ripping-machine/setup/apprise.yaml ${cfg.dataDir}/config/apprise.yaml
+          ln -sf $out/share/automatic-ripping-machine/setup/.abcde.conf ${cfg.dataDir}/config/abcde.conf
+        '';
+      };
     };
 
-    nixpkgs.config.allowUnfree = true;
-    networking.firewall.allowedTCPPorts = [ cfg.port ];
+    services.udev.extraRules = ''
+      SUBSYSTEM=="block", KERNEL=="sr[0-9]*", ACTION=="change", RUN+="${armPkg}/bin/arm-ui --trigger-udev"
+    '';
   };
 }
