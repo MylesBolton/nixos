@@ -15,79 +15,73 @@ in
   options.services.automatic-ripping-machine = {
     enable = mkEnableOption "Automatic Ripping Machine (ARM) service";
 
-    user = mkOption {
+    armUser = mkOption {
       type = types.str;
       default = "arm";
       description = "User account under which ARM runs.";
     };
 
-    group = mkOption {
+    armGroup = mkOption {
       type = types.str;
-      default = "cdrom";
-      description = "Group account under which ARM runs (should have access to optical drives).";
+      default = "arm";
+      description = "Group account under which ARM runs";
     };
 
     dataDir = mkOption {
       type = types.path;
       default = "/home/arm/config";
-      description = "Directory to store ARM configuration and database.";
-    };
-
-    mediaDir = mkOption {
-      type = types.path;
-      default = "/home/arm/media";
-      description = "Base directory where ripped media will be stored.";
+      description = "Directory to store ARM configuration and Data.";
     };
   };
 
   config = mkIf cfg.enable {
     users.users.${cfg.user} = {
-      isSystemUser = true;
+      isNormalUser = true;
       group = cfg.group;
+      description = "Automatic Ripping Machine User";
       extraGroups = [
         "video"
         "render"
         "cdrom"
+        "docker"
       ];
       home = cfg.dataDir;
       createHome = true;
     };
 
-    systemd.services.arm-ui = {
-      description = "Automatic Ripping Machine UI";
-      after = [ "network.target" ];
-      wantedBy = [ "multi-user.target" ];
+    systemd.tmpfiles.rules = [
+      "d ${cfg.dataDir}/music  0755 ${cfg.armUser} ${cfg.armGroup} -"
+      "d ${cfg.dataDir}/logs   0755 ${cfg.armUser} ${cfg.armGroup} -"
+      "d ${cfg.dataDir}/media  0755 ${cfg.armUser} ${cfg.armGroup} -"
+      "d ${cfg.dataDir}/config 0755 ${cfg.armUser} ${cfg.armGroup} -"
+    ];
+
+    virtualisation.oci-containers.containers.arm-rippers = {
+      image = "automaticrippingmachine/automatic-ripping-machine:latest";
+      autoStart = true;
+
+      ports = [ "8080:8080" ];
 
       environment = {
-        ARM_CONFIG_DIR = "${cfg.dataDir}/config";
-        PYTHONPATH = "${armPkg}/share/automatic-ripping-machine";
+        TZ = config.time.timeZone;
       };
 
-      serviceConfig = {
-        User = cfg.user;
-        Group = cfg.group;
-        WorkingDirectory = cfg.dataDir;
-        ExecStart = "${armPkg}/bin/arm-ui";
-        Restart = "always";
-        RestartSec = "10";
-        preStart = ''
-          if [ ! -d "${cfg.dataDir}/config" ]; then
-            mkdir -p ${cfg.dataDir}/{db,logs,config}
-          fi
-          if [ ! -d "${cfg.mediaDir}" ]; then
-            mkdir -p ${cfg.mediaDir}/{music,media/raw,media/transcode,media/completed}
-          fi
-          chown -R ${cfg.user}:${cfg.group} ${cfg.dataDir}
-          chown -R ${cfg.user}:${cfg.group} ${cfg.mediaDir}
-          ln -sf $out/share/automatic-ripping-machine/setup/arm.yaml ${cfg.dataDir}/config/arm.yaml
-          ln -sf $out/share/automatic-ripping-machine/setup/apprise.yaml ${cfg.dataDir}/config/apprise.yaml
-          ln -sf $out/share/automatic-ripping-machine/setup/.abcde.conf ${cfg.dataDir}/config/abcde.conf
-        '';
-      };
+      volumes = [
+        "${cfg.dataDir}:/home/arm"
+        "${cfg.dataDir}/music:/home/arm/music"
+        "${cfg.dataDir}/logs:/home/arm/logs"
+        "${cfg.dataDir}/media:/home/arm/media"
+        "${cfg.dataDir}/config:/etc/arm/config"
+      ];
+
+      extraOptions = [
+        "--privileged"
+        "--device=/dev/sr0:/dev/sr0"
+      ];
     };
 
     services.udev.extraRules = ''
-      SUBSYSTEM=="block", KERNEL=="sr[0-9]*", ACTION=="change", RUN+="${armPkg}/bin/arm-ui --trigger-udev"
+      KERNEL=="sr*", GROUP="cdrom", MODE="0660"
     '';
   };
 }
