@@ -15,18 +15,6 @@ in
   options.services.automatic-ripping-machine = {
     enable = mkEnableOption "Automatic Ripping Machine (ARM) service";
 
-    armUser = mkOption {
-      type = types.str;
-      default = "arm";
-      description = "User account under which ARM runs.";
-    };
-
-    armGroup = mkOption {
-      type = types.str;
-      default = "arm";
-      description = "Group account under which ARM runs";
-    };
-
     dataDir = mkOption {
       type = types.path;
       default = "/home/arm/config";
@@ -35,53 +23,57 @@ in
   };
 
   config = mkIf cfg.enable {
-    users.users.${cfg.user} = {
+
+    users.groups.arm.gid = 1001;
+
+    users.users.arm = {
       isNormalUser = true;
-      group = cfg.group;
-      description = "Automatic Ripping Machine User";
+      home = "/home/arm";
+      uid = 1001;
+      homeMode = "755";
+      group = "arm";
       extraGroups = [
-        "video"
-        "render"
         "cdrom"
-        "docker"
+        "video"
       ];
-      home = cfg.dataDir;
-      createHome = true;
     };
 
     systemd.tmpfiles.rules = [
-      "d ${cfg.dataDir}/music  0755 ${cfg.armUser} ${cfg.armGroup} -"
-      "d ${cfg.dataDir}/logs   0755 ${cfg.armUser} ${cfg.armGroup} -"
-      "d ${cfg.dataDir}/media  0755 ${cfg.armUser} ${cfg.armGroup} -"
-      "d ${cfg.dataDir}/config 0755 ${cfg.armUser} ${cfg.armGroup} -"
+      "d /home/arm/music 0755 arm arm"
+      "d /home/arm/logs 0755 arm arm"
+      "d /home/arm/media 0755 arm arm"
+      "d /home/arm/media/raw 0755 arm arm"
+      "d /home/arm/media/transcode 0755 arm arm"
+      "d /home/arm/media/transcode/movies 0755 arm arm"
+      "d /home/arm/media/transcode/unidentified 0755 arm arm"
+      "d /home/arm/media/completed 0755 arm arm"
+      "d /home/arm/config 0755 arm arm"
+      "d /home/arm/db 0755 arm arm"
     ];
 
-    virtualisation.oci-containers.containers.arm-rippers = {
-      image = "automaticrippingmachine/automatic-ripping-machine:latest";
-      autoStart = true;
-
-      ports = [ "8080:8080" ];
-
-      environment = {
-        TZ = config.time.timeZone;
+    virtualisation.oci-containers = {
+      containers = {
+        arm = {
+          autoStart = true;
+          image = "docker.io/aric49/automatic-ripping-machine:2.20.5";
+          volumes = [
+            "/home/arm:/home/arm"
+            "/home/arm/music:/home/arm/music"
+            "/home/arm/logs:/home/arm/logs"
+            "/home/arm/media:/home/arm/media"
+            "/home/arm/config:/etc/arm/config"
+          ];
+          ports = [ "8080:8080" ];
+          environment = {
+            ARM_UID = "1001";
+            ARM_GID = "1001";
+          };
+          extraOptions = [
+            "--privileged"
+            "--device=/dev/sr0:/dev/sr0"
+          ];
+        };
       };
-
-      volumes = [
-        "${cfg.dataDir}:/home/arm"
-        "${cfg.dataDir}/music:/home/arm/music"
-        "${cfg.dataDir}/logs:/home/arm/logs"
-        "${cfg.dataDir}/media:/home/arm/media"
-        "${cfg.dataDir}/config:/etc/arm/config"
-      ];
-
-      extraOptions = [
-        "--privileged"
-        "--device=/dev/sr0:/dev/sr0"
-      ];
     };
-
-    services.udev.extraRules = ''
-      KERNEL=="sr*", GROUP="cdrom", MODE="0660"
-    '';
   };
 }
