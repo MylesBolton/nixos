@@ -9,7 +9,6 @@ with lib;
 
 let
   cfg = config.services.automatic-ripping-machine;
-  armPkg = pkgs.custom.automatic-ripping-machine;
 in
 {
   options.services.automatic-ripping-machine = {
@@ -70,7 +69,9 @@ in
           };
           extraOptions = [
             "--privileged"
+            "--pull=always"
             "--device=/dev/sr0:/dev/sr0"
+            "--device=/dev/sg0:/dev/sg0"
           ];
         };
       };

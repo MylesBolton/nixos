@@ -53,6 +53,7 @@ in
       curl
       nmap
       lshw
+      lsscsi
     ];
     styles.stylix.enable = true;
   };
