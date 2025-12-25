@@ -1050,7 +1050,7 @@
         "driver": "ahci",
         "driver_module": "ahci",
         "drivers": ["ahci", "sr", "sg"],
-        "driver_modules": ["ahci", "sr_mod", "sg"]
+        "driver_modules": ["ahci", "sr_mod", "sg_mod"]
       }
     ],
     "cpu": [

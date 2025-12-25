@@ -54,6 +54,7 @@ in
       nmap
       lshw
       lsscsi
+      libva-utils
     ];
     styles.stylix.enable = true;
   };

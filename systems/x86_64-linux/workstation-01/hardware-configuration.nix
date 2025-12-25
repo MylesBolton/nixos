@@ -11,29 +11,33 @@
   ];
 
   environment.variables = {
-    GSK_RENDERER = "opengl"; # stops wierd driver problems for intel B580 GPU
-    LIBVA_DRIVER_NAME = "iHD";
+    GSK_RENDERER = "opengl";
+  };
+
+  environment.sessionVariables = {
+    DRI_PRIME = "1";
+    ONEVPL_PREFER_DEVICE = "discrete";
+    NEOReadDebugKeys = "1";
   };
 
   hardware = {
     intel-gpu-tools.enable = true;
+    enableRedistributableFirmware = true;
+    cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
     graphics = {
       enable = true;
       enable32Bit = true;
       extraPackages = with pkgs; [
-        intel-media-driver # QuickSync (iHD)
-        vpl-gpu-rt # Modern Video Processing Library
-        intel-compute-runtime # OpenCL/Compute
-        libva-vdpau-driver
-        libvdpau-va-gl
-        mesa
+        intel-media-driver # Best for i9-10900K iGPU
+        vpl-gpu-rt # Required for B580 (Battlemage) Video logic
+        intel-compute-runtime # OpenCL for both GPUs
+        libva
+        libdrm
       ];
       extraPackages32 = with pkgs.pkgsi686Linux; [
         intel-media-driver
-        intel-vaapi-driver
-        libva-vdpau-driver
-        mesa
-        libvdpau-va-gl
+        libva
+        libdrm
       ];
     };
   };
@@ -47,5 +51,4 @@
   };
 
   system.stateVersion = "24.05";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

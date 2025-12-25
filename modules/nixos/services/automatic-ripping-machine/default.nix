@@ -34,6 +34,7 @@ in
       extraGroups = [
         "cdrom"
         "video"
+        "render"
       ];
     };
 
@@ -50,11 +51,19 @@ in
       "d /home/arm/db 0755 arm arm"
     ];
 
+    services.udev.extraRules = ''
+      # Ignore the drive in udisks to prevent desktop mounting interference
+      SUBSYSTEM=="block", KERNEL=="sr0", ENV{UDISKS_IGNORE}="1"
+
+      # Ensure the sg module is loaded for the CD-ROM
+      SUBSYSTEM=="scsi", ENV{DEVTYPE}=="scsi_device", TEST!="sg", RUN+="${pkgs.kmod}/bin/modprobe sg"
+    '';
+
     virtualisation.oci-containers = {
       containers = {
         arm = {
           autoStart = true;
-          image = "docker.io/aric49/automatic-ripping-machine:2.20.5";
+          image = "automaticrippingmachine/automatic-ripping-machine:latest";
           volumes = [
             "/home/arm:/home/arm"
             "/home/arm/music:/home/arm/music"
@@ -72,6 +81,11 @@ in
             "--pull=always"
             "--device=/dev/sr0:/dev/sr0"
             "--device=/dev/sg0:/dev/sg0"
+            "--device=/dev/dri/card0:/dev/dri/card0"
+            "--device=/dev/dri/renderD129:/dev/dri/renderD128"
+            "--group-add=cdrom"
+            "--group-add=video"
+            "--group-add=render"
           ];
         };
       };
