@@ -81,7 +81,7 @@ in
             "--pull=always"
             "--device=/dev/sr0:/dev/sr0"
             "--device=/dev/sg0:/dev/sg0"
-            "--device=/dev/dri/card0:/dev/dri/card0"
+            "--device=/dev/dri/card1:/dev/dri/card0"
             "--device=/dev/dri/renderD129:/dev/dri/renderD128"
             "--group-add=cdrom"
             "--group-add=video"
