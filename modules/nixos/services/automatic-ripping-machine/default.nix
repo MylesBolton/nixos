@@ -86,8 +86,8 @@ in
             "--device=/dev/dri/card1:/dev/dri/card1"
             "--device=/dev/dri/renderD129:/dev/dri/renderD129"
             "--group-add=cdrom"
-            "--group-add=video"
-            "--group-add=render"
+            "--group-add=26"
+            "--group-add=303"
           ];
         };
       };
