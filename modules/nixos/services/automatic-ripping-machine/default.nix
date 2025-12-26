@@ -83,7 +83,7 @@ in
             "--device=/dev/sg0:/dev/sg0"
             "--device=/dev/dri/card0:/dev/dri/card0"
             "--device=/dev/dri/renderD128:/dev/dri/renderD128"
-            "--device=/dev/dri/card1:/dev/dri/card1"
+            "--device=/dev/dri/card1:/dev/dri/card1" # todo wait for b580 driver support on ARM docker image (XE Driver for Intel Arc)
             "--device=/dev/dri/renderD129:/dev/dri/renderD129"
             "--group-add=cdrom"
             "--group-add=26"
