@@ -87,7 +87,6 @@
           {
             services.comin = {
               enable = true;
-              debug = true;
               remotes = [
                 {
                   name = "origin";
