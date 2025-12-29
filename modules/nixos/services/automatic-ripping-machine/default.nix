@@ -9,6 +9,19 @@ with lib;
 
 let
   cfg = config.services.automatic-ripping-machine;
+  cifsOptions = [
+    "x-systemd.automount"
+    "noauto"
+    "x-systemd.idle-timeout=60"
+    "rw"
+    "uid=1001"
+    "gid=1001"
+    "username=external"
+    "password=SKP3u4I8C8KlAAa2m2WlrkhsueDAyDlMlHtCPfHlid"
+    "file_mode=0775"
+    "dir_mode=0775"
+    "vers=3.0"
+  ];
 in
 {
   options.services.automatic-ripping-machine = {
@@ -40,29 +53,16 @@ in
       ];
     };
 
-    fileSystems."/home/arm/media" = {
-      device = "//10.0.7.20/media";
+    fileSystems."/home/arm/media/completed" = {
+      device = "//10.0.7.20/media/completed";
       fsType = "cifs";
-      options = [
-        "x-systemd.automount"
-        "noauto"
-        "x-systemd.idle-timeout=60"
-        "rw"
-        "uid=1001"
-        "gid=1001"
-        "username=external"
-        "password=SKP3u4I8C8KlAAa2m2WlrkhsueDAyDlMlHtCPfHlid"
-        "file_mode=0775"
-        "dir_mode=0775"
-        "vers=3.0"
-      ];
+      options = cifsOptions;
     };
 
     fileSystems."/home/arm/music" = {
-      device = "/home/arm/media/music";
-      fsType = "none";
-      options = [ "bind" ];
-      depends = [ "/home/arm/media" ];
+      device = "//10.0.7.20/media/music";
+      fsType = "cifs";
+      options = cifsOptions;
     };
 
     systemd.tmpfiles.rules = [
