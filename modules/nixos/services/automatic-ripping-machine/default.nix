@@ -54,7 +54,7 @@ in
     };
 
     fileSystems."/home/arm/media/completed" = {
-      device = "//10.0.7.20/media/completed";
+      device = "//10.0.7.20/media";
       fsType = "cifs";
       options = cifsOptions;
     };
