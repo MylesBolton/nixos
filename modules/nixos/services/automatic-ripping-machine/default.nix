@@ -54,13 +54,13 @@ in
     };
 
     fileSystems."/home/arm/media/completed" = {
-      device = "//10.0.7.20/media";
+      device = "//10.0.7.20/Media";
       fsType = "cifs";
       options = cifsOptions;
     };
 
     fileSystems."/home/arm/music" = {
-      device = "//10.0.7.20/media/music";
+      device = "//10.0.7.20/Media/music";
       fsType = "cifs";
       options = cifsOptions;
     };
