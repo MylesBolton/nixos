@@ -23,6 +23,8 @@ in
 
   config = mkIf cfg.enable {
 
+    environment.systemPackages = [ pkgs.cifs-utils ];
+
     users.groups.arm.gid = 1001;
 
     users.users.arm = {
@@ -36,6 +38,31 @@ in
         "video"
         "render"
       ];
+    };
+
+    fileSystems."/home/arm/media" = {
+      device = "//10.0.7.20/media";
+      fsType = "cifs";
+      options = [
+        "x-systemd.automount"
+        "noauto"
+        "x-systemd.idle-timeout=60"
+        "rw"
+        "uid=1001"
+        "gid=1001"
+        "username=external"
+        "password=SKP3u4I8C8KlAAa2m2WlrkhsueDAyDlMlHtCPfHlid"
+        "file_mode=0775"
+        "dir_mode=0775"
+        "vers=3.0"
+      ];
+    };
+
+    fileSystems."/home/arm/music" = {
+      device = "/home/arm/media/music";
+      fsType = "none";
+      options = [ "bind" ];
+      depends = [ "/home/arm/media" ];
     };
 
     systemd.tmpfiles.rules = [
@@ -52,10 +79,7 @@ in
     ];
 
     services.udev.extraRules = ''
-      # Ignore the drive in udisks to prevent desktop mounting interference
       SUBSYSTEM=="block", KERNEL=="sr0", ENV{UDISKS_IGNORE}="1"
-
-      # Ensure the sg module is loaded for the CD-ROM
       SUBSYSTEM=="scsi", ENV{DEVTYPE}=="scsi_device", TEST!="sg", RUN+="${pkgs.kmod}/bin/modprobe sg"
     '';
 
