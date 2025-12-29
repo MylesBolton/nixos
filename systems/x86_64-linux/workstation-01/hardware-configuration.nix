@@ -48,6 +48,10 @@
     supportedFilesystems = lib.mkForce [ "btrfs" ];
     kernelPackages = pkgs.linuxPackages_latest;
     resumeDevice = "/dev/disk/by-label/nixos";
+    kernelParams = [
+      "pci=realloc"
+      "pcie_aspm=off"
+    ];
   };
 
   system.stateVersion = "24.05";
