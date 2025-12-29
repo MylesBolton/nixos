@@ -41,7 +41,6 @@ in
       inetutils
       gopass
       gnupg
-      gpg-tui
       git
       unrar
       unzip
