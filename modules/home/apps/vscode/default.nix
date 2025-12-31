@@ -56,6 +56,9 @@ in
           "[typescriptreact]" = {
             "editor.defaultFormatter" = "esbenp.prettier-vscode";
           };
+          "[typescript]" = {
+            "editor.defaultFormatter" = "esbenp.prettier-vscode";
+          };
         };
         keybindings = [
           {
