@@ -48,6 +48,9 @@ in
       winetricks
       protontricks
       wineWowPackages.waylandFull
+      piper
     ];
+
+    services.ratbagd.enable = true;
   };
 }
