@@ -15,9 +15,12 @@
   };
 
   environment.sessionVariables = {
-    DRI_PRIME = "1";
     ONEVPL_PREFER_DEVICE = "discrete";
     NEOReadDebugKeys = "1";
+    LIBVA_DRIVER_NAME = "iHD";
+    LIBVA_DRM_DEVICE = "/dev/dri/renderD129";
+    MOZ_DISABLE_RDD_SANDBOX = "1";
+    MESA_VK_DEVICE_SELECT = "pci:0000:03:00.0";
   };
 
   hardware = {
@@ -42,6 +45,7 @@
     };
   };
 
+  services.switcherooControl.enable = true;
   services.xserver.videoDrivers = [ "modesetting" ];
 
   boot = {
