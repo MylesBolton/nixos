@@ -30,6 +30,7 @@ in
       bottles
       uesave
       #factorio-space-age
+      prismlauncher
     ];
   };
 }
