@@ -59,6 +59,7 @@ in
           "[typescript]" = {
             "editor.defaultFormatter" = "esbenp.prettier-vscode";
           };
+          "chat.disableAIFeatures" = true;
         };
         keybindings = [
           {

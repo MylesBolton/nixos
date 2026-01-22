@@ -1,20 +1,29 @@
-#todo write a about section
+# ⚠️ The Repository of Eternal Confusion
 
-### ISO Reminder
+**Disclaimer: I have no idea what I am doing.**
 
-```
-#minimal install iso
-nix build .#install-isoConfigurations.minimal
+This is a NixOS configuration written by a creature fueled by panic and espresso. There is no logic here. There is no reason. There is only the eternal cycle of `nixos-rebuild switch`, the error message, and the subsequent screaming.
 
-#graphical install iso
-nix build .#install-isoConfigurations.graphical
+This entire configuration is a crime scene of copy-pasted snippets from Reddit threads, 4-year-old blog posts, and hallucinations induced by sleep deprivation. I do not know how the dependency resolution works. I assume it involves blood magic.
 
-#install iso to usb
-dd if=result/iso/* of=/dev/* status=progress
-```
+**WARNING**: This system state is held together by load-bearing whitespace and sheer audacity. I do not know why it builds, only that the Machine God smiled upon me during the last hash calculation.
 
-## Credits
+## ❓ Frequently Asked Questions
 
-https://gitlab.com/hmajid2301/nixicle
-https://github.com/jakehamilton/config/
-https://github.com/IogaMaster/dotfiles
+**Q: Do you know what this code does?**
+A: No.
+
+**Q: Does it work?**
+A: Sometimes. Usually when I'm not looking directly at it.
+
+**Q: Should I use this as a reference?**
+A: Absolutely not. This code was hammered out by a madman with a bloodstream consisting of 90% espresso and a misunderstanding of functional programming.
+
+## ✨ Features Include
+
+- Spaghetti code (Declarative style).
+- Comments that lie.
+- **Horrific amounts of AI slop** that I copy-pasted without reading.
+- A `hardware-configuration.nix` that I am too scared to touch.
+
+**If you understand this code, please [Contact Me](https://MylesBolton.com/contact) and explain it to me, because I am lost.**
