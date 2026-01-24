@@ -20,7 +20,7 @@ in
     home.packages = with pkgs; [
       aircrack-ng
       arping
-      armitage
+      #armitage
       bettercap
       binwalk
       burpsuite
