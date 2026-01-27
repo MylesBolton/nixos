@@ -47,7 +47,7 @@ in
         isDefault = true;
 
         settings = {
-          "browser.startup.homepage" = "https://startpage.mylesbolton.com/";
+          "browser.startup.homepage" = "https://mylesbolton.com/startpage/";
           "browser.search.region" = "GB";
           "browser.search.isUS" = false;
           "distribution.searchplugins.defaultLocale" = "en-GB";
@@ -57,7 +57,7 @@ in
           "browser.newtabpage.pinned" = [
             {
               title = "NixOS";
-              url = "https://startpage.mylesbolton.com/";
+              url = "https://mylesbolton.com/startpage/";
             }
           ];
         };
