@@ -20,7 +20,7 @@ in
     apps.vscode.enable = true;
     home.packages = with pkgs; [
       xpipe
-      nixfmt-rfc-style
+      nixfmt
       nil
       typescript
       typescript-language-server
