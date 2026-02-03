@@ -45,6 +45,7 @@ in
 
     environment.systemPackages = with pkgs; [
       libadwaita
+      cartridges
       steamtinkerlaunch
       winetricks
       protontricks
