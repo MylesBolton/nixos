@@ -26,14 +26,14 @@ in
     };
 
     home.packages = with pkgs; [
-      lutris.override
-      {
+      (pkgs.lutris.override {
         extraLibraries =
           pkgs: with pkgs; [
             libadwaita
             gtk4
           ];
-      }
+      })
+
       bottles
       uesave
       #factorio-space-age
