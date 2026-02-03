@@ -25,6 +25,14 @@ in
       };
     };
 
+    lutris.override = {
+      extraLibraries =
+        pkgs: with pkgs; [
+          libadwaita
+          gtk4
+        ];
+    };
+
     home.packages = with pkgs; [
       lutris
       bottles
