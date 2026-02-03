@@ -25,16 +25,15 @@ in
       };
     };
 
-    lutris.override = {
-      extraLibraries =
-        pkgs: with pkgs; [
-          libadwaita
-          gtk4
-        ];
-    };
-
     home.packages = with pkgs; [
-      lutris
+      lutris.override
+      {
+        extraLibraries =
+          pkgs: with pkgs; [
+            libadwaita
+            gtk4
+          ];
+      }
       bottles
       uesave
       #factorio-space-age
