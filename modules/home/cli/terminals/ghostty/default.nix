@@ -15,10 +15,18 @@ in
   };
 
   config = mkIf cfg.enable {
+    xdg.terminal-exec = {
+      enable = true;
+      settings.default = [ "ghostty.desktop" ];
+    };
+
     stylix.targets.ghostty.fonts.enable = false;
     programs.ghostty = {
       enable = true;
       enableFishIntegration = true;
+      settings = {
+        command = "fish";
+      };
       settings = {
         font-family = "Atkinson Hyperlegible Mono";
         font-family-bold = "Atkinson Hyperlegible Mono";
