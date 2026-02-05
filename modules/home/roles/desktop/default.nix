@@ -30,6 +30,9 @@ in
       obs-studio
     ];
     dconf.settings = {
+      "org/gnome/mutter" = {
+        check-alive-timeout = lib.gvariant.mkUint32 120000;
+      };
       "org/gnome/shell" = {
         enabled-extensions = [
           "user-theme@gnome-shell-extensions.gcampax.github.com"
