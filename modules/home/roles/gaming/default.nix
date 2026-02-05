@@ -34,7 +34,6 @@ in
           ];
       })
       dotnetCorePackages.runtime_9_0-bin
-      dotnetCorePackages.sdk_9_0-bin
       bottles
       uesave
       #factorio-space-age
