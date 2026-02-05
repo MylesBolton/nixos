@@ -33,7 +33,8 @@ in
             gtk4
           ];
       })
-
+      dotnet-runtime-wrapped
+      dotnet-sdk-wrapped
       bottles
       uesave
       #factorio-space-age
