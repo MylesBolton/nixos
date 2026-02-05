@@ -30,6 +30,12 @@ in
       desktopManager.gnome.enable = true;
     };
 
+    dconf.settings = {
+      "org/gnome/mutter" = {
+        check-alive-timeout = lib.gvariant.mkUint32 120000;
+      };
+    };
+
     environment.systemPackages = with pkgs.gnomeExtensions; [
       blur-my-shell
       headsetcontrol
