@@ -28,10 +28,11 @@ in
       wl-clipboard
       keepassxc
       obs-studio
+      organicmaps
     ];
     dconf.settings = {
       "org/gnome/mutter" = {
-        check-alive-timeout = lib.gvariant.mkUint32 120000;
+        check-alive-timeout = lib.gvariant.mkUint32 60000;
       };
       "org/gnome/shell" = {
         enabled-extensions = [
