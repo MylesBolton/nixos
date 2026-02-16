@@ -29,6 +29,7 @@ in
       keepassxc
       obs-studio
       organicmaps
+      custom.keeper
     ];
     dconf.settings = {
       "org/gnome/mutter" = {
