@@ -93,7 +93,6 @@ stdenv.mkDerivation rec {
     cp -r usr/lib/keeperpasswordmanager $out/lib/
     cp -r usr/share/* $out/share/
 
-    # FIX: Manually wrap the binary to force LD_LIBRARY_PATH for dlopened libs (libGL)
     makeWrapper $out/lib/keeperpasswordmanager/keeperpasswordmanager $out/bin/keeperpasswordmanager \
       --prefix LD_LIBRARY_PATH : "${
         lib.makeLibraryPath [
