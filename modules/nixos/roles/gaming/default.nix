@@ -49,7 +49,7 @@ in
       steamtinkerlaunch
       winetricks
       protontricks
-      wineWowPackages.waylandFull
+      wineWow64Packages.waylandFull
       piper
     ];
 
