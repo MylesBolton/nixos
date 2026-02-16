@@ -28,7 +28,7 @@ in
       wl-clipboard
       keepassxc
       obs-studio
-      organicmaps
+      (lib.lowPrio organicmaps)
       custom.keeper
     ];
     dconf.settings = {
