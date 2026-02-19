@@ -8,9 +8,7 @@
   libsecret,
   pcsclite,
   alsa-lib,
-  at-spi2-atk,
   at-spi2-core,
-  atk,
   cairo,
   cups,
   dbus,
@@ -36,7 +34,7 @@
 }:
 
 stdenv.mkDerivation rec {
-  pname = "keeper-password-manager";
+  pname = "keeper-password-manager-desktop";
   version = "17.5.0";
 
   src = fetchurl {
@@ -52,9 +50,7 @@ stdenv.mkDerivation rec {
 
   buildInputs = [
     alsa-lib
-    at-spi2-atk
     at-spi2-core
-    atk
     cairo
     cups
     dbus
@@ -100,7 +96,8 @@ stdenv.mkDerivation rec {
           udev
           libuuid
         ]
-      }"
+      }" \
+      --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations}}"
 
     substituteInPlace $out/share/applications/keeperpasswordmanager.desktop \
       --replace "Exec=/usr/lib/keeperpasswordmanager/keeperpasswordmanager" "Exec=$out/bin/keeperpasswordmanager" \
@@ -109,16 +106,13 @@ stdenv.mkDerivation rec {
     runHook postInstall
   '';
 
-  runtimeDependencies = [
-    (lib.getLib udev)
-    libglvnd
-  ];
-
   meta = with lib; {
     description = "Keeper Password Manager Desktop App";
     homepage = "https://keepersecurity.com";
     license = licenses.unfree;
     platforms = [ "x86_64-linux" ];
-    maintainers = with maintainers; [ ];
+    mainProgram = "keeperpasswordmanager";
+    sourceProvenance = with sourceTypes; [ binaryNativeCode ];
+    maintainers = with maintainers; [ mylesbolton ];
   };
 }
