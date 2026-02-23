@@ -57,6 +57,7 @@ in
       via
       qmk
       vial
+      via
     ];
 
     services.ratbagd.enable = true;

@@ -14,6 +14,10 @@
     GSK_RENDERER = "opengl";
   };
 
+  services.udev.extraRules = ''
+    KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="36b0", MODE="0666"
+  '';
+
   environment.sessionVariables = {
     ONEVPL_PREFER_DEVICE = "discrete";
     NEOReadDebugKeys = "1";
