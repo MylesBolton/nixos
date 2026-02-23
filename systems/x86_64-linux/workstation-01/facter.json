@@ -1212,7 +1212,6 @@
         "fpu_exception": false,
         "cpuid_level": 22,
         "write_protect": false,
-        "tlb_size": 32706,
         "clflush_size": 64,
         "cache_alignment": 64,
         "address_sizes": {
@@ -3056,7 +3055,7 @@
         "resources": [
           {
             "type": "hwaddr",
-            "address": 55
+            "address": 48
           },
           {
             "type": "phwaddr",
@@ -3223,6 +3222,39 @@
     "network_interface": [
       {
         "index": 76,
+        "attached_to": 27,
+        "class_list": ["network_interface"],
+        "base_class": {
+          "hex": "0107",
+          "name": "Network Interface",
+          "value": 263
+        },
+        "sub_class": {
+          "hex": "0001",
+          "name": "Ethernet",
+          "value": 1
+        },
+        "model": "Ethernet network interface",
+        "sysfs_id": "/class/net/wlp9s0",
+        "sysfs_device_link": "/devices/pci0000:00/0000:00:1c.6/0000:09:00.0",
+        "unix_device_names": ["wlp9s0"],
+        "resources": [
+          {
+            "type": "hwaddr",
+            "address": 48
+          },
+          {
+            "type": "phwaddr",
+            "address": 101
+          }
+        ],
+        "driver": "iwlwifi",
+        "driver_module": "iwlwifi",
+        "drivers": ["iwlwifi"],
+        "driver_modules": ["iwlwifi"]
+      },
+      {
+        "index": 77,
         "attached_to": 31,
         "class_list": ["network_interface"],
         "base_class": {
@@ -3255,7 +3287,7 @@
         "driver_modules": ["atlantic"]
       },
       {
-        "index": 77,
+        "index": 78,
         "attached_to": 0,
         "class_list": ["network_interface"],
         "base_class": {
@@ -3271,39 +3303,6 @@
         "model": "Loopback network interface",
         "sysfs_id": "/class/net/lo",
         "unix_device_names": ["lo"]
-      },
-      {
-        "index": 79,
-        "attached_to": 27,
-        "class_list": ["network_interface"],
-        "base_class": {
-          "hex": "0107",
-          "name": "Network Interface",
-          "value": 263
-        },
-        "sub_class": {
-          "hex": "0001",
-          "name": "Ethernet",
-          "value": 1
-        },
-        "model": "Ethernet network interface",
-        "sysfs_id": "/class/net/wlp9s0",
-        "sysfs_device_link": "/devices/pci0000:00/0000:00:1c.6/0000:09:00.0",
-        "unix_device_names": ["wlp9s0"],
-        "resources": [
-          {
-            "type": "hwaddr",
-            "address": 55
-          },
-          {
-            "type": "phwaddr",
-            "address": 101
-          }
-        ],
-        "driver": "iwlwifi",
-        "driver_module": "iwlwifi",
-        "drivers": ["iwlwifi"],
-        "driver_modules": ["iwlwifi"]
       }
     ],
     "pci": [
@@ -3899,7 +3898,7 @@
           },
           "interface_protocol": 0,
           "interface_number": 1,
-          "interface_alternate_setting": 0
+          "interface_alternate_setting": 1
         },
         "hotplug": "usb",
         "driver": "snd-usb-audio",
@@ -4750,7 +4749,7 @@
         "name": "Firmware Version Info",
         "handles": [
           309237645383, 313532612680, 317827579977, 322122547274, 390842024011,
-          1189705941083
+          1172526071899
         ]
       }
     ],

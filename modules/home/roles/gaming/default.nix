@@ -38,8 +38,6 @@ in
       uesave
       #factorio-space-age
       prismlauncher
-      vial
-      via
     ];
   };
 }

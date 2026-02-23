@@ -22,6 +22,8 @@ in
     custom.services = {
       syncthing.enable = true;
     };
+    hardware.keyboard.qmk.enable = true;
+    services.udev.packages = with pkgs; [ via ];
     home.packages = with pkgs; [
       thunderbird
       vlc
@@ -30,6 +32,9 @@ in
       obs-studio
       (lib.lowPrio organicmaps)
       custom.keeper
+      via
+      qmk
+      vial
     ];
     dconf.settings = {
       "org/gnome/mutter" = {
