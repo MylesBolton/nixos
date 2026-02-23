@@ -14,6 +14,10 @@
     GSK_RENDERER = "opengl";
   };
 
+  services.udev.extraRules = ''
+    # Rules for Epomaker Galaxy100 Lite (VID 36b0: PID 3055)
+    KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="36b0", ATTRS{idProduct}=="3055", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
+  '';
   environment.sessionVariables = {
     ONEVPL_PREFER_DEVICE = "discrete";
     NEOReadDebugKeys = "1";
