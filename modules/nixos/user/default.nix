@@ -38,7 +38,6 @@ in
         "podman"
         "kvm"
         "libvirtd"
-        "plugdev"
       ]
       ++ cfg.extraGroups;
     }

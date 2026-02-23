@@ -44,7 +44,6 @@ in
     };
 
     hardware.keyboard.qmk.enable = true;
-    services.udev.packages = with pkgs; [ via ];
 
     environment.systemPackages = with pkgs; [
       libadwaita
@@ -54,7 +53,6 @@ in
       protontricks
       wineWow64Packages.waylandFull
       piper
-      via
       qmk
       vial
       via
