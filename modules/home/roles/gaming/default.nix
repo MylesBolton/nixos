@@ -39,6 +39,7 @@ in
       #factorio-space-age
       prismlauncher
       vial
+      via
     ];
   };
 }

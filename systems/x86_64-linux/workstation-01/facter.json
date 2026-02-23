@@ -2,6 +2,10 @@
   "version": 1,
   "system": "x86_64-linux",
   "virtualisation": "none",
+  "uefi": {
+    "supported": true,
+    "platform_size": 64
+  },
   "hardware": {
     "bios": {
       "apm_info": {
@@ -24,7 +28,7 @@
     "bluetooth": [
       {
         "index": 63,
-        "attached_to": 69,
+        "attached_to": 68,
         "class_list": ["usb", "bluetooth"],
         "bus_type": {
           "hex": "0086",
@@ -95,8 +99,8 @@
         "module_alias": "usb:v8087p0032d0000dcE0dsc01dp01icE0isc01ip01in00"
       },
       {
-        "index": 70,
-        "attached_to": 69,
+        "index": 69,
+        "attached_to": 68,
         "class_list": ["usb", "bluetooth"],
         "bus_type": {
           "hex": "0086",
@@ -1039,18 +1043,17 @@
         "unix_device_names": [
           "/dev/cdrom",
           "/dev/disk/by-id/ata-HL-DT-ST_BD-RE_WH14NS40_KL8O5OC0130",
-          "/dev/disk/by-label/\\x3cTHE_SMURFS\\x3e",
+          "/dev/disk/by-label/VAGINA_MONOLOGUES",
           "/dev/disk/by-path/pci-0000:00:17.0-ata-2",
           "/dev/disk/by-path/pci-0000:00:17.0-ata-2.0",
-          "/dev/disk/by-uuid/3f4f2cc200000000",
-          "/dev/sr0",
-          "/dev/sg0"
+          "/dev/disk/by-uuid/2c98865d00000000",
+          "/dev/sr0"
         ],
         "unix_device_name2": "/dev/sg0",
         "driver": "ahci",
         "driver_module": "ahci",
-        "drivers": ["ahci", "sr", "sg"],
-        "driver_modules": ["ahci", "sr_mod", "sg_mod"]
+        "drivers": ["ahci", "sr"],
+        "driver_modules": ["ahci", "sr_mod"]
       }
     ],
     "cpu": [
@@ -1209,7 +1212,7 @@
         "fpu_exception": false,
         "cpuid_level": 22,
         "write_protect": false,
-        "tlb_size": 32705,
+        "tlb_size": 32706,
         "clflush_size": 64,
         "cache_alignment": 64,
         "address_sizes": {
@@ -1221,79 +1224,6 @@
     "disk": [
       {
         "index": 54,
-        "attached_to": 41,
-        "class_list": ["disk", "block_device", "nvme"],
-        "bus_type": {
-          "hex": "0096",
-          "name": "NVME",
-          "value": 150
-        },
-        "slot": {
-          "bus": 0,
-          "number": 0
-        },
-        "base_class": {
-          "hex": "0106",
-          "name": "Mass Storage Device",
-          "value": 262
-        },
-        "sub_class": {
-          "hex": "0000",
-          "name": "Disk",
-          "value": 0
-        },
-        "vendor": {
-          "hex": "c0a9",
-          "value": 49321
-        },
-        "sub_vendor": {
-          "hex": "c0a9",
-          "value": 49321
-        },
-        "device": {
-          "hex": "540a",
-          "name": "CT2000P2SSD8",
-          "value": 21514
-        },
-        "sub_device": {
-          "hex": "540a",
-          "value": 21514
-        },
-        "serial": "2127E5B605AC",
-        "model": "CT2000P2SSD8",
-        "sysfs_id": "/class/block/nvme0n1",
-        "sysfs_bus_id": "nvme0",
-        "sysfs_device_link": "/devices/pci0000:00/0000:00:1b.0/0000:05:00.0/nvme/nvme0",
-        "unix_device_names": [
-          "/dev/disk/by-id/nvme-CT2000P2SSD8_2127E5B605AC",
-          "/dev/disk/by-id/nvme-CT2000P2SSD8_2127E5B605AC_1",
-          "/dev/disk/by-id/nvme-nvme.c0a9-323132374535423630354143-435432303030503253534438-00000001",
-          "/dev/disk/by-path/pci-0000:05:00.0-nvme-1",
-          "/dev/nvme0n1"
-        ],
-        "resources": [
-          {
-            "type": "disk_geo",
-            "cylinders": 1907729,
-            "heads": 64,
-            "sectors": 32,
-            "size": "0x0",
-            "geo_type": "logical"
-          },
-          {
-            "type": "size",
-            "unit": "sectors",
-            "value_1": 3907029168,
-            "value_2": 512
-          }
-        ],
-        "driver": "nvme",
-        "driver_module": "nvme",
-        "drivers": ["nvme"],
-        "driver_modules": ["nvme"]
-      },
-      {
-        "index": 56,
         "attached_to": 35,
         "class_list": ["disk", "block_device", "nvme"],
         "bus_type": {
@@ -1303,7 +1233,7 @@
         },
         "slot": {
           "bus": 0,
-          "number": 1
+          "number": 0
         },
         "base_class": {
           "hex": "0106",
@@ -1334,15 +1264,15 @@
         },
         "serial": "231309800706",
         "model": "WD PC SN740 SDDPNQD-256G-1006",
-        "sysfs_id": "/class/block/nvme1n1",
-        "sysfs_bus_id": "nvme1",
-        "sysfs_device_link": "/devices/pci0000:00/0000:00:1d.0/0000:0a:00.0/nvme/nvme1",
+        "sysfs_id": "/class/block/nvme0n1",
+        "sysfs_bus_id": "nvme0",
+        "sysfs_device_link": "/devices/pci0000:00/0000:00:1d.0/0000:0a:00.0/nvme/nvme0",
         "unix_device_names": [
           "/dev/disk/by-id/nvme-WD_PC_SN740_SDDPNQD-256G-1006_231309800706",
           "/dev/disk/by-id/nvme-WD_PC_SN740_SDDPNQD-256G-1006_231309800706_1",
           "/dev/disk/by-id/nvme-eui.e8238fa6bf530001001b448b4e30ab87",
           "/dev/disk/by-path/pci-0000:0a:00.0-nvme-1",
-          "/dev/nvme1n1"
+          "/dev/nvme0n1"
         ],
         "resources": [
           {
@@ -1357,6 +1287,79 @@
             "type": "size",
             "unit": "sectors",
             "value_1": 500118192,
+            "value_2": 512
+          }
+        ],
+        "driver": "nvme",
+        "driver_module": "nvme",
+        "drivers": ["nvme"],
+        "driver_modules": ["nvme"]
+      },
+      {
+        "index": 56,
+        "attached_to": 41,
+        "class_list": ["disk", "block_device", "nvme"],
+        "bus_type": {
+          "hex": "0096",
+          "name": "NVME",
+          "value": 150
+        },
+        "slot": {
+          "bus": 0,
+          "number": 1
+        },
+        "base_class": {
+          "hex": "0106",
+          "name": "Mass Storage Device",
+          "value": 262
+        },
+        "sub_class": {
+          "hex": "0000",
+          "name": "Disk",
+          "value": 0
+        },
+        "vendor": {
+          "hex": "c0a9",
+          "value": 49321
+        },
+        "sub_vendor": {
+          "hex": "c0a9",
+          "value": 49321
+        },
+        "device": {
+          "hex": "540a",
+          "name": "CT2000P2SSD8",
+          "value": 21514
+        },
+        "sub_device": {
+          "hex": "540a",
+          "value": 21514
+        },
+        "serial": "2127E5B605AC",
+        "model": "CT2000P2SSD8",
+        "sysfs_id": "/class/block/nvme1n1",
+        "sysfs_bus_id": "nvme1",
+        "sysfs_device_link": "/devices/pci0000:00/0000:00:1b.0/0000:05:00.0/nvme/nvme1",
+        "unix_device_names": [
+          "/dev/disk/by-id/nvme-CT2000P2SSD8_2127E5B605AC",
+          "/dev/disk/by-id/nvme-CT2000P2SSD8_2127E5B605AC_1",
+          "/dev/disk/by-id/nvme-nvme.c0a9-323132374535423630354143-435432303030503253534438-00000001",
+          "/dev/disk/by-path/pci-0000:05:00.0-nvme-1",
+          "/dev/nvme1n1"
+        ],
+        "resources": [
+          {
+            "type": "disk_geo",
+            "cylinders": 1907729,
+            "heads": 64,
+            "sectors": 32,
+            "size": "0x0",
+            "geo_type": "logical"
+          },
+          {
+            "type": "size",
+            "unit": "sectors",
+            "value_1": 3907029168,
             "value_2": 512
           }
         ],
@@ -1502,7 +1505,7 @@
     "hub": [
       {
         "index": 57,
-        "attached_to": 69,
+        "attached_to": 68,
         "class_list": ["usb", "hub"],
         "bus_type": {
           "hex": "0086",
@@ -1581,7 +1584,7 @@
       },
       {
         "index": 58,
-        "attached_to": 73,
+        "attached_to": 74,
         "class_list": ["usb", "hub"],
         "bus_type": {
           "hex": "0086",
@@ -1649,8 +1652,8 @@
         "module_alias": "usb:v0BDAp0411d0124dc09dsc00dp03ic09isc00ip00in00"
       },
       {
-        "index": 62,
-        "attached_to": 69,
+        "index": 61,
+        "attached_to": 68,
         "class_list": ["usb", "hub"],
         "bus_type": {
           "hex": "0086",
@@ -1729,7 +1732,7 @@
       },
       {
         "index": 64,
-        "attached_to": 73,
+        "attached_to": 74,
         "class_list": ["usb", "hub"],
         "bus_type": {
           "hex": "0086",
@@ -1797,7 +1800,7 @@
         "module_alias": "usb:v0BDAp0411d0124dc09dsc00dp03ic09isc00ip00in00"
       },
       {
-        "index": 69,
+        "index": 68,
         "attached_to": 49,
         "class_list": ["usb", "hub"],
         "bus_type": {
@@ -1816,7 +1819,7 @@
         },
         "vendor": {
           "hex": "1d6b",
-          "name": "Linux 6.18.0 xhci-hcd",
+          "name": "Linux 6.19.0 xhci-hcd",
           "value": 7531
         },
         "device": {
@@ -1826,11 +1829,11 @@
         },
         "revision": {
           "hex": "0000",
-          "name": "6.18",
+          "name": "6.19",
           "value": 0
         },
         "serial": "0000:00:14.0",
-        "model": "Linux 6.18.0 xhci-hcd xHCI Host Controller",
+        "model": "Linux 6.19.0 xhci-hcd xHCI Host Controller",
         "sysfs_id": "/devices/pci0000:00/0000:00:14.0/usb1/1-0:1.0",
         "sysfs_bus_id": "1-0:1.0",
         "resources": [
@@ -1874,11 +1877,11 @@
         "driver_module": "usbcore",
         "drivers": ["hub"],
         "driver_modules": ["usbcore"],
-        "module_alias": "usb:v1D6Bp0002d0618dc09dsc00dp01ic09isc00ip00in00"
+        "module_alias": "usb:v1D6Bp0002d0619dc09dsc00dp01ic09isc00ip00in00"
       },
       {
-        "index": 71,
-        "attached_to": 69,
+        "index": 70,
+        "attached_to": 68,
         "class_list": ["usb", "hub"],
         "bus_type": {
           "hex": "0086",
@@ -1955,7 +1958,7 @@
         "module_alias": "usb:v05E3p0608d8536dc09dsc00dp01ic09isc00ip00in00"
       },
       {
-        "index": 73,
+        "index": 74,
         "attached_to": 49,
         "class_list": ["usb", "hub"],
         "bus_type": {
@@ -1974,7 +1977,7 @@
         },
         "vendor": {
           "hex": "1d6b",
-          "name": "Linux 6.18.0 xhci-hcd",
+          "name": "Linux 6.19.0 xhci-hcd",
           "value": 7531
         },
         "device": {
@@ -1984,11 +1987,11 @@
         },
         "revision": {
           "hex": "0000",
-          "name": "6.18",
+          "name": "6.19",
           "value": 0
         },
         "serial": "0000:00:14.0",
-        "model": "Linux 6.18.0 xhci-hcd xHCI Host Controller",
+        "model": "Linux 6.19.0 xhci-hcd xHCI Host Controller",
         "sysfs_id": "/devices/pci0000:00/0000:00:14.0/usb2/2-0:1.0",
         "sysfs_bus_id": "2-0:1.0",
         "detail": {
@@ -2022,13 +2025,13 @@
         "driver_module": "usbcore",
         "drivers": ["hub"],
         "driver_modules": ["usbcore"],
-        "module_alias": "usb:v1D6Bp0003d0618dc09dsc00dp03ic09isc00ip00in00"
+        "module_alias": "usb:v1D6Bp0003d0619dc09dsc00dp03ic09isc00ip00in00"
       }
     ],
     "keyboard": [
       {
-        "index": 68,
-        "attached_to": 62,
+        "index": 73,
+        "attached_to": 61,
         "class_list": ["keyboard", "usb"],
         "bus_type": {
           "hex": "0086",
@@ -2050,26 +2053,29 @@
           "value": 0
         },
         "vendor": {
-          "hex": "1b1c",
-          "name": "Corsair",
-          "value": 6940
+          "hex": "36b0",
+          "name": "RDMCTMZT",
+          "value": 14000
         },
         "device": {
-          "hex": "1b2d",
-          "name": "Corsair Gaming K95 RGB PLATINUM Keyboard",
-          "value": 6957
+          "hex": "3055",
+          "name": "Epomaker Galaxy100 Lite",
+          "value": 12373
         },
         "revision": {
           "hex": "0000",
-          "name": "3.29",
+          "name": "0.08",
           "value": 0
         },
-        "serial": "16028029AF35A0205B3230D7F5001BC4",
-        "model": "Corsair Gaming K95 RGB PLATINUM Keyboard",
-        "sysfs_id": "/devices/pci0000:00/0000:00:14.0/usb1/1-10/1-10.2/1-10.2:1.0",
-        "sysfs_bus_id": "1-10.2:1.0",
-        "unix_device_names": ["/dev/input/mice"],
-        "unix_device_name2": "/dev/input/mouse1",
+        "model": "RDMCTMZT Epomaker Galaxy100 Lite",
+        "sysfs_id": "/devices/pci0000:00/0000:00:14.0/usb1/1-10/1-10.3/1-10.3:1.0",
+        "sysfs_bus_id": "1-10.3:1.0",
+        "unix_device_names": [
+          "/dev/input/by-id/usb-RDMCTMZT_Epomaker_Galaxy100_Lite-event-kbd",
+          "/dev/input/by-path/pci-0000:00:14.0-usb-0:10.3:1.0-event-kbd",
+          "/dev/input/by-path/pci-0000:00:14.0-usbv2-0:10.3:1.0-event-kbd",
+          "/dev/input/event3"
+        ],
         "resources": [
           {
             "type": "baud",
@@ -2116,7 +2122,7 @@
           "xkb_rules": "xfree86",
           "xkb_model": "pc104"
         },
-        "module_alias": "usb:v1B1Cp1B2Dd0329dc00dsc00dp00ic03isc01ip01in00"
+        "module_alias": "usb:v36B0p3055d0008dc00dsc00dp00ic03isc01ip01in00"
       }
     ],
     "memory": [
@@ -2804,8 +2810,8 @@
     ],
     "mouse": [
       {
-        "index": 72,
-        "attached_to": 57,
+        "index": 71,
+        "attached_to": 68,
         "class_list": ["mouse", "usb"],
         "bus_type": {
           "hex": "0086",
@@ -2845,8 +2851,8 @@
         "compat_vendor": "Unknown",
         "compat_device": "Generic USB Mouse",
         "model": "Logitech G502 HERO Gaming Mouse",
-        "sysfs_id": "/devices/pci0000:00/0000:00:14.0/usb1/1-9/1-9.2/1-9.2:1.0",
-        "sysfs_bus_id": "1-9.2:1.0",
+        "sysfs_id": "/devices/pci0000:00/0000:00:14.0/usb1/1-8/1-8:1.0",
+        "sysfs_bus_id": "1-8:1.0",
         "unix_device_names": ["/dev/input/mice"],
         "unix_device_name2": "/dev/input/mouse0",
         "resources": [
@@ -2899,6 +2905,102 @@
           "wheels": -1
         },
         "module_alias": "usb:v046DpC08Bd2703dc00dsc00dp00ic03isc01ip02in00"
+      },
+      {
+        "index": 72,
+        "attached_to": 61,
+        "class_list": ["mouse", "usb"],
+        "bus_type": {
+          "hex": "0086",
+          "name": "USB",
+          "value": 134
+        },
+        "slot": {
+          "bus": 0,
+          "number": 0
+        },
+        "base_class": {
+          "hex": "0105",
+          "name": "Mouse",
+          "value": 261
+        },
+        "sub_class": {
+          "hex": "0003",
+          "name": "USB Mouse",
+          "value": 3
+        },
+        "vendor": {
+          "hex": "36b0",
+          "name": "RDMCTMZT",
+          "value": 14000
+        },
+        "device": {
+          "hex": "3055",
+          "name": "Epomaker Galaxy100 Lite",
+          "value": 12373
+        },
+        "revision": {
+          "hex": "0000",
+          "name": "0.08",
+          "value": 0
+        },
+        "compat_vendor": "Unknown",
+        "compat_device": "Generic USB Mouse",
+        "model": "RDMCTMZT Epomaker Galaxy100 Lite",
+        "sysfs_id": "/devices/pci0000:00/0000:00:14.0/usb1/1-10/1-10.3/1-10.3:1.2",
+        "sysfs_bus_id": "1-10.3:1.2",
+        "unix_device_names": ["/dev/input/mice"],
+        "unix_device_name2": "/dev/input/mouse1",
+        "resources": [
+          {
+            "type": "baud",
+            "speed": 12000000,
+            "bits": 0,
+            "stop_bits": 0,
+            "parity": 0,
+            "handshake": 0
+          }
+        ],
+        "detail": {
+          "device_class": {
+            "hex": "0000",
+            "name": "per_interface",
+            "value": 0
+          },
+          "device_subclass": {
+            "hex": "0000",
+            "name": "per_interface",
+            "value": 0
+          },
+          "device_protocol": 0,
+          "interface_class": {
+            "hex": "0003",
+            "name": "hid",
+            "value": 3
+          },
+          "interface_subclass": {
+            "hex": "0000",
+            "name": "per_interface",
+            "value": 0
+          },
+          "interface_protocol": 0,
+          "interface_number": 2,
+          "interface_alternate_setting": 0
+        },
+        "hotplug": "usb",
+        "driver": "usbhid",
+        "driver_module": "usbhid",
+        "drivers": ["usbhid"],
+        "driver_modules": ["usbhid"],
+        "driver_info": {
+          "type": "mouse",
+          "db_entry_0": ["explorerps/2", "exps2"],
+          "xf86": "explorerps/2",
+          "gpm": "exps2",
+          "buttons": -1,
+          "wheels": -1
+        },
+        "module_alias": "usb:v36B0p3055d0008dc00dsc00dp00ic03isc00ip00in02"
       }
     ],
     "network_controller": [
@@ -2954,7 +3056,7 @@
         "resources": [
           {
             "type": "hwaddr",
-            "address": 101
+            "address": 55
           },
           {
             "type": "phwaddr",
@@ -3120,39 +3222,6 @@
     ],
     "network_interface": [
       {
-        "index": 75,
-        "attached_to": 27,
-        "class_list": ["network_interface"],
-        "base_class": {
-          "hex": "0107",
-          "name": "Network Interface",
-          "value": 263
-        },
-        "sub_class": {
-          "hex": "0001",
-          "name": "Ethernet",
-          "value": 1
-        },
-        "model": "Ethernet network interface",
-        "sysfs_id": "/class/net/wlp9s0",
-        "sysfs_device_link": "/devices/pci0000:00/0000:00:1c.6/0000:09:00.0",
-        "unix_device_names": ["wlp9s0"],
-        "resources": [
-          {
-            "type": "hwaddr",
-            "address": 101
-          },
-          {
-            "type": "phwaddr",
-            "address": 101
-          }
-        ],
-        "driver": "iwlwifi",
-        "driver_module": "iwlwifi",
-        "drivers": ["iwlwifi"],
-        "driver_modules": ["iwlwifi"]
-      },
-      {
         "index": 76,
         "attached_to": 31,
         "class_list": ["network_interface"],
@@ -3202,6 +3271,39 @@
         "model": "Loopback network interface",
         "sysfs_id": "/class/net/lo",
         "unix_device_names": ["lo"]
+      },
+      {
+        "index": 79,
+        "attached_to": 27,
+        "class_list": ["network_interface"],
+        "base_class": {
+          "hex": "0107",
+          "name": "Network Interface",
+          "value": 263
+        },
+        "sub_class": {
+          "hex": "0001",
+          "name": "Ethernet",
+          "value": 1
+        },
+        "model": "Ethernet network interface",
+        "sysfs_id": "/class/net/wlp9s0",
+        "sysfs_device_link": "/devices/pci0000:00/0000:00:1c.6/0000:09:00.0",
+        "unix_device_names": ["wlp9s0"],
+        "resources": [
+          {
+            "type": "hwaddr",
+            "address": 55
+          },
+          {
+            "type": "phwaddr",
+            "address": 101
+          }
+        ],
+        "driver": "iwlwifi",
+        "driver_module": "iwlwifi",
+        "drivers": ["iwlwifi"],
+        "driver_modules": ["iwlwifi"]
       }
     ],
     "pci": [
@@ -3556,7 +3658,7 @@
       },
       {
         "index": 59,
-        "attached_to": 62,
+        "attached_to": 61,
         "class_list": ["sound", "usb"],
         "bus_type": {
           "hex": "0086",
@@ -3639,8 +3741,8 @@
         "module_alias": "usb:v08BBp2902d0100dc00dsc00dp00ic01isc02ip00in02"
       },
       {
-        "index": 61,
-        "attached_to": 62,
+        "index": 60,
+        "attached_to": 61,
         "class_list": ["sound", "usb"],
         "bus_type": {
           "hex": "0086",
@@ -3724,7 +3826,7 @@
       },
       {
         "index": 67,
-        "attached_to": 62,
+        "attached_to": 61,
         "class_list": ["sound", "usb"],
         "bus_type": {
           "hex": "0086",
@@ -4025,93 +4127,8 @@
     },
     "usb": [
       {
-        "index": 60,
-        "attached_to": 62,
-        "class_list": ["usb", "unknown"],
-        "bus_type": {
-          "hex": "0086",
-          "name": "USB",
-          "value": 134
-        },
-        "slot": {
-          "bus": 0,
-          "number": 0
-        },
-        "base_class": {
-          "hex": "0000",
-          "name": "Unclassified device",
-          "value": 0
-        },
-        "sub_class": {
-          "hex": "0000",
-          "name": "Unclassified device",
-          "value": 0
-        },
-        "vendor": {
-          "hex": "1b1c",
-          "name": "Corsair",
-          "value": 6940
-        },
-        "device": {
-          "hex": "1b2d",
-          "name": "Corsair Gaming K95 RGB PLATINUM Keyboard",
-          "value": 6957
-        },
-        "revision": {
-          "hex": "0000",
-          "name": "3.29",
-          "value": 0
-        },
-        "serial": "16028029AF35A0205B3230D7F5001BC4",
-        "model": "Corsair Gaming K95 RGB PLATINUM Keyboard",
-        "sysfs_id": "/devices/pci0000:00/0000:00:14.0/usb1/1-10/1-10.2/1-10.2:1.1",
-        "sysfs_bus_id": "1-10.2:1.1",
-        "resources": [
-          {
-            "type": "baud",
-            "speed": 12000000,
-            "bits": 0,
-            "stop_bits": 0,
-            "parity": 0,
-            "handshake": 0
-          }
-        ],
-        "detail": {
-          "device_class": {
-            "hex": "0000",
-            "name": "per_interface",
-            "value": 0
-          },
-          "device_subclass": {
-            "hex": "0000",
-            "name": "per_interface",
-            "value": 0
-          },
-          "device_protocol": 0,
-          "interface_class": {
-            "hex": "0003",
-            "name": "hid",
-            "value": 3
-          },
-          "interface_subclass": {
-            "hex": "0000",
-            "name": "per_interface",
-            "value": 0
-          },
-          "interface_protocol": 0,
-          "interface_number": 1,
-          "interface_alternate_setting": 0
-        },
-        "hotplug": "usb",
-        "driver": "usbhid",
-        "driver_module": "usbhid",
-        "drivers": ["usbhid"],
-        "driver_modules": ["usbhid"],
-        "module_alias": "usb:v1B1Cp1B2Dd0329dc00dsc00dp00ic03isc00ip00in01"
-      },
-      {
-        "index": 65,
-        "attached_to": 57,
+        "index": 62,
+        "attached_to": 68,
         "class_list": ["usb", "unknown"],
         "bus_type": {
           "hex": "0086",
@@ -4149,12 +4166,12 @@
         },
         "serial": "1882325B3132",
         "model": "Logitech G502 HERO Gaming Mouse",
-        "sysfs_id": "/devices/pci0000:00/0000:00:14.0/usb1/1-9/1-9.2/1-9.2:1.1",
-        "sysfs_bus_id": "1-9.2:1.1",
+        "sysfs_id": "/devices/pci0000:00/0000:00:14.0/usb1/1-8/1-8:1.1",
+        "sysfs_bus_id": "1-8:1.1",
         "unix_device_names": [
           "/dev/input/by-id/usb-Logitech_G502_HERO_Gaming_Mouse_1882325B3132-if01-event-kbd",
-          "/dev/input/by-path/pci-0000:00:14.0-usb-0:9.2:1.1-event-kbd",
-          "/dev/input/by-path/pci-0000:00:14.0-usbv2-0:9.2:1.1-event-kbd",
+          "/dev/input/by-path/pci-0000:00:14.0-usb-0:8:1.1-event-kbd",
+          "/dev/input/by-path/pci-0000:00:14.0-usbv2-0:8:1.1-event-kbd",
           "/dev/input/event2"
         ],
         "resources": [
@@ -4201,8 +4218,92 @@
         "module_alias": "usb:v046DpC08Bd2703dc00dsc00dp00ic03isc00ip00in01"
       },
       {
+        "index": 65,
+        "attached_to": 61,
+        "class_list": ["usb", "unknown"],
+        "bus_type": {
+          "hex": "0086",
+          "name": "USB",
+          "value": 134
+        },
+        "slot": {
+          "bus": 0,
+          "number": 0
+        },
+        "base_class": {
+          "hex": "0000",
+          "name": "Unclassified device",
+          "value": 0
+        },
+        "sub_class": {
+          "hex": "0000",
+          "name": "Unclassified device",
+          "value": 0
+        },
+        "vendor": {
+          "hex": "36b0",
+          "name": "RDMCTMZT",
+          "value": 14000
+        },
+        "device": {
+          "hex": "3055",
+          "name": "Epomaker Galaxy100 Lite",
+          "value": 12373
+        },
+        "revision": {
+          "hex": "0000",
+          "name": "0.08",
+          "value": 0
+        },
+        "model": "RDMCTMZT Epomaker Galaxy100 Lite",
+        "sysfs_id": "/devices/pci0000:00/0000:00:14.0/usb1/1-10/1-10.3/1-10.3:1.1",
+        "sysfs_bus_id": "1-10.3:1.1",
+        "resources": [
+          {
+            "type": "baud",
+            "speed": 12000000,
+            "bits": 0,
+            "stop_bits": 0,
+            "parity": 0,
+            "handshake": 0
+          }
+        ],
+        "detail": {
+          "device_class": {
+            "hex": "0000",
+            "name": "per_interface",
+            "value": 0
+          },
+          "device_subclass": {
+            "hex": "0000",
+            "name": "per_interface",
+            "value": 0
+          },
+          "device_protocol": 0,
+          "interface_class": {
+            "hex": "0003",
+            "name": "hid",
+            "value": 3
+          },
+          "interface_subclass": {
+            "hex": "0000",
+            "name": "per_interface",
+            "value": 0
+          },
+          "interface_protocol": 0,
+          "interface_number": 1,
+          "interface_alternate_setting": 0
+        },
+        "hotplug": "usb",
+        "driver": "usbhid",
+        "driver_module": "usbhid",
+        "drivers": ["usbhid"],
+        "driver_modules": ["usbhid"],
+        "module_alias": "usb:v36B0p3055d0008dc00dsc00dp00ic03isc00ip00in01"
+      },
+      {
         "index": 66,
-        "attached_to": 62,
+        "attached_to": 61,
         "class_list": ["usb", "unknown"],
         "bus_type": {
           "hex": "0086",
@@ -4245,7 +4346,7 @@
           "/dev/input/by-id/usb-Burr-Brown_from_TI_USB_Audio_CODEC-event-if03",
           "/dev/input/by-path/pci-0000:00:14.0-usb-0:10.4:1.3-event",
           "/dev/input/by-path/pci-0000:00:14.0-usbv2-0:10.4:1.3-event",
-          "/dev/input/event7"
+          "/dev/input/event8"
         ],
         "resources": [
           {
@@ -4291,8 +4392,8 @@
         "module_alias": "usb:v08BBp2902d0100dc00dsc00dp00ic03isc00ip00in03"
       },
       {
-        "index": 74,
-        "attached_to": 69,
+        "index": 75,
+        "attached_to": 68,
         "class_list": ["usb", "unknown"],
         "bus_type": {
           "hex": "0086",
@@ -4649,7 +4750,7 @@
         "name": "Firmware Version Info",
         "handles": [
           309237645383, 313532612680, 317827579977, 322122547274, 390842024011,
-          4488240824411
+          1189705941083
         ]
       }
     ],
