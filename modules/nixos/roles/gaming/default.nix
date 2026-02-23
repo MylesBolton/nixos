@@ -51,6 +51,7 @@ in
       protontricks
       wineWow64Packages.waylandFull
       piper
+      qmk-udev-rules
     ];
 
     services.ratbagd.enable = true;

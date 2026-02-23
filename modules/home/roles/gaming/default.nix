@@ -39,7 +39,6 @@ in
       #factorio-space-age
       prismlauncher
       vial
-      qmk-udev-rules
     ];
   };
 }

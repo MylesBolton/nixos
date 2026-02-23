@@ -54,6 +54,7 @@ in
       lshw
       lsscsi
       libva-utils
+      usbutils
     ];
     styles.stylix.enable = true;
   };
