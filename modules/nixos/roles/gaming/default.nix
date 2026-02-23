@@ -43,6 +43,9 @@ in
       enable32Bit = true;
     };
 
+    hardware.keyboard.qmk.enable = true;
+    services.udev.packages = with pkgs; [ via ];
+
     environment.systemPackages = with pkgs; [
       libadwaita
       cartridges
@@ -51,6 +54,9 @@ in
       protontricks
       wineWow64Packages.waylandFull
       piper
+      via
+      qmk
+      vial
     ];
 
     services.ratbagd.enable = true;
