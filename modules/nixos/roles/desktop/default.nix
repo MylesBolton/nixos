@@ -46,10 +46,16 @@ in
       ghostty
       lshw-gui
       nvtopPackages.full
+      vial
+      via
     ];
 
     services = {
       printing.enable = true;
+      udev.packages = with pkgs; [
+        vial
+        via
+      ];
     };
   };
 }
