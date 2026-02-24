@@ -43,8 +43,6 @@ in
       enable32Bit = true;
     };
 
-    hardware.keyboard.qmk.enable = true;
-
     environment.systemPackages = with pkgs; [
       libadwaita
       cartridges
