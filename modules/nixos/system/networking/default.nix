@@ -58,6 +58,7 @@ in
       networkmanager.enable = true;
       firewall.enable = true;
       wireless = mkIf cfg.wifi.enable {
+        userControlled.enable = true;
         networks = mkMerge [
           (mkIf cfg.wifi.guest {
             "Guest WiFi" = {
