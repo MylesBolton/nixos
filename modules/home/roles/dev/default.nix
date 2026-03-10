@@ -28,6 +28,7 @@ in
       bun
       scanmem
       gemini-cli
+      mcp-nixos
       direnv
       gh
     ];
