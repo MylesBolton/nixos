@@ -73,7 +73,6 @@ in
             enhanced-github # better gh
             custom-new-tab-page # startpage
             ublock-origin # ad block
-            startup-bookmarks # opens a folder of bookmarks on startup
             markdownload # dowlaods webpages as markdown
             fx_cast
 
