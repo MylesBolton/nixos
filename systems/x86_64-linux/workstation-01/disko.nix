@@ -1,9 +1,9 @@
 {
   disko.devices = {
     disk = {
-      nvme1n1 = {
+      nvme0n1 = {
         type = "disk";
-        device = "/dev/nvme1n1";
+        device = "/dev/disk/by-id/nvme-eui.e8238fa6bf530001001b448b4e30ab87";
         content = {
           type = "gpt";
           partitions = {
@@ -27,7 +27,7 @@
                   "-L"
                   "nixos"
                   "-f"
-                ]; # Changed label
+                ];
                 subvolumes = {
                   "/root" = {
                     mountpoint = "/";
@@ -63,9 +63,9 @@
           };
         };
       };
-      nvme0n1 = {
+      nvme1n1 = {
         type = "disk";
-        device = "/dev/nvme0n1";
+        device = "/dev/disk/by-id/nvme-CT2000P2SSD8_2127E5B605AC";
         content = {
           type = "gpt";
           partitions = {
