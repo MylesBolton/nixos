@@ -49,7 +49,14 @@
   services.xserver.videoDrivers = [ "modesetting" ];
 
   boot = {
-    supportedFilesystems = lib.mkForce [ "btrfs" ];
+    initrd.availableKernelModules = [
+      "xhci_pci"
+      "ahci"
+      "nvme"
+      "usb_storage"
+      "sd_mod"
+    ];
+    supportedFilesystems = [ "btrfs" ];
     kernelPackages = pkgs.linuxPackages_latest;
     resumeDevice = "/dev/disk/by-label/nixos";
     kernelParams = [
