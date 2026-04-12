@@ -22,7 +22,7 @@ in
       openscad
       freecad
       librecad
-      librepcb
+      #librepcb
       kicad
     ];
   };
