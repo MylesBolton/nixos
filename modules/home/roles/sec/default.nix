@@ -42,7 +42,6 @@ in
       hcxtools
       hping
       iaito
-      john
       ldapnomnom
       metasploit
       mimikatz

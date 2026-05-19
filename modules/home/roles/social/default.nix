@@ -21,7 +21,7 @@ in
     home.packages = with pkgs; [
       signal-desktop
       element-desktop
-      wasistlos
+      karere
     ];
   };
 }
