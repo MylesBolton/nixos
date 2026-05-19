@@ -29,6 +29,12 @@
                   "compress=zstd"
                   "noatime"
                 ];
+                subvolumes = {
+                  "/root" = {
+                    mountpoint = "/";
+                    mountOptions = ["subvol=root" "compress=zstd" "noatime"];
+                  };
+                };
               };
             };
           };
