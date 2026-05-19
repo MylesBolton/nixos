@@ -4,8 +4,7 @@
   pkgs,
   modulesPath,
   ...
-}:
-{
+}: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
@@ -46,7 +45,7 @@
   };
 
   services.switcherooControl.enable = true;
-  services.xserver.videoDrivers = [ "modesetting" ];
+  services.xserver.videoDrivers = ["modesetting"];
 
   boot = {
     initrd.availableKernelModules = [
@@ -56,9 +55,8 @@
       "usb_storage"
       "sd_mod"
     ];
-    supportedFilesystems = [ "btrfs" ];
+    supportedFilesystems = ["btrfs"];
     kernelPackages = pkgs.linuxPackages_latest;
-    resumeDevice = "/dev/disk/by-label/nixos";
     kernelParams = [
       "pci=realloc"
       "pcie_aspm=off"
