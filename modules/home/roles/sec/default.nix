@@ -18,7 +18,6 @@ in
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      mullvad-vpn
       aircrack-ng
       arping
       #armitage

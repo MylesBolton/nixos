@@ -1,6 +1,8 @@
-{ pkgs, namespace, ... }:
 {
-
+  pkgs,
+  namespace,
+  ...
+}: {
   roles = {
     common.enable = true;
     desktop.enable = true;
@@ -11,7 +13,7 @@
     dev.enable = true;
     cad.enable = true;
     priv.enable = true;
-    sec.enable = true;
+    sec.enable = false;
   };
 
   custom.user = {
