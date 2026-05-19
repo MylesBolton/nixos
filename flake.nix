@@ -7,6 +7,7 @@
   inputs = {
     nixpkgs.url = "github:Nixos/nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:Nixos/nixpkgs/nixos-25.11";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     nixos-facter-modules.url = "github:nix-community/nixos-facter-modules";
     stylix.url = "github:danth/stylix";
@@ -76,6 +77,7 @@
       ];
 
       systems.modules.nixos = with inputs; [
+        { nixpkgs.config.allowUnfree = true; }
         stylix.nixosModules.stylix
         home-manager.nixosModules.home-manager
         disko.nixosModules.disko

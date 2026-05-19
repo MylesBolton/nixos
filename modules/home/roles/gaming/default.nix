@@ -4,14 +4,13 @@
   lib,
   pkgs,
   namespace,
+  inputs,
   ...
 }:
 with lib;
-with lib.custom;
-let
+with lib.custom; let
   cfg = config.roles.gaming;
-in
-{
+in {
   options.roles.gaming = with types; {
     enable = mkBoolOpt false "enable gaming role";
   };
@@ -26,15 +25,8 @@ in
     };
 
     home.packages = with pkgs; [
-      (pkgs.lutris.override {
-        extraLibraries =
-          pkgs: with pkgs; [
-            libadwaita
-            gtk4
-          ];
-      })
+      inputs.nixpkgs-stable.legacyPackages.${pkgs.system}.lutris
       dotnetCorePackages.runtime_9_0-bin
-      bottles
       uesave
       #factorio-space-age
       prismlauncher

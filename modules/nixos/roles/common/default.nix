@@ -17,6 +17,7 @@ in
   };
 
   config = mkIf cfg.enable {
+    nixpkgs.config.allowUnfree = true;
     custom = {
       system = {
         nix.enable = true;

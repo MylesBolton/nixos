@@ -569,6 +569,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-stable": {
+      "locked": {
+        "lastModified": 1779102034,
+        "narHash": "sha256-vZJZjLo513IeI8hjzHFc6TDezUd4uCE2Eq4SNO3DNNg=",
+        "owner": "Nixos",
+        "repo": "nixpkgs",
+        "rev": "687f05a9184cad4eaf905c48b63649e3a86f5433",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Nixos",
+        "ref": "nixos-25.11",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-unstable": {
       "locked": {
         "lastModified": 1778869304,
@@ -655,11 +671,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1779218989,
-        "narHash": "sha256-iAUqjUcf5tVUAe2ID8N0IYg/TF5ipftkbqgm1mwWTvo=",
+        "lastModified": 1779224823,
+        "narHash": "sha256-KgDep23uR8/SLok2eWDM9AEb5le1WOhoGKJHEudXjJQ=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "ce1e0ad96c4f9c7db45f01e4f484651ac63ab9b1",
+        "rev": "8a159c684429ff1ead5cb2661a0a1185cceb313d",
         "type": "github"
       },
       "original": {
@@ -705,6 +721,7 @@
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_3",
+        "nixpkgs-stable": "nixpkgs-stable",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nur": "nur",
         "snowfall-lib": "snowfall-lib",
