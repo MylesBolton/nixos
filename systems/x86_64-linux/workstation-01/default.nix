@@ -15,10 +15,6 @@ with lib.custom;
 
   networking.hostName = "workstation-01";
 
-  #services.automatic-ripping-machine = {
-  #  enable = true;
-  #};
-
   roles = {
     desktop = {
       enable = true;
