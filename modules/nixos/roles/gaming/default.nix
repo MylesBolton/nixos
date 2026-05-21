@@ -34,6 +34,7 @@ in
         gamescopeSession.enable = true;
         extraCompatPackages = with pkgs; [
           proton-ge-bin
+          proton-cachyos
         ];
       };
     };
@@ -49,11 +50,8 @@ in
       steamtinkerlaunch
       winetricks
       protontricks
+      protonup-qt
       wineWow64Packages.waylandFull
-      piper
-      qmk
-      vial
-      via
     ];
 
     services.ratbagd.enable = true;

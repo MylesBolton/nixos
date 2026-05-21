@@ -4,7 +4,8 @@
   pkgs,
   modulesPath,
   ...
-}: {
+}:
+{
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
@@ -45,7 +46,7 @@
   };
 
   services.switcherooControl.enable = true;
-  services.xserver.videoDrivers = ["modesetting"];
+  services.xserver.videoDrivers = [ "modesetting" ];
 
   boot = {
     initrd.availableKernelModules = [
@@ -55,8 +56,8 @@
       "usb_storage"
       "sd_mod"
     ];
-    supportedFilesystems = ["btrfs"];
-    kernelPackages = pkgs.linuxPackages_latest;
+    supportedFilesystems = [ "btrfs" ];
+    kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore;
     kernelParams = [
       "pci=realloc"
       "pcie_aspm=off"

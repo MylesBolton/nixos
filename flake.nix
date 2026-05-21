@@ -1,8 +1,16 @@
 {
   description = "MylesBolton's Nix/NixOS Config";
   nixConfig = {
-    extra-substituters = "https://nix-community.cachix.org";
-    extra-trusted-public-keys = "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=";
+    extra-substituters = [
+      "https://nix-community.cachix.org"
+      "https://cache.garnix.io"
+      "https://attic.xuyh0120.win/lantian"
+    ];
+    extra-trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+      "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
+    ];
   };
   inputs = {
     nixpkgs.url = "github:Nixos/nixpkgs/nixos-unstable";
@@ -32,7 +40,6 @@
       url = "github:nlewo/comin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    agenix.url = "github:ryantm/agenix";
     nixos-anywhere = {
       url = "github:numtide/nixos-anywhere";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -42,6 +49,12 @@
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel";
+    nix-gaming-edge = {
+      url = "github:powerofthe69/nix-gaming-edge";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
   outputs =
@@ -74,6 +87,9 @@
       overlays = with inputs; [
         nur.overlays.default
         nix-vscode-extensions.overlays.default
+        nix-gaming-edge.overlays.default
+        nix-gaming-edge.overlays.proton-cachyos
+        nix-cachyos-kernel.overlays.default
         (_: prev: {
           openldap = prev.openldap.overrideAttrs {
             doCheck = false;
@@ -86,7 +102,6 @@
         stylix.nixosModules.stylix
         home-manager.nixosModules.home-manager
         disko.nixosModules.disko
-        agenix.nixosModules.default
         comin.nixosModules.comin
         inputs.nixos-facter-modules.nixosModules.facter
         (

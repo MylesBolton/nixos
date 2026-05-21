@@ -4,6 +4,7 @@
   lib,
   pkgs,
   namespace,
+  osConfig,
   inputs,
   ...
 }:
@@ -25,15 +26,16 @@ in
         cpu_load_change = true;
       };
     };
+    programs.lutris = {
+      enable = true;
+      protonPackages = with pkgs; [
+        proton-ge-bin
+        proton-cachyos
+      ];
+      steamPackage = osConfig.programs.steam.package;
+    };
 
     home.packages = with pkgs; [
-      (pkgs.lutris.override {
-        extraLibraries =
-          pkgs: with pkgs; [
-            libadwaita
-            gtk4
-          ];
-      })
       dotnetCorePackages.runtime_9_0-bin
       uesave
       #factorio-space-age

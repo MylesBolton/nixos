@@ -46,6 +46,8 @@ in
       ghostty
       lshw-gui
       nvtopPackages.full
+      piper
+      qmk
       vial
       via
     ];
