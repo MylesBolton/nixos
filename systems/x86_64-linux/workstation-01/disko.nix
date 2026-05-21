@@ -1,38 +1,56 @@
 {
   disko.devices = {
     disk = {
-      firstDisk = {
+      nvme256g = {
         type = "disk";
         device = "/dev/disk/by-id/nvme-eui.e8238fa6bf530001001b448b4e30ab87";
         content = {
           type = "gpt";
           partitions = {
             BOOT = {
-              priority = 1;
-              label = "BOOT";
-              name = "ESP";
               size = "512M";
               type = "EF00";
+              start = "1M";
               content = {
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
-                mountOptions = ["umask=0077"];
+                extraArgs = [
+                  "-n"
+                  "BOOT"
+                ];
+                mountOptions = [ "umask=0077" ];
               };
             };
-            firstDisk_Main = {
+            nvme256g_root = {
               size = "100%";
-              name = "firstDisk_Main";
+              name = "nvme256g_root";
               content = {
                 type = "btrfs";
-                mountOptions = [
-                  "compress=zstd"
-                  "noatime"
-                ];
+                extraArgs = [ "-f" ];
                 subvolumes = {
-                  "/root" = {
+                  "root" = {
                     mountpoint = "/";
-                    mountOptions = ["subvol=root" "compress=zstd" "noatime"];
+                    mountOptions = [
+                      "compress=zstd"
+                      "noatime"
+                    ];
+                    neededForBoot = true;
+                  };
+                  "nix" = {
+                    mountpoint = "/nix";
+                    mountOptions = [
+                      "compress=zstd"
+                      "noatime"
+                    ];
+                  };
+                  "log" = {
+                    mountpoint = "/var/log";
+                    mountOptions = [
+                      "compress=zstd"
+                      "noatime"
+                    ];
+                    neededForBoot = true;
                   };
                 };
               };
@@ -40,25 +58,24 @@
           };
         };
       };
-      secondDisk = {
+      nvme2t = {
         type = "disk";
         device = "/dev/disk/by-id/nvme-CT2000P2SSD8_2127E5B605AC";
         content = {
           type = "gpt";
           partitions = {
-            secondDisk_Main = {
+            nvme2t_home = {
               size = "100%";
               content = {
                 type = "btrfs";
-                extraArgs = ["-f"];
-                mountOptions = [
-                  "compress=zstd"
-                  "noatime"
-                ];
+                extraArgs = [ "-f" ];
                 subvolumes = {
-                  "/home" = {
-                    mountOptions = ["compress=zstd"];
+                  "home" = {
                     mountpoint = "/home";
+                    mountOptions = [
+                      "compress=zstd"
+                      "noatime"
+                    ];
                   };
                 };
               };
