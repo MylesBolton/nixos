@@ -35,7 +35,6 @@
                       "compress=zstd"
                       "noatime"
                     ];
-                    neededForBoot = true;
                   };
                   "nix" = {
                     mountpoint = "/nix";
@@ -50,7 +49,6 @@
                       "compress=zstd"
                       "noatime"
                     ];
-                    neededForBoot = true;
                   };
                 };
               };
@@ -85,4 +83,6 @@
       };
     };
   };
+  fileSystems."/".neededForBoot = true;
+  fileSystems."/var/log".neededForBoot = true;
 }
