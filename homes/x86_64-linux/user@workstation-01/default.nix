@@ -2,7 +2,8 @@
   pkgs,
   namespace,
   ...
-}: {
+}:
+{
   roles = {
     common.enable = true;
     desktop.enable = true;
@@ -11,7 +12,7 @@
     social.enable = true;
     rot.enable = true;
     dev.enable = true;
-    cad.enable = true;
+    cad.enable = false;
     priv.enable = true;
     sec.enable = false;
   };
