@@ -8,9 +8,11 @@
   ...
 }:
 with lib;
-with lib.custom; let
+with lib.custom;
+let
   cfg = config.roles.gaming;
-in {
+in
+{
   options.roles.gaming = with types; {
     enable = mkBoolOpt false "enable gaming role";
   };
@@ -25,7 +27,13 @@ in {
     };
 
     home.packages = with pkgs; [
-      inputs.nixpkgs-stable.legacyPackages.${pkgs.system}.lutris
+      (pkgs.lutris.override {
+        extraLibraries =
+          pkgs: with pkgs; [
+            libadwaita
+            gtk4
+          ];
+      })
       dotnetCorePackages.runtime_9_0-bin
       uesave
       #factorio-space-age

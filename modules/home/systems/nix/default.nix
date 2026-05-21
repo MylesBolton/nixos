@@ -17,6 +17,7 @@ in
   };
 
   config = mkIf cfg.enable {
+    nixpkgs.config.allowUnfree = lib.mkForce true;
 
     home.packages = with pkgs; [
       nix-output-monitor

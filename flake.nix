@@ -74,6 +74,11 @@
       overlays = with inputs; [
         nur.overlays.default
         nix-vscode-extensions.overlays.default
+        (_: prev: {
+          openldap = prev.openldap.overrideAttrs {
+            doCheck = false;
+          };
+        })
       ];
 
       systems.modules.nixos = with inputs; [
