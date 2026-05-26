@@ -52,6 +52,8 @@ in
       protontricks
       protonup-qt
       wineWow64Packages.waylandFull
+      wineWow64Packages.staging
+      wineWow64Packages.stable
     ];
 
     services.ratbagd.enable = true;
