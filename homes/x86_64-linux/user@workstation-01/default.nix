@@ -12,7 +12,7 @@
     social.enable = true;
     rot.enable = true;
     dev.enable = true;
-    cad.enable = false;
+    cad.enable = true;
     priv.enable = true;
     sec.enable = false;
   };
