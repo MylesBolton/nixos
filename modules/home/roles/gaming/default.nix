@@ -32,6 +32,11 @@ in
         proton-ge-bin
         proton-cachyos
       ];
+      winePackages = with pkgs; [
+        wineWow64Packages.waylandFull
+        wineWow64Packages.staging
+        wineWow64Packages.stable
+      ];
       steamPackage = osConfig.programs.steam.package;
     };
 

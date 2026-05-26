@@ -35,6 +35,9 @@ in
         extraCompatPackages = with pkgs; [
           proton-ge-bin
           proton-cachyos
+          wineWow64Packages.waylandFull
+          wineWow64Packages.staging
+          wineWow64Packages.stable
         ];
       };
     };
@@ -51,9 +54,6 @@ in
       winetricks
       protontricks
       protonup-qt
-      wineWow64Packages.waylandFull
-      wineWow64Packages.staging
-      wineWow64Packages.stable
     ];
 
     services.ratbagd.enable = true;
