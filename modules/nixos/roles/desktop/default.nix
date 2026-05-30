@@ -27,14 +27,6 @@ in
         tailscale.enable = true;
         virtualisation.podman.enable = true;
       };
-      system = {
-        networking = {
-          wifi = {
-            enable = true;
-            guest = true;
-          };
-        };
-      };
     };
 
     environment.systemPackages = with pkgs; [
