@@ -23,6 +23,7 @@ in
         networking.enable = true;
         locale.enable = true;
         boot.enable = true;
+        zram.enable = true;
       };
       services = {
         openssh.enable = true;

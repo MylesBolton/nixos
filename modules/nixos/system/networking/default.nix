@@ -18,8 +18,21 @@ in
 
   config = mkIf cfg.enable {
     networking = {
+      nameservers = [ "194.242.2.4#base.dns.mullvad.net" ];
       networkmanager.enable = true;
       firewall.enable = true;
+    };
+
+    services.resolved = {
+      enable = true;
+      settings = {
+        Resolve = {
+          DNSSEC = "true";
+          Domains = [ "~." ];
+          FallbackDNS = [ ];
+          DNSOverTLS = "yes";
+        };
+      };
     };
   };
 }

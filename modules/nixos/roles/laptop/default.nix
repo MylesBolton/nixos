@@ -20,6 +20,8 @@ in
     custom = {
       system = {
         battery.enable = true;
+        bluetooth.enable = true;
+        power.enable = true;
       };
     };
   };

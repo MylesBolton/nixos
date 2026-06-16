@@ -19,6 +19,7 @@ in
   config = mkIf cfg.enable {
     custom.system.nix.enable = true;
     custom.cli.shells.fish.enable = true;
+    custom.cli.direnv.enable = true;
     custom.styles.stylix.enable = true;
   };
 }
