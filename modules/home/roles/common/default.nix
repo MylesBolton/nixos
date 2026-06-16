@@ -9,16 +9,16 @@
 with lib;
 with lib.custom;
 let
-  cfg = config.roles.common;
+  cfg = config.custom.roles.common;
 in
 {
-  options.roles.common = with types; {
+  options.custom.roles.common = with types; {
     enable = mkBoolOpt false "Enable common role";
   };
 
   config = mkIf cfg.enable {
     custom.system.nix.enable = true;
-    cli.shells.fish.enable = true;
-    styles.stylix.enable = true;
+    custom.cli.shells.fish.enable = true;
+    custom.styles.stylix.enable = true;
   };
 }

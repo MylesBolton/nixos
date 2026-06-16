@@ -9,14 +9,14 @@
 with lib;
 with lib.custom;
 let
-  cfg = config.styles.stylix;
+  cfg = config.custom.styles.stylix;
 in
 {
   imports = with inputs; [
     stylix.homeModules.stylix
   ];
 
-  options.styles.stylix = with types; {
+  options.custom.styles.stylix = with types; {
     enable = mkBoolOpt false "Enable stylix";
     wallpaper = mkOpt str "jellyfish" "wallpaper name";
   };

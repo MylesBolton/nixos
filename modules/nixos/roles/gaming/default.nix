@@ -9,10 +9,10 @@
 with lib;
 with lib.custom;
 let
-  cfg = config.roles.gaming;
+  cfg = config.custom.roles.gaming;
 in
 {
-  options.roles.gaming = with types; {
+  options.custom.roles.gaming = with types; {
     enable = mkBoolOpt false "gaming nixos configuration.";
   };
 

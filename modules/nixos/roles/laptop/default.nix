@@ -9,10 +9,10 @@
 with lib;
 with lib.custom;
 let
-  cfg = config.roles.laptop;
+  cfg = config.custom.roles.laptop;
 in
 {
-  options.roles.laptop = with types; {
+  options.custom.roles.laptop = with types; {
     enable = mkBoolOpt false "laptop nixos configuration.";
   };
 

@@ -9,10 +9,10 @@
 with lib;
 with lib.custom;
 let
-  cfg = config.roles.cad;
+  cfg = config.custom.roles.cad;
 in
 {
-  options.roles.cad = with types; {
+  options.custom.roles.cad = with types; {
     enable = mkBoolOpt false "enable cad role";
   };
 

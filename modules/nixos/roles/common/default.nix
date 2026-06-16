@@ -9,10 +9,10 @@
 with lib;
 with lib.custom;
 let
-  cfg = config.roles.common;
+  cfg = config.custom.roles.common;
 in
 {
-  options.roles.common = with types; {
+  options.custom.roles.common = with types; {
     enable = mkBoolOpt false "common nixos configuration.";
   };
 
@@ -56,6 +56,6 @@ in
       libva-utils
       usbutils
     ];
-    styles.stylix.enable = true;
+    custom.styles.stylix.enable = true;
   };
 }

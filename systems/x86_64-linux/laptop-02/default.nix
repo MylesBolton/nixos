@@ -19,7 +19,7 @@
     jj.admin = false;
   };
 
-  roles = {
+  custom.roles = {
     desktop = {
       enable = true;
       gnome.enable = true;

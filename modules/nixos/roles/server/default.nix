@@ -8,16 +8,16 @@
 with lib;
 with lib.custom;
 let
-  cfg = config.roles.server;
+  cfg = config.custom.roles.server;
 in
 {
-  options.roles.server = with types; {
+  options.custom.roles.server = with types; {
     enable = mkBoolOpt false "Enable server role";
   };
 
   config = mkIf cfg.enable {
 
-    roles = {
+    custom.roles = {
       common.enable = true;
     };
 

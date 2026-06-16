@@ -1,7 +1,7 @@
 { pkgs, namespace, ... }:
 {
 
-  roles = {
+  custom.roles = {
     common.enable = true;
     desktop.enable = true;
     office.enable = true;
@@ -12,7 +12,7 @@
     priv.enable = true;
   };
 
-  styles.stylix.wallpaper = "tree";
+  custom.styles.stylix.wallpaper = "tree";
 
   custom.user = {
     enable = true;

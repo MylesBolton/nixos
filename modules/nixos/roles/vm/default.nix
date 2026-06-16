@@ -8,16 +8,16 @@
 with lib;
 with lib.custom;
 let
-  cfg = config.roles.vm;
+  cfg = config.custom.roles.vm;
 in
 {
-  options.roles.vm = with types; {
+  options.custom.roles.vm = with types; {
     enable = mkBoolOpt false "Enable VM role";
   };
 
   config = mkIf cfg.enable {
 
-    roles = {
+    custom.roles = {
       common.enable = true;
     };
     services = {

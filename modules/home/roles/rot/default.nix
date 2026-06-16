@@ -9,10 +9,10 @@
 with lib;
 with lib.custom;
 let
-  cfg = config.roles.rot;
+  cfg = config.custom.roles.rot;
 in
 {
-  options.roles.rot = with types; {
+  options.custom.roles.rot = with types; {
     enable = mkBoolOpt false "enable office role";
   };
 

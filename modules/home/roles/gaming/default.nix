@@ -11,10 +11,10 @@
 with lib;
 with lib.custom;
 let
-  cfg = config.roles.gaming;
+  cfg = config.custom.roles.gaming;
 in
 {
-  options.roles.gaming = with types; {
+  options.custom.roles.gaming = with types; {
     enable = mkBoolOpt false "enable gaming role";
   };
 
@@ -43,7 +43,6 @@ in
     home.packages = with pkgs; [
       dotnetCorePackages.runtime_9_0-bin
       uesave
-      #factorio-space-age
       prismlauncher
     ];
   };

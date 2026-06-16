@@ -7,10 +7,10 @@
 }:
 with lib;
 let
-  cfg = config.cli.terminals.ghostty;
+  cfg = config.custom.cli.terminals.ghostty;
 in
 {
-  options.cli.terminals.ghostty = {
+  options.custom.cli.terminals.ghostty = {
     enable = mkEnableOption "enable ghostty terminal emulator";
   };
 
@@ -26,8 +26,6 @@ in
       enableFishIntegration = true;
       settings = {
         command = "fish";
-      };
-      settings = {
         font-family = "Atkinson Hyperlegible Mono";
         font-family-bold = "Atkinson Hyperlegible Mono";
         font-family-italic = "Atkinson Hyperlegible Mono";

@@ -10,10 +10,10 @@ with lib;
 with lib.custom;
 let
   inherit (config.lib.stylix) colors;
-  cfg = config.cli.shells.fish;
+  cfg = config.custom.cli.shells.fish;
 in
 {
-  options.cli.shells.fish = with types; {
+  options.custom.cli.shells.fish = with types; {
     enable = mkBoolOpt false "enable fish shell";
   };
 

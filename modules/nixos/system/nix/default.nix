@@ -39,6 +39,5 @@ in
       generateNixPathFromInputs = true;
       linkInputs = true;
     };
-    nixpkgs.config.allowUnfree = true;
   };
 }

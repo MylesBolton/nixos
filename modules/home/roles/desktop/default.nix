@@ -9,16 +9,16 @@
 with lib;
 with lib.custom;
 let
-  cfg = config.roles.desktop;
+  cfg = config.custom.roles.desktop;
 in
 {
-  options.roles.desktop = with types; {
+  options.custom.roles.desktop = with types; {
     enable = mkBoolOpt false "enable desktop role";
   };
 
   config = mkIf cfg.enable {
-    cli.terminals.ghostty.enable = true;
-    apps.firefox.enable = true;
+    custom.cli.terminals.ghostty.enable = true;
+    custom.apps.firefox.enable = true;
     custom.services = {
       syncthing.enable = true;
     };

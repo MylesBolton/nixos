@@ -9,10 +9,10 @@
 with lib;
 with lib.custom;
 let
-  cfg = config.roles.priv;
+  cfg = config.custom.roles.priv;
 in
 {
-  options.roles.priv = with types; {
+  options.custom.roles.priv = with types; {
     enable = mkBoolOpt false "enable priv role";
   };
 

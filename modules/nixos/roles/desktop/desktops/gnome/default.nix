@@ -8,10 +8,10 @@
 with lib;
 with lib.custom;
 let
-  cfg = config.roles.desktop.gnome;
+  cfg = config.custom.roles.desktop.gnome;
 in
 {
-  options.roles.desktop.gnome = with types; {
+  options.custom.roles.desktop.gnome = with types; {
     enable = mkBoolOpt false "Enable Gnome desktop environment";
   };
 

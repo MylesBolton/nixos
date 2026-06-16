@@ -1,7 +1,7 @@
 { pkgs, namespace, ... }:
 {
 
-  roles = {
+  custom.roles = {
     common.enable = true;
     desktop.enable = true;
     office.enable = true;
@@ -11,7 +11,7 @@
     dev.enable = true;
     cad.enable = true;
   };
-  styles.stylix = {
+  custom.styles.stylix = {
     wallpaper = "panes";
   };
   home.packages = with pkgs; [

@@ -13,7 +13,7 @@
 
   networking.hostName = "laptop-01";
 
-  roles = {
+  custom.roles = {
     desktop = {
       enable = true;
       gnome.enable = true;

@@ -9,10 +9,10 @@
 with lib;
 with lib.custom;
 let
-  cfg = config.roles.sec;
+  cfg = config.custom.roles.sec;
 in
 {
-  options.roles.sec = {
+  options.custom.roles.sec = {
     enable = mkBoolOpt false "Enable the cybersecurity tools role.";
   };
 

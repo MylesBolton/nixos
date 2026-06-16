@@ -9,10 +9,10 @@
 with lib;
 with lib.custom;
 let
-  cfg = config.apps.vscode;
+  cfg = config.custom.apps.vscode;
 in
 {
-  options.apps.vscode = {
+  options.custom.apps.vscode = {
     enable = mkEnableOption "enable vscode";
   };
 

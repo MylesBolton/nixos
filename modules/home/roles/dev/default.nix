@@ -9,15 +9,15 @@
 with lib;
 with lib.custom;
 let
-  cfg = config.roles.dev;
+  cfg = config.custom.roles.dev;
 in
 {
-  options.roles.dev = with types; {
+  options.custom.roles.dev = with types; {
     enable = mkBoolOpt false "enable dev role";
   };
 
   config = mkIf cfg.enable {
-    apps.vscode.enable = true;
+    custom.apps.vscode.enable = true;
     home.packages = with pkgs; [
       xpipe
       nixfmt

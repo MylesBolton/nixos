@@ -96,7 +96,6 @@
       ];
 
       systems.modules.nixos = with inputs; [
-        { nixpkgs.config.allowUnfree = true; }
         stylix.nixosModules.stylix
         home-manager.nixosModules.home-manager
         disko.nixosModules.disko

@@ -1,14 +1,14 @@
 { pkgs, namespace, ... }:
 {
 
-  roles = {
+  custom.roles = {
     common.enable = true;
     desktop.enable = true;
     office.enable = true;
     rot.enable = true;
   };
 
-  styles.stylix.wallpaper = "soft-rose";
+  custom.styles.stylix.wallpaper = "soft-rose";
 
   custom.user = {
     enable = true;

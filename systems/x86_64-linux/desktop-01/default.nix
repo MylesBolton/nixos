@@ -7,7 +7,7 @@
 
   networking.hostName = "desktop-01";
 
-  roles = {
+  custom.roles = {
     desktop = {
       enable = true;
       gnome.enable = true;

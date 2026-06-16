@@ -15,7 +15,7 @@ with lib.custom;
 
   networking.hostName = "workstation-01";
 
-  roles = {
+  custom.roles = {
     desktop = {
       enable = true;
       gnome.enable = true;

@@ -8,16 +8,16 @@
 with lib;
 with lib.custom;
 let
-  cfg = config.roles.desktop;
+  cfg = config.custom.roles.desktop;
 in
 {
-  options.roles.desktop = with types; {
+  options.custom.roles.desktop = with types; {
     enable = mkBoolOpt false "Enable desktop environment";
   };
 
   config = mkIf cfg.enable {
 
-    roles = {
+    custom.roles = {
       common.enable = true;
     };
 

@@ -9,10 +9,10 @@
 }:
 with lib;
 let
-  cfg = config.apps.firefox;
+  cfg = config.custom.apps.firefox;
 in
 {
-  options.apps.firefox = {
+  options.custom.apps.firefox = {
     enable = mkEnableOption "enable firefox browser";
   };
 
@@ -26,6 +26,7 @@ in
     };
     stylix.targets.firefox.profileNames = [ "default" ];
     programs.firefox = {
+      configPath = "${config.xdg.configHome}/mozilla/firefox";
       nativeMessagingHosts = [
         pkgs.fx-cast-bridge
         pkgs.gnomeExtensions.gsconnect

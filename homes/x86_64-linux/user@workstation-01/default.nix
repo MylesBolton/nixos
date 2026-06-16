@@ -4,7 +4,7 @@
   ...
 }:
 {
-  roles = {
+  custom.roles = {
     common.enable = true;
     desktop.enable = true;
     office.enable = true;

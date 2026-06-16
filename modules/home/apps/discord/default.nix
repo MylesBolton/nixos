@@ -9,10 +9,10 @@
 }:
 with lib;
 let
-  cfg = config.apps.discord;
+  cfg = config.custom.apps.discord;
 in
 {
-  options.apps.discord = {
+  options.custom.apps.discord = {
     enable = mkEnableOption "enable discord";
   };
 
