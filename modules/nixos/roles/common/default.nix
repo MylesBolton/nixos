@@ -17,22 +17,26 @@ in
   };
 
   config = mkIf cfg.enable {
-    custom = {
-      system = {
-        nix.enable = true;
-        networking.enable = true;
-        locale.enable = true;
-        boot.enable = true;
-        zram.enable = true;
-      };
-      services = {
-        openssh.enable = true;
-      };
-      user = {
-        name = "user";
-        initialPassword = "1337";
-      };
+  custom = {
+    system = {
+      nix.enable = true;
+      networking.enable = true;
+      locale.enable = true;
+      boot.enable = true;
+      zram.enable = true;
+      security.enable = true;
+      oom.enable = true;
     };
+    services = {
+      openssh.enable = true;
+      fwupd.enable = true;
+    };
+    user = {
+      name = "user";
+      initialPassword = "1337";
+    };
+  };
+
     fonts = {
       packages = builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
       enableDefaultPackages = true;

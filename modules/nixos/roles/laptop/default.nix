@@ -21,7 +21,11 @@ in
       system = {
         battery.enable = true;
         bluetooth.enable = true;
-        power.enable = true;
+        power = {
+          enable = true;
+          mode = "auto-cpufreq";
+        };
+        security.usbguard = true;
       };
     };
   };
