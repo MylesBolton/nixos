@@ -15,6 +15,10 @@ in
   };
 
   config = mkIf cfg.enable {
-    zramSwap.enable = true;
+    zramSwap = {
+      enable = true;
+      algorithm = "zstd";
+      memoryPercent = 50;
+    };
   };
 }

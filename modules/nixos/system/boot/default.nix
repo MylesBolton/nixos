@@ -17,6 +17,9 @@ in
   };
 
   config = mkIf cfg.enable {
+    boot.tmp.useTmpfs = true;
+    boot.tmp.tmpfsSize = "50%";
+
     boot.loader = {
       systemd-boot = {
         enable = true;

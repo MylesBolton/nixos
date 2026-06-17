@@ -23,6 +23,12 @@ in
       firewall.enable = true;
     };
 
+    boot.kernel.sysctl = {
+      "net.ipv4.tcp_fastopen" = 3;
+      "net.ipv4.tcp_congestion_control" = "bbr";
+      "net.core.default_qdisc" = "fq";
+    };
+
     services.resolved = {
       enable = true;
       settings = {

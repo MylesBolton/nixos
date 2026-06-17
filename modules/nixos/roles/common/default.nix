@@ -20,6 +20,7 @@ in
   custom = {
     system = {
       nix.enable = true;
+      nix-ld.enable = true;
       networking.enable = true;
       locale.enable = true;
       boot.enable = true;
@@ -60,6 +61,13 @@ in
       lsscsi
       libva-utils
       usbutils
+      nh
+      nix-output-monitor
+      nvd
+      fastfetch
+      fd
+      ripgrep
+      fzf
     ];
     custom.styles.stylix.enable = true;
   };
