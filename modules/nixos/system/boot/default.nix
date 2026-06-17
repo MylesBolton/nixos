@@ -18,7 +18,6 @@ in
       mkOpt raw pkgs.cachyosKernels.linuxPackages-cachyos-lts
         "The kernel packages to use.";
     supportedFilesystems = mkOpt (listOf str) [ "btrfs" ] "The supported filesystems.";
-    resumeDevice = mkOpt (nullOr str) "/dev/disk/by-label/nixos" "The resume device.";
   };
 
   config = mkIf cfg.enable {
@@ -36,6 +35,5 @@ in
 
     boot.supportedFilesystems = lib.mkDefault cfg.supportedFilesystems;
     boot.kernelPackages = lib.mkDefault cfg.kernelPackages;
-    boot.resumeDevice = lib.mkIf (cfg.resumeDevice != null) (lib.mkDefault cfg.resumeDevice);
   };
 }
