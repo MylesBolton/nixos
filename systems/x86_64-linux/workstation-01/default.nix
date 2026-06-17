@@ -18,18 +18,11 @@ with lib.custom;
   custom.roles = {
     desktop = {
       enable = true;
-      gnome.enable = true;
+      gnome = {
+        enable = true;
+        numlock = true;
+      };
     };
     gaming.enable = true;
   };
-
-  programs.dconf.profiles.gdm.databases = [
-    {
-      settings = {
-        "org/gnome/desktop/peripherals/keyboard" = {
-          numlock-state = true;
-        };
-      };
-    }
-  ];
 }

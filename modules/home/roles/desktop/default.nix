@@ -14,6 +14,7 @@ in
 {
   options.custom.roles.desktop = with types; {
     enable = mkBoolOpt false "enable desktop role";
+    numlock = mkBoolOpt false "enable numlock";
   };
 
   config = mkIf cfg.enable {
@@ -32,6 +33,10 @@ in
       custom.keeper
     ];
     dconf.settings = {
+      "org/gnome/desktop/peripherals/keyboard" = mkIf cfg.numlock {
+        numlock-state = true;
+        remember-numlock-state = true;
+      };
       "org/gnome/mutter" = {
         check-alive-timeout = lib.gvariant.mkUint32 60000;
       };

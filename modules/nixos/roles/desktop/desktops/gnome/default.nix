@@ -13,6 +13,7 @@ in
 {
   options.custom.roles.desktop.gnome = with types; {
     enable = mkBoolOpt false "Enable Gnome desktop environment";
+    numlock = mkBoolOpt false "Enable numlock on boot";
   };
 
   config = mkIf cfg.enable {
@@ -29,6 +30,16 @@ in
       };
       desktopManager.gnome.enable = true;
     };
+
+    programs.dconf.profiles.gdm.databases = mkIf cfg.numlock [
+      {
+        settings = {
+          "org/gnome/desktop/peripherals/keyboard" = {
+            numlock-state = true;
+          };
+        };
+      }
+    ];
 
     environment.systemPackages = with pkgs.gnomeExtensions; [
       blur-my-shell

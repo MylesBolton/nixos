@@ -14,7 +14,9 @@ in
 {
   options.custom.system.boot = with types; {
     enable = mkBoolOpt false "Whether or not to enable booting.";
-    kernelPackages = mkOpt raw pkgs.cachyosKernels.linux-cachyos-lts "The kernel packages to use.";
+    kernelPackages =
+      mkOpt raw pkgs.cachyosKernels.linuxPackages-cachyos-lts
+        "The kernel packages to use.";
     supportedFilesystems = mkOpt (listOf str) [ "btrfs" ] "The supported filesystems.";
     resumeDevice = mkOpt (nullOr str) "/dev/disk/by-label/nixos" "The resume device.";
   };

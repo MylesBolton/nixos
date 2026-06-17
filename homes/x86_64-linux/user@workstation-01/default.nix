@@ -6,7 +6,10 @@
 {
   custom.roles = {
     common.enable = true;
-    desktop.enable = true;
+    desktop = {
+      enable = true;
+      numlock = true;
+    };
     office.enable = true;
     gaming.enable = true;
     social.enable = true;
@@ -20,14 +23,6 @@
   custom.user = {
     enable = true;
     name = "user";
+    stateVersion = "26.05";
   };
-
-  dconf.settings = {
-    "org/gnome/desktop/peripherals/keyboard" = {
-      numlock-state = true;
-      remember-numlock-state = true;
-    };
-  };
-
-  home.stateVersion = "26.05";
 }
