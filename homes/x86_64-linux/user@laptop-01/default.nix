@@ -19,5 +19,4 @@
     name = "user";
   };
 
-  home.stateVersion = "24.05";
 }

@@ -13,8 +13,8 @@ The configuration is organized into several key areas:
 The flake uses several advanced Nix tools, including:
 -   **`disko`:** For declarative disk partitioning and formatting.
 -   **`stylix`:** For system-wide theming and styling.
--   **`agenix`:** For managing secrets declaratively.
--   **`comin`:** For automatically pulling and applying the latest configuration from the Git repository.
+-   **`agenix`:** For managing secrets declaratively (Module: `modules/nixos/services/agenix`).
+-   **`comin`:** For automatically pulling and applying the latest configuration (Module: `modules/nixos/services/comin`).
 
 ## Building and Running
 
@@ -49,5 +49,6 @@ Replace `jj@laptop-02` with the desired user profile from the `/homes/x86_64-lin
 -   **System-Specific vs. User-Specific:**
     -   System-wide settings (e.g., kernel, system services, hardware) belong in NixOS modules under `/modules/nixos`.
     -   User-specific settings (e.g., dotfiles, user applications, themes) belong in home-manager modules under `/modules/home`.
--   **Secrets:** Managed with `agenix`. Do not commit unencrypted secrets. Refer to the `agenix` documentation and existing files for the correct procedure.
+-   **Common Defaults:** Many common settings (like boot configuration and state versions) are defined as defaults in their respective modules. Check the module `options` before hardcoding values in system or home files.
+-   **Secrets:** Managed with `agenix`. Refer to `modules/nixos/services/agenix` and the existing `.age` files (once created) for the correct procedure.
 -   **Formatting:** The code is formatted with `nixfmt`. You can format the entire repository by running `nix fmt`.

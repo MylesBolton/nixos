@@ -31,6 +31,7 @@ in
     services = {
       openssh.enable = true;
       fwupd.enable = true;
+      agenix.enable = true;
     };
     user = {
       name = "user";

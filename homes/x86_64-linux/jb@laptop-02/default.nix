@@ -17,5 +17,4 @@
     name = "jb";
   };
 
-  home.stateVersion = "24.05";
 }

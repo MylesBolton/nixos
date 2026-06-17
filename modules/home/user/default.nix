@@ -16,6 +16,7 @@ in
     enable = mkOpt types.bool false "Whether to configure the user account.";
     home = mkOpt (types.nullOr types.str) "/home/${cfg.name}" "The user's home directory.";
     name = mkOpt (types.nullOr types.str) config.snowfallorg.user.name "The user account.";
+    stateVersion = mkOpt types.str "24.05" "The state version.";
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -30,6 +31,7 @@ in
       home = {
         homeDirectory = mkDefault cfg.home;
         username = mkDefault cfg.name;
+        stateVersion = mkDefault cfg.stateVersion;
       };
     }
   ]);

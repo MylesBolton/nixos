@@ -15,5 +15,4 @@
     name = "aj";
   };
 
-  home.stateVersion = "24.05";
 }

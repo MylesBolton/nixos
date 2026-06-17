@@ -3,11 +3,9 @@
   nixConfig = {
     extra-substituters = [
       "https://nix-community.cachix.org"
-      "https://cache.garnix.io"
     ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
     ];
   };
   inputs = {
@@ -50,6 +48,10 @@
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel";
     nix-gaming-edge = {
       url = "github:powerofthe69/nix-gaming-edge";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    agenix = {
+      url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -100,24 +102,11 @@
         home-manager.nixosModules.home-manager
         disko.nixosModules.disko
         comin.nixosModules.comin
+        agenix.nixosModules.default
         inputs.nixos-facter-modules.nixosModules.facter
-        (
-          { ... }:
-          {
-            services.comin = {
-              enable = true;
-              remotes = [
-                {
-                  name = "origin";
-                  url = "https://github.com/MylesBolton/nixos.git";
-                  #auth.access_token_path = "/persits/secrets/comin/token";
-                  branches.main.name = "main";
-                  poller.period = 1200;
-                }
-              ];
-            };
-          }
-        )
+        {
+          custom.services.comin.enable = true;
+        }
       ];
 
       outputs-builder = channels: {

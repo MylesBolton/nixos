@@ -56,8 +56,6 @@
       "usb_storage"
       "sd_mod"
     ];
-    supportedFilesystems = [ "btrfs" ];
-    kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore;
     kernelParams = [
       "pci=realloc"
       "pcie_aspm=off"

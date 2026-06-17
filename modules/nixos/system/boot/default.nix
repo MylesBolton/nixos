@@ -14,6 +14,9 @@ in
 {
   options.custom.system.boot = with types; {
     enable = mkBoolOpt false "Whether or not to enable booting.";
+    kernelPackages = mkOpt raw pkgs.cachyosKernels.linux-cachyos-lts "The kernel packages to use.";
+    supportedFilesystems = mkOpt (listOf str) [ "btrfs" ] "The supported filesystems.";
+    resumeDevice = mkOpt (nullOr str) "/dev/disk/by-label/nixos" "The resume device.";
   };
 
   config = mkIf cfg.enable {
@@ -23,10 +26,14 @@ in
     boot.loader = {
       systemd-boot = {
         enable = true;
-        configurationLimit = 5;
+        configurationLimit = 8;
         editor = false;
       };
       efi.canTouchEfiVariables = true;
     };
+
+    boot.supportedFilesystems = lib.mkDefault cfg.supportedFilesystems;
+    boot.kernelPackages = lib.mkDefault cfg.kernelPackages;
+    boot.resumeDevice = lib.mkIf (cfg.resumeDevice != null) (lib.mkDefault cfg.resumeDevice);
   };
 }

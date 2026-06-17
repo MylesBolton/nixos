@@ -18,5 +18,4 @@
     name = "mb";
   };
 
-  home.stateVersion = "24.05";
 }
