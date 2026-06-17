@@ -55,16 +55,8 @@ in
         ];
       };
 
-      gc = {
-        automatic = true;
-        dates = "weekly";
-        options = "--delete-older-than 7d";
-      };
-      
-      optimise = {
-        automatic = true;
-        dates = [ "weekly" ];
-      };
+      gc.automatic = false;
+      optimise.automatic = false;
 
       generateRegistryFromInputs = true;
       generateNixPathFromInputs = true;
@@ -82,7 +74,6 @@ in
       enable = true;
       clean.enable = true;
       clean.extraArgs = "--keep-since 4d --keep 3";
-      flake = "/home/user/git/nixos";
     };
 
     security.pam.loginLimits = [
