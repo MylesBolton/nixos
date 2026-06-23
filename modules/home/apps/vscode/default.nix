@@ -37,7 +37,6 @@ in
           tailscale.vscode-tailscale
           ms-vscode-remote.remote-containers
           ms-vscode-remote.remote-ssh
-          google.gemini-cli-vscode-ide-companion
         ];
         userSettings = {
           "editor.formatOnPaste" = true;
@@ -48,7 +47,6 @@ in
           "terminal.integrated.defaultProfile.linux" = "fish";
           "nix.formatterPath" = "nixfmt";
           "nix.serverPath" = "nil";
-          "geminicodeassist.project" = "radiant-wall-473314-m8";
           "projectManager.git.baseFolders" = [ "~/git" ];
           "[nix]" = {
             "editor.defaultFormatter" = "brettm12345.nixfmt-vscode";

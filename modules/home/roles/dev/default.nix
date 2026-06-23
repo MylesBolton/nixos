@@ -27,10 +27,10 @@ in
       tailwindcss
       bun
       scanmem
-      gemini-cli
       mcp-nixos
       direnv
       gh
+      google-antigravity-cli
     ];
   };
 }

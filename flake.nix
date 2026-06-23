@@ -54,7 +54,10 @@
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
+    antigravity-nix = {
+      url = "github:jacopone/antigravity-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -90,6 +93,7 @@
         nix-gaming-edge.overlays.default
         nix-gaming-edge.overlays.proton-cachyos
         nix-cachyos-kernel.overlays.default
+        inputs.antigravity-nix.overlays.default
         (_: prev: {
           openldap = prev.openldap.overrideAttrs {
             doCheck = false;
