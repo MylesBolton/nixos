@@ -25,6 +25,7 @@ in
     };
     home.packages = with pkgs; [
       thunderbird
+      recoll
       vlc
       wl-clipboard
       keepassxc
