@@ -26,26 +26,27 @@ in
         cpu_load_change = true;
       };
     };
-    programs.lutris =
-      {
-        enable = true;
-        protonPackages = with pkgs; [
-          proton-ge-bin
-          proton-cachyos
-        ];
-        winePackages = with pkgs; [
-          wineWow64Packages.waylandFull
-          wineWow64Packages.staging
-          wineWow64Packages.stable
-        ];
-      }
-      // optionalAttrs (osConfig ? programs.steam.package) {
-        steamPackage = osConfig.programs.steam.package;
-      };
+    programs.lutris = {
+      enable = true;
+      protonPackages = with pkgs; [
+        proton-ge-bin
+        proton-cachyos
+      ];
+      winePackages = with pkgs; [
+        wineWow64Packages.waylandFull
+        wineWow64Packages.staging
+        wineWow64Packages.stable
+      ];
+    }
+    // optionalAttrs (osConfig ? programs.steam.package) {
+      steamPackage = osConfig.programs.steam.package;
+    };
 
     home.packages = with pkgs; [
       dotnetCorePackages.runtime_9_0-bin
       uesave
+      dolphin-emu
+      wheelwizard
       prismlauncher
     ];
   };
