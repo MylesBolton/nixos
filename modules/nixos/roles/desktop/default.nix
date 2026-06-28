@@ -45,6 +45,10 @@ in
     ];
 
     services = {
+      usbmuxd = {
+        enable = true;
+        package = pkgs.usbmuxd2;
+      };
       printing.enable = true;
       udev.packages = with pkgs; [
         vial

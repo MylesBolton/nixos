@@ -66,9 +66,5 @@ in
       android-tools
       clamav
     ];
-    services.usbmuxd = {
-      enable = true;
-      package = pkgs.usbmuxd2;
-    };
   };
 }
