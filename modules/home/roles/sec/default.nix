@@ -62,6 +62,9 @@ in
       wireshark
       zap
       zenmap
+      mvt
+      android-tools
+      clamav
     ];
   };
 }
