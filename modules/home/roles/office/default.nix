@@ -26,6 +26,7 @@ in
       ptouch-driver
       anki-bin
       gpa
+      chromium
     ];
   };
 }
