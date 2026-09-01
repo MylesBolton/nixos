@@ -73,13 +73,14 @@ in
             languagetool # spelling help
             enhanced-github # better gh
             custom-new-tab-page # startpage
-            ublock-origin # ad block
+            adnauseam # ad block
             markdownload # dowlaods webpages as markdown
-            fx_cast
+            fx_cast # cast
+            kagi-translate # translate
+            kagi-search # search
 
             #yt specific
-            #enhancer-for-youtube # 1080p 2.5x speed mods
-            #youtube-recommended-videos # remove yt brain rot
+            enhancer-for-youtube # 1080p 2.5x speed mods
             sponsorblock # remove yt sponsor spots
 
             #bullshit removers
