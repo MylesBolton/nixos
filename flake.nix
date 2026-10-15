@@ -83,6 +83,10 @@
       inherit inputs;
       src = ./.;
 
+      supportedSystems = [
+        "x86_64-linux"
+      ];
+
       channels-config = {
         allowUnfree = true;
       };

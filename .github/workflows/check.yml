@@ -8,12 +8,12 @@ on:
     branches: [main]
 jobs:
   check:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Check Nix flake inputs
         uses: DeterminateSystems/flake-checker-action@main
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@main
-      - name: Build default package
+      - name: Check Nix flake
         run: nix flake check --all-systems --show-trace
