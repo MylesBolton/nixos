@@ -121,7 +121,7 @@ in
               PAPERLESS_AI_LLM_MODEL = "qwen3.5:4b";
               PAPERLESS_AI_LLM_EMBEDDING_BACKEND = "ollama";
               PAPERLESS_AI_LLM_EMBEDDING_ENDPOINT = "http://127.0.0.1:11434";
-              PAPERLESS_AI_LLM_EMBEDDING_MODEL = "nomic-embed-text";
+              PAPERLESS_AI_LLM_EMBEDDING_MODEL = "nomic-embed-text:latest";
 
               # OCR configuration
               PAPERLESS_OCR_LANGUAGE = "eng";
