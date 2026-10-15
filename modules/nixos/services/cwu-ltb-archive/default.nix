@@ -118,7 +118,7 @@ in
               PAPERLESS_AI_ENABLED = true;
               PAPERLESS_AI_LLM_BACKEND = "ollama";
               PAPERLESS_AI_LLM_ENDPOINT = "http://127.0.0.1:11434";
-              PAPERLESS_AI_LLM_MODEL = "llama3.2";
+              PAPERLESS_AI_LLM_MODEL = "qwen3.5:4b";
               PAPERLESS_AI_LLM_EMBEDDING_BACKEND = "ollama";
               PAPERLESS_AI_LLM_EMBEDDING_ENDPOINT = "http://127.0.0.1:11434";
               PAPERLESS_AI_LLM_EMBEDDING_MODEL = "nomic-embed-text";
