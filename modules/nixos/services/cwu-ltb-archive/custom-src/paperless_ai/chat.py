@@ -23,8 +23,8 @@ logger = logging.getLogger("paperless_ai.chat")
 CHAT_METADATA_DELIMITER = "\n\n__PAPERLESS_CHAT_METADATA__"
 CHAT_ERROR_MESSAGE = "Sorry, something went wrong while generating a response."
 CHAT_NO_CONTENT_MESSAGE = "Sorry, I couldn't find any content to answer your question."
-MAX_CHAT_REFERENCES = 8
-CHAT_RETRIEVER_TOP_K = 15
+MAX_CHAT_REFERENCES = 6
+CHAT_RETRIEVER_TOP_K = 6
 
 
 def _build_chat_prompt(output_language: str | None) -> str:
@@ -155,28 +155,63 @@ def _stream_chat_with_documents(
                 q = query_bundle.query_str
                 tantivy_nodes = []
                 try:
+                    import re
                     from documents.search import get_backend
                     from documents.search._backend import SearchMode
                     search_backend = get_backend()
-                    try:
-                        matched_ids = search_backend.search_ids(
-                            q, user=None, search_mode=SearchMode.QUERY, limit=10
-                        )
-                    except Exception:
-                        matched_ids = search_backend.search_ids(
-                            q, user=None, search_mode=SearchMode.TEXT, limit=10
-                        )
+
+                    matched_ids = []
+                    # 1. Search for specific LTB patterns like "082.20" or "082/20"
+                    ltb_matches = re.findall(r"(?:ltb)?\s*(\d{2,4}[\./]\d{2,4})", q, re.IGNORECASE)
+                    for m in ltb_matches:
+                        clean_dot = m.replace("/", ".")
+                        clean_slash = m.replace(".", "/")
+                        try:
+                            sub_ids = search_backend.search_ids(
+                                f'"{clean_dot}" OR "{clean_slash}"', user=None, search_mode=SearchMode.QUERY, limit=5
+                            )
+                            matched_ids.extend(sub_ids)
+                        except Exception:
+                            pass
+
+                    # 2. Search for cleaned keywords (removing conversational stop words)
+                    stopwords = {
+                        "what", "is", "are", "was", "were", "discussed", "in", "regarding", "about",
+                        "tell", "me", "find", "search", "show", "the", "a", "an", "of", "to", "for",
+                        "with", "on", "at", "by", "from", "up", "into", "over", "after", "how", "can",
+                        "please", "give", "details"
+                    }
+                    terms = [w for w in re.findall(r"\w+", q.lower()) if w not in stopwords]
+                    if terms:
+                        keyword_query = " ".join(terms)
+                        try:
+                            kw_ids = search_backend.search_ids(
+                                keyword_query, user=None, search_mode=SearchMode.QUERY, limit=10
+                            )
+                        except Exception:
+                            kw_ids = search_backend.search_ids(
+                                keyword_query, user=None, search_mode=SearchMode.TEXT, limit=10
+                            )
+                        matched_ids.extend(kw_ids)
+
+                    # Deduplicate matched_ids preserving order
+                    deduped_ids = []
+                    seen_ids = set()
+                    for mid in matched_ids:
+                        if mid not in seen_ids:
+                            seen_ids.add(mid)
+                            deduped_ids.append(mid)
 
                     if not unrestricted:
                         allowed_set = set(documents.values_list("pk", flat=True))
-                        matched_ids = [mid for mid in matched_ids if mid in allowed_set]
+                        deduped_ids = [mid for mid in deduped_ids if mid in allowed_set]
 
-                    if matched_ids:
-                        target_docs = Document.objects.filter(pk__in=matched_ids[:6])
+                    if deduped_ids:
+                        target_docs = Document.objects.filter(pk__in=deduped_ids[:3])
                         for d in target_docs:
                             nodes = build_document_node(d, chunk_size=config.llm_embedding_chunk_size)
-                            for n in nodes[:3]:
-                                tantivy_nodes.append(NodeWithScore(node=n, score=1.2))
+                            for n in nodes[:2]:
+                                tantivy_nodes.append(NodeWithScore(node=n, score=1.5))
                 except Exception as ex:
                     logger.warning("Hybrid Tantivy search warning: %s", ex)
 
@@ -212,7 +247,7 @@ def _stream_chat_with_documents(
             llm=client.llm,
             prompt_helper=get_rag_prompt_helper(
                 chunk_size=config.llm_embedding_chunk_size,
-                context_size=config.llm_context_size,
+                context_size=min(config.llm_context_size, 4096),
             ),
             text_qa_template=prompt_template,
             refine_template=refine_template,

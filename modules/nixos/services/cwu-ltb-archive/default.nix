@@ -10,9 +10,12 @@ with lib.custom;
 let
   cfg = config.custom.services.cwu-ltb-archive;
 
-  customPaperlessSrc = pkgs.runCommand "paperless-hybrid-src" {} ''
-    mkdir -p $out/paperless_ai
-    cp ${./custom-src/paperless_ai/chat.py} $out/paperless_ai/chat.py
+  customPaperlessSrc = pkgs.runCommand "paperless-hybrid-src" { } ''
+    mkdir -p $out/lib/paperless-ngx
+    cp -r ${pkgs.paperless-ngx}/lib/paperless-ngx/src $out/lib/paperless-ngx/
+    ln -s ${pkgs.paperless-ngx}/lib/paperless-ngx/static $out/lib/paperless-ngx/static
+    chmod -R u+w $out/lib/paperless-ngx/src
+    cp ${./custom-src/paperless_ai/chat.py} $out/lib/paperless-ngx/src/paperless_ai/chat.py
   '';
 
   openvinoServer =
@@ -28,12 +31,14 @@ let
       ''
         import os
         import re
+        import gc
         import time
         import json
         import uuid
         import queue
         import threading
         import asyncio
+        from contextlib import asynccontextmanager
         from typing import List, Optional, Dict, Any
         from fastapi import FastAPI
         from fastapi.responses import StreamingResponse
@@ -42,12 +47,11 @@ let
         import openvino as ov
         import uvicorn
 
-        app = FastAPI(title="OpenVINO Arc B580 LLM Server")
+        MODEL_ID = "Qwen2.5-Coder-3B-Instruct-fp16-ov"
+        MODEL_DIR = "/var/lib/openvino-models/Qwen2.5-Coder-3B-Instruct-fp16-ov"
+        IDLE_TIMEOUT_SECONDS = ${toString cfg.gpuLlmIdleTimeout}
 
-        MODEL_ID = "Qwen2.5-1.5B-Instruct-fp16-ov"
-        MODEL_DIR = "/var/lib/openvino-models/Qwen2.5-1.5B-Instruct-fp16-ov"
-
-        print("Initializing OpenVINO GenAI native FP16 on Intel Arc B580...")
+        print("Initializing OpenVINO GenAI tokenizer...")
         tokenizer = ov_genai.Tokenizer(MODEL_DIR)
         config = {
             "INFERENCE_PRECISION_HINT": ov.Type.f16,
@@ -55,8 +59,45 @@ let
             "GPU_ENABLE_SDPA_OPTIMIZATION": False,
             "EXECUTION_MODE_HINT": ov.properties.hint.ExecutionMode.PERFORMANCE,
         }
-        pipe = ov_genai.LLMPipeline(MODEL_DIR, "GPU", **config)
-        print("Pipeline ready on Intel Arc B580!")
+
+        pipe = None
+        last_active_time = 0.0
+        pipe_lock = asyncio.Lock()
+
+        async def get_pipeline():
+            global pipe, last_active_time
+            last_active_time = time.time()
+            if pipe is None:
+                print(f"Loading OpenVINO GenAI FP16 model into Intel Arc B580 GPU memory (idle timeout: {IDLE_TIMEOUT_SECONDS}s)...")
+                def _load():
+                    return ov_genai.LLMPipeline(MODEL_DIR, "GPU", **config)
+                pipe = await asyncio.to_thread(_load)
+                print("Model loaded into GPU memory and ready!")
+            return pipe
+
+        async def idle_watchdog():
+            global pipe, last_active_time
+            while True:
+                await asyncio.sleep(15)
+                if pipe is not None:
+                    async with pipe_lock:
+                        if pipe is not None and (time.time() - last_active_time) >= IDLE_TIMEOUT_SECONDS:
+                            print(f"Model idle for {IDLE_TIMEOUT_SECONDS}s (20 mins). Unloading from GPU memory to free VRAM for games...")
+                            pipe = None
+                            gc.collect()
+                            print("Model unloaded. GPU memory freed for games and other workloads.")
+
+        @asynccontextmanager
+        async def lifespan(app: FastAPI):
+            watchdog_task = asyncio.create_task(idle_watchdog())
+            yield
+            watchdog_task.cancel()
+            try:
+                await watchdog_task
+            except asyncio.CancelledError:
+                pass
+
+        app = FastAPI(title="OpenVINO Arc B580 LLM Server", lifespan=lifespan)
 
         class ChatMessage(BaseModel):
             role: str
@@ -86,6 +127,30 @@ let
                 ],
             }
 
+        @app.post("/v1/models/unload")
+        @app.post("/unload")
+        async def unload_model():
+            global pipe
+            async with pipe_lock:
+                if pipe is not None:
+                    pipe = None
+                    gc.collect()
+                    print("Model manually unloaded from GPU memory.")
+                    return {"status": "unloaded", "message": "GPU memory freed successfully."}
+                return {"status": "not_loaded", "message": "Model was not in GPU memory."}
+
+        @app.get("/v1/models/status")
+        @app.get("/status")
+        async def model_status():
+            loaded = (pipe is not None)
+            idle_secs = int(time.time() - last_active_time) if loaded else None
+            return {
+                "model": MODEL_ID,
+                "loaded": loaded,
+                "idle_seconds": idle_secs,
+                "unload_in_seconds": max(0, IDLE_TIMEOUT_SECONDS - idle_secs) if loaded else 0,
+            }
+
         @app.post("/v1/chat/completions")
         async def chat_completions(req: ChatCompletionRequest):
             ch = ov_genai.ChatHistory()
@@ -110,76 +175,102 @@ let
                 created = int(time.time())
 
                 async def sse_generator():
-                    chunk_init = {
-                        "id": cmpl_id,
-                        "object": "chat.completion.chunk",
-                        "created": created,
-                        "model": req.model or MODEL_ID,
-                        "choices": [
-                            {
-                                "index": 0,
-                                "delta": {"role": "assistant", "content": ""},
-                                "finish_reason": None,
-                            }
-                        ],
-                    }
-                    yield f"data: {json.dumps(chunk_init)}\n\n"
+                    async with pipe_lock:
+                        active_pipe = await get_pipeline()
+                        chunk_init = {
+                            "id": cmpl_id,
+                            "object": "chat.completion.chunk",
+                            "created": created,
+                            "model": req.model or MODEL_ID,
+                            "choices": [
+                                {
+                                    "index": 0,
+                                    "delta": {"role": "assistant", "content": ""},
+                                    "finish_reason": None,
+                                }
+                            ],
+                        }
+                        yield f"data: {json.dumps(chunk_init)}\n\n"
 
-                    token_queue = queue.Queue()
+                        token_queue = queue.Queue()
+                        stop_generating = False
 
-                    def streamer_cb(subword):
-                        token_queue.put(subword)
-                        return ov_genai.StreamingStatus.RUNNING
+                        def streamer_cb(subword):
+                            if stop_generating:
+                                return ov_genai.StreamingStatus.STOP
+                            token_queue.put(subword)
+                            return ov_genai.StreamingStatus.RUNNING
 
-                    def worker():
+                        def worker():
+                            try:
+                                active_pipe.generate(prompt, max_new_tokens=req.max_tokens or 1024, streamer=streamer_cb)
+                            except Exception as e:
+                                print(f"Streaming generation error: {e}")
+                                if "CL_OUT_OF_RESOURCES" in str(e) or "CL_" in str(e):
+                                    os._exit(1)
+                            finally:
+                                token_queue.put(None)
+
+                        thread = threading.Thread(target=worker, daemon=True)
+                        thread.start()
+
                         try:
-                            pipe.generate(prompt, max_new_tokens=req.max_tokens or 1024, streamer=streamer_cb)
-                        except Exception as e:
-                            print(f"Streaming generation error: {e}")
-                        finally:
-                            token_queue.put(None)
-
-                    threading.Thread(target=worker, daemon=True).start()
-
-                    while True:
-                        token = await asyncio.to_thread(token_queue.get)
-                        if token is None:
-                            break
-                        if token:
-                            chunk = {
-                                "id": cmpl_id,
-                                "object": "chat.completion.chunk",
-                                "created": created,
-                                "model": req.model or MODEL_ID,
-                                "choices": [
-                                    {
-                                        "index": 0,
-                                        "delta": {"content": token},
-                                        "finish_reason": None,
+                            while True:
+                                token = await asyncio.to_thread(token_queue.get)
+                                if token is None:
+                                    break
+                                if token:
+                                    chunk = {
+                                        "id": cmpl_id,
+                                        "object": "chat.completion.chunk",
+                                        "created": created,
+                                        "model": req.model or MODEL_ID,
+                                        "choices": [
+                                            {
+                                                "index": 0,
+                                                "delta": {"content": token},
+                                                "finish_reason": None,
+                                            }
+                                        ],
                                     }
-                                ],
-                            }
-                            yield f"data: {json.dumps(chunk)}\n\n"
+                                    yield f"data: {json.dumps(chunk)}\n\n"
+                        finally:
+                            global last_active_time
+                            last_active_time = time.time()
+                            stop_generating = True
+                            await asyncio.to_thread(thread.join)
 
-                    chunk_finish = {
-                        "id": cmpl_id,
-                        "object": "chat.completion.chunk",
-                        "created": created,
-                        "model": req.model or MODEL_ID,
-                        "choices": [
-                            {
-                                "index": 0,
-                                "delta": {},
-                                "finish_reason": "stop",
-                            }
-                        ],
-                    }
-                    yield f"data: {json.dumps(chunk_finish)}\n\n"
-                    yield "data: [DONE]\n\n"
+                        chunk_finish = {
+                            "id": cmpl_id,
+                            "object": "chat.completion.chunk",
+                            "created": created,
+                            "model": req.model or MODEL_ID,
+                            "choices": [
+                                {
+                                    "index": 0,
+                                    "delta": {},
+                                    "finish_reason": "stop",
+                                }
+                            ],
+                        }
+                        yield f"data: {json.dumps(chunk_finish)}\n\n"
+                        yield "data: [DONE]\n\n"
 
                 return StreamingResponse(sse_generator(), media_type="text/event-stream")
 
-            response_text = str(pipe.generate(prompt, max_new_tokens=req.max_tokens or 1024)).strip()
+            async with pipe_lock:
+                active_pipe = await get_pipeline()
+                try:
+                    response_text = await asyncio.to_thread(
+                        lambda: str(active_pipe.generate(prompt, max_new_tokens=req.max_tokens or 1024)).strip()
+                    )
+                except Exception as e:
+                    print(f"Generation error: {e}")
+                    if "CL_OUT_OF_RESOURCES" in str(e) or "CL_" in str(e):
+                        os._exit(1)
+                    raise
+                finally:
+                    last_active_time = time.time()
             
             clean_json = response_text
             match = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", response_text, re.DOTALL)
@@ -235,6 +326,9 @@ in
     enable = mkBoolOpt false "Whether or not to enable the automated CWU LTB archive container.";
     enableGpuLlm = mkBoolOpt true "Whether to run OpenVINO LLM on the Intel Arc B580 GPU on the host for Paperless AI.";
     gpuLlmPort = mkOpt int 8001 "Host port for OpenVINO LLM server.";
+    gpuLlmIdleTimeout =
+      mkOpt int 300
+        "Number of idle seconds before unloading OpenVINO LLM from GPU memory (default 1200 = 20 mins).";
     hostWanInterface =
       mkOpt (nullOr str) null
         "The WAN network interface on the host used for NAT routing (null for all egress interfaces).";
@@ -336,7 +430,7 @@ in
             port = 11434;
             loadModels = cfg.ollamaModels;
             environmentVariables = {
-              OLLAMA_KEEP_ALIVE = "24h";
+              OLLAMA_KEEP_ALIVE = "5m";
               OLLAMA_NUM_PARALLEL = "1";
             };
           };
@@ -357,9 +451,12 @@ in
               PAPERLESS_ALLOWED_HOSTS = "*";
               PAPERLESS_CSRF_TRUSTED_ORIGINS = "http://10.0.3.134:${toString cfg.hostPort},http://127.0.0.1:${toString cfg.hostPort},http://localhost:${toString cfg.hostPort}";
 
+              # Static files directory
+              PAPERLESS_STATICDIR = "${pkgs.paperless-ngx}/lib/paperless-ngx/static";
+
               # Paperless AI / LLM configuration
               PAPERLESS_AI_ENABLED = true;
-              PAPERLESS_AI_LLM_CONTEXT_SIZE = 16384;
+              PAPERLESS_AI_LLM_CONTEXT_SIZE = 4096;
               PAPERLESS_AI_LLM_BACKEND = if cfg.enableGpuLlm then "openai-like" else "ollama";
               PAPERLESS_AI_LLM_ENDPOINT =
                 if cfg.enableGpuLlm then
@@ -367,7 +464,7 @@ in
                 else
                   "http://127.0.0.1:11434";
               PAPERLESS_AI_LLM_MODEL =
-                if cfg.enableGpuLlm then "Qwen2.5-1.5B-Instruct-fp16-ov" else "llama3.2:1b";
+                if cfg.enableGpuLlm then "Qwen2.5-Coder-3B-Instruct-fp16-ov" else "llama3.2:1b";
               PAPERLESS_AI_LLM_EMBEDDING_BACKEND = "ollama";
               PAPERLESS_AI_LLM_EMBEDDING_ENDPOINT = "http://127.0.0.1:11434";
               PAPERLESS_AI_LLM_EMBEDDING_MODEL = "nomic-embed-text:latest";
@@ -384,8 +481,12 @@ in
           };
 
           # Hybrid search customization (Tantivy BM25 + Vector embedding retrieval)
-          systemd.services.paperless-web.environment.PYTHONPATH = lib.mkForce "${customPaperlessSrc}:${config.services.paperless.package.python.pkgs.makePythonPath config.services.paperless.package.passthru.dependencies}:${config.services.paperless.package}/lib/paperless-ngx/src";
-          systemd.services.paperless-task-queue.environment.PYTHONPATH = lib.mkForce "${customPaperlessSrc}:${config.services.paperless.package.python.pkgs.makePythonPath config.services.paperless.package.passthru.dependencies}:${config.services.paperless.package}/lib/paperless-ngx/src";
+          systemd.services.paperless-web.environment.PYTHONPATH =
+            lib.mkForce "${customPaperlessSrc}/lib/paperless-ngx/src:${config.services.paperless.package.python.pkgs.makePythonPath config.services.paperless.package.passthru.dependencies}";
+          systemd.services.paperless-task-queue.environment.PYTHONPATH =
+            lib.mkForce "${customPaperlessSrc}/lib/paperless-ngx/src:${config.services.paperless.package.python.pkgs.makePythonPath config.services.paperless.package.passthru.dependencies}";
+          systemd.services.paperless-consumer.environment.PYTHONPATH =
+            lib.mkForce "${customPaperlessSrc}/lib/paperless-ngx/src:${config.services.paperless.package.python.pkgs.makePythonPath config.services.paperless.package.passthru.dependencies}";
 
           # Ensure Paperless starts after Ollama
           systemd.services.paperless-web.after = [ "ollama.service" ];
