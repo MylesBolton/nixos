@@ -26,8 +26,12 @@ let
         import time
         import json
         import uuid
+        import queue
+        import threading
+        import asyncio
         from typing import List, Optional, Dict, Any
         from fastapi import FastAPI
+        from fastapi.responses import StreamingResponse
         from pydantic import BaseModel
         import openvino_genai as ov_genai
         import openvino as ov
@@ -95,7 +99,81 @@ let
                 ch.append({"role": m.role, "content": m.content or ""})
             
             prompt = tokenizer.apply_chat_template(ch, add_generation_prompt=True)
-            
+
+            if req.stream and not tool_name:
+                cmpl_id = f"chatcmpl-{uuid.uuid4()}"
+                created = int(time.time())
+
+                async def sse_generator():
+                    chunk_init = {
+                        "id": cmpl_id,
+                        "object": "chat.completion.chunk",
+                        "created": created,
+                        "model": req.model or MODEL_ID,
+                        "choices": [
+                            {
+                                "index": 0,
+                                "delta": {"role": "assistant", "content": ""},
+                                "finish_reason": None,
+                            }
+                        ],
+                    }
+                    yield f"data: {json.dumps(chunk_init)}\n\n"
+
+                    token_queue = queue.Queue()
+
+                    def streamer_cb(subword):
+                        token_queue.put(subword)
+                        return ov_genai.StreamingStatus.RUNNING
+
+                    def worker():
+                        try:
+                            pipe.generate(prompt, max_new_tokens=req.max_tokens or 1024, streamer=streamer_cb)
+                        except Exception as e:
+                            print(f"Streaming generation error: {e}")
+                        finally:
+                            token_queue.put(None)
+
+                    threading.Thread(target=worker, daemon=True).start()
+
+                    while True:
+                        token = await asyncio.to_thread(token_queue.get)
+                        if token is None:
+                            break
+                        if token:
+                            chunk = {
+                                "id": cmpl_id,
+                                "object": "chat.completion.chunk",
+                                "created": created,
+                                "model": req.model or MODEL_ID,
+                                "choices": [
+                                    {
+                                        "index": 0,
+                                        "delta": {"content": token},
+                                        "finish_reason": None,
+                                    }
+                                ],
+                            }
+                            yield f"data: {json.dumps(chunk)}\n\n"
+
+                    chunk_finish = {
+                        "id": cmpl_id,
+                        "object": "chat.completion.chunk",
+                        "created": created,
+                        "model": req.model or MODEL_ID,
+                        "choices": [
+                            {
+                                "index": 0,
+                                "delta": {},
+                                "finish_reason": "stop",
+                            }
+                        ],
+                    }
+                    yield f"data: {json.dumps(chunk_finish)}\n\n"
+                    yield "data: [DONE]\n\n"
+
+                return StreamingResponse(sse_generator(), media_type="text/event-stream")
+
             response_text = str(pipe.generate(prompt, max_new_tokens=req.max_tokens or 1024)).strip()
             
             clean_json = response_text
