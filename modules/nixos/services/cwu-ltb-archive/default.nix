@@ -10,6 +10,11 @@ with lib.custom;
 let
   cfg = config.custom.services.cwu-ltb-archive;
 
+  customPaperlessSrc = pkgs.runCommand "paperless-hybrid-src" {} ''
+    mkdir -p $out/paperless_ai
+    cp ${./custom-src/paperless_ai/chat.py} $out/paperless_ai/chat.py
+  '';
+
   openvinoServer =
     pkgs.writers.writePython3Bin "openvino-b580-llm-server"
       {
@@ -354,6 +359,7 @@ in
 
               # Paperless AI / LLM configuration
               PAPERLESS_AI_ENABLED = true;
+              PAPERLESS_AI_LLM_CONTEXT_SIZE = 16384;
               PAPERLESS_AI_LLM_BACKEND = if cfg.enableGpuLlm then "openai-like" else "ollama";
               PAPERLESS_AI_LLM_ENDPOINT =
                 if cfg.enableGpuLlm then
@@ -376,6 +382,10 @@ in
               PAPERLESS_CONSUMER_POLLING = 60;
             };
           };
+
+          # Hybrid search customization (Tantivy BM25 + Vector embedding retrieval)
+          systemd.services.paperless-web.environment.PYTHONPATH = lib.mkForce "${customPaperlessSrc}:${config.services.paperless.package.python.pkgs.makePythonPath config.services.paperless.package.passthru.dependencies}:${config.services.paperless.package}/lib/paperless-ngx/src";
+          systemd.services.paperless-task-queue.environment.PYTHONPATH = lib.mkForce "${customPaperlessSrc}:${config.services.paperless.package.python.pkgs.makePythonPath config.services.paperless.package.passthru.dependencies}:${config.services.paperless.package}/lib/paperless-ngx/src";
 
           # Ensure Paperless starts after Ollama
           systemd.services.paperless-web.after = [ "ollama.service" ];
