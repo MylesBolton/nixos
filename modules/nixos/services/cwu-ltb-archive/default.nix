@@ -123,6 +123,13 @@ in
             recommendedOptimisation = true;
             clientMaxBodySize = "100m";
 
+            commonHttpConfig = ''
+              map $cookie_paperless_admin $paperless_remote_user {
+                default "${cfg.publicUser}";
+                "1" "";
+              }
+            '';
+
             virtualHosts."cwu-archive" = {
               default = true;
               serverName = "${cfg.domain} _";
@@ -134,27 +141,46 @@ in
               ];
 
               # Public Search Frontend:
-              # Injects Remote-User: <publicUser> so any incoming visitor is automatically
-              # authenticated as the read-only user without seeing a login screen.
+              # Injects Remote-User: <publicUser> ONLY for visitors without the paperless_admin cookie.
               locations."/" = {
                 proxyPass = "http://127.0.0.1:28981";
                 proxyWebsockets = true;
                 extraConfig = ''
-                  # Strip client Remote-User headers to prevent privilege escalation
-                  proxy_set_header Remote-User "${cfg.publicUser}";
+                  # Pass Remote-User unless user has logged in as admin
+                  proxy_set_header Remote-User $paperless_remote_user;
+                '';
+              };
+
+              # Authentication & Account Endpoints:
+              # Exempted from Remote-User so users can view the sign-in form.
+              locations."/accounts/" = {
+                proxyPass = "http://127.0.0.1:28981";
+                proxyWebsockets = true;
+                extraConfig = ''
+                  proxy_set_header Remote-User "";
+                  add_header Set-Cookie "paperless_admin=1; Path=/; SameSite=Lax" always;
+                '';
+              };
+
+              # Logout Endpoint:
+              # Clears the paperless_admin cookie so visitor reverts to public searcher mode.
+              locations."/accounts/logout/" = {
+                proxyPass = "http://127.0.0.1:28981";
+                proxyWebsockets = true;
+                extraConfig = ''
+                  proxy_set_header Remote-User "";
+                  add_header Set-Cookie "paperless_admin=; Path=/; Max-Age=0; SameSite=Lax" always;
                 '';
               };
 
               # Admin Portal Access:
               # Access via http://<host>:<port>/admin/
-              # Remote-User is intentionally cleared so administrators can log in
-              # with standard superuser username and password.
               locations."/admin/" = {
                 proxyPass = "http://127.0.0.1:28981/admin/";
                 proxyWebsockets = true;
                 extraConfig = ''
-                  # Do not pass Remote-User so Django prompts for superuser credentials
                   proxy_set_header Remote-User "";
+                  add_header Set-Cookie "paperless_admin=1; Path=/; SameSite=Lax" always;
                 '';
               };
             };
