@@ -28,7 +28,6 @@ with lib.custom;
 
   custom.services.cwu-ltb-archive = {
     enable = true;
-    hostWanInterface = "enp8s0";
     hostPort = 8080;
   };
 }
