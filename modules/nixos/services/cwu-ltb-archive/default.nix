@@ -17,12 +17,6 @@ in
       mkOpt (nullOr str) null
         "The WAN network interface on the host used for NAT routing (null for all egress interfaces).";
     hostPort = mkOpt int 8080 "The public-facing port on the host forwarded to Paperless-ngx.";
-    domain =
-      mkOpt str "cwu-archive.local"
-        "Public domain name used for Paperless ALLOWED_HOSTS and CSRF.";
-    publicUser =
-      mkOpt str "public_searcher"
-        "Username injected via Remote-User HTTP header for read-only visitors.";
     containerHostIp =
       mkOpt str "192.168.100.10"
         "IPv4 address assigned to the host side of the container veth link.";
@@ -34,15 +28,12 @@ in
     # -------------------------------------------------------------------------
     # HOST NETWORKING & NAT CONFIGURATION
     # -------------------------------------------------------------------------
-    # Enable IPv4 packet forwarding and NAT on the host so the container can
-    # reach the internet to fetch CWU sitemaps and download LTB PDFs.
     networking.nat = {
       enable = true;
       internalInterfaces = [ "ve-+" ];
       externalInterface = cfg.hostWanInterface;
     };
 
-    # Open the public port on the host firewall
     networking.firewall.allowedTCPPorts = [ cfg.hostPort ];
 
     # -------------------------------------------------------------------------
@@ -54,10 +45,10 @@ in
       hostAddress = cfg.containerHostIp;
       localAddress = cfg.containerIp;
 
-      # Forward incoming hostPort traffic directly to container port 80 (Nginx)
+      # Forward incoming hostPort traffic directly to Paperless-ngx
       forwardPorts = [
         {
-          containerPort = 80;
+          containerPort = 28981;
           hostPort = cfg.hostPort;
           protocol = "tcp";
         }
@@ -73,34 +64,27 @@ in
         {
           system.stateVersion = "25.05";
 
-          # Gateway pointing to the host veth IP and external DNS
           networking.defaultGateway = cfg.containerHostIp;
           networking.nameservers = [
             "1.1.1.1"
             "8.8.8.8"
           ];
           networking.useHostResolvConf = false;
-          networking.firewall.allowedTCPPorts = [ 80 ];
+          networking.firewall.allowedTCPPorts = [ 28981 ];
 
           # -------------------------------------------------------------------
           # PAPERLESS-NGX BACKEND
           # -------------------------------------------------------------------
           services.paperless = {
             enable = true;
-            address = "127.0.0.1";
+            address = "0.0.0.0";
             port = 28981;
             consumptionDir = "/var/lib/paperless/consume";
             consumptionDirIsPublic = false;
 
             settings = {
-              # Remote user header authentication
-              PAPERLESS_ENABLE_HTTP_REMOTE_USER = "true";
-              PAPERLESS_HTTP_REMOTE_USER_HEADER_NAME = "HTTP_REMOTE_USER";
-
-              # URL and CSRF security settings
-              PAPERLESS_URL = "http://${cfg.domain}:${toString cfg.hostPort}";
-              PAPERLESS_CSRF_TRUSTED_ORIGINS = "http://${cfg.domain}:${toString cfg.hostPort},http://127.0.0.1:${toString cfg.hostPort},http://localhost:${toString cfg.hostPort}";
               PAPERLESS_ALLOWED_HOSTS = "*";
+              PAPERLESS_CSRF_TRUSTED_ORIGINS = "http://10.0.3.134:${toString cfg.hostPort},http://127.0.0.1:${toString cfg.hostPort},http://localhost:${toString cfg.hostPort}";
 
               # OCR configuration
               PAPERLESS_OCR_LANGUAGE = "eng";
@@ -110,79 +94,6 @@ in
 
               # Inotify polling fallback inside containers
               PAPERLESS_CONSUMER_POLLING = 60;
-            };
-          };
-
-          # -------------------------------------------------------------------
-          # REVERSE PROXY (NGINX)
-          # -------------------------------------------------------------------
-          services.nginx = {
-            enable = true;
-            recommendedProxySettings = true;
-            recommendedGzipSettings = true;
-            recommendedOptimisation = true;
-            clientMaxBodySize = "100m";
-
-            commonHttpConfig = ''
-              map $cookie_paperless_admin $paperless_remote_user {
-                default "${cfg.publicUser}";
-                "1" "";
-              }
-            '';
-
-            virtualHosts."cwu-archive" = {
-              default = true;
-              serverName = "${cfg.domain} _";
-              listen = [
-                {
-                  addr = "0.0.0.0";
-                  port = 80;
-                }
-              ];
-
-              # Public Search Frontend:
-              # Injects Remote-User: <publicUser> ONLY for visitors without the paperless_admin cookie.
-              locations."/" = {
-                proxyPass = "http://127.0.0.1:28981";
-                proxyWebsockets = true;
-                extraConfig = ''
-                  # Pass Remote-User unless user has logged in as admin
-                  proxy_set_header Remote-User $paperless_remote_user;
-                '';
-              };
-
-              # Authentication & Account Endpoints:
-              # Exempted from Remote-User so users can view the sign-in form.
-              locations."/accounts/" = {
-                proxyPass = "http://127.0.0.1:28981";
-                proxyWebsockets = true;
-                extraConfig = ''
-                  proxy_set_header Remote-User "";
-                  add_header Set-Cookie "paperless_admin=1; Path=/; SameSite=Lax" always;
-                '';
-              };
-
-              # Logout Endpoint:
-              # Clears the paperless_admin cookie so visitor reverts to public searcher mode.
-              locations."/accounts/logout/" = {
-                proxyPass = "http://127.0.0.1:28981";
-                proxyWebsockets = true;
-                extraConfig = ''
-                  proxy_set_header Remote-User "";
-                  add_header Set-Cookie "paperless_admin=; Path=/; Max-Age=0; SameSite=Lax" always;
-                '';
-              };
-
-              # Admin Portal Access:
-              # Access via http://<host>:<port>/admin/
-              locations."/admin/" = {
-                proxyPass = "http://127.0.0.1:28981/admin/";
-                proxyWebsockets = true;
-                extraConfig = ''
-                  proxy_set_header Remote-User "";
-                  add_header Set-Cookie "paperless_admin=1; Path=/; SameSite=Lax" always;
-                '';
-              };
             };
           };
 
@@ -199,8 +110,6 @@ in
 
             serviceConfig = {
               Type = "oneshot";
-              # Run directly as the paperless user so that all created files
-              # in consumptionDir natively belong to paperless:paperless.
               User = config.services.paperless.user;
               Group = config.services.paperless.group;
               StateDirectory = "cwu-ltb-downloader";
@@ -233,7 +142,7 @@ in
                             STATE_DIR="/var/lib/cwu-ltb-downloader"
                             STATE_FILE="$STATE_DIR/processed_urls.txt"
                             TEMP_DIR="$STATE_DIR/tmp"
-                            USER_AGENT="Mozilla/5.0 (Windows NT 10.0; Win64; x64) CWU-LTB-Archiver/1.0 (+https://${cfg.domain})"
+                            USER_AGENT="Mozilla/5.0 (Windows NT 10.0; Win64; x64) CWU-LTB-Archiver/1.0"
                             SITEMAP_INDEX="https://www.cwu.org/wp-sitemap.xml"
 
                             mkdir -p "$TEMP_DIR" "$CONSUME_DIR"
