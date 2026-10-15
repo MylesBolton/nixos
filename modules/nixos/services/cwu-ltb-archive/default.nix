@@ -9,10 +9,148 @@ with lib;
 with lib.custom;
 let
   cfg = config.custom.services.cwu-ltb-archive;
+
+  openvinoServer =
+    pkgs.writers.writePython3Bin "openvino-b580-llm-server"
+      {
+        libraries = with pkgs.python3Packages; [
+          fastapi
+          uvicorn
+          openvino-genai
+        ];
+      }
+      ''
+        import os
+        import re
+        import time
+        import json
+        import uuid
+        from typing import List, Optional, Dict, Any
+        from fastapi import FastAPI
+        from pydantic import BaseModel
+        import openvino_genai as ov_genai
+        import openvino as ov
+        import uvicorn
+
+        app = FastAPI(title="OpenVINO Arc B580 LLM Server")
+
+        MODEL_ID = "Qwen2.5-1.5B-Instruct-fp16-ov"
+        MODEL_DIR = "/var/lib/openvino-models/Qwen2.5-1.5B-Instruct-fp16-ov"
+
+        print("Initializing OpenVINO GenAI native FP16 on Intel Arc B580...")
+        tokenizer = ov_genai.Tokenizer(MODEL_DIR)
+        config = {
+            "INFERENCE_PRECISION_HINT": ov.Type.f16,
+            "KV_CACHE_PRECISION": ov.Type.f16,
+            "GPU_ENABLE_SDPA_OPTIMIZATION": False,
+            "EXECUTION_MODE_HINT": ov.properties.hint.ExecutionMode.PERFORMANCE,
+        }
+        pipe = ov_genai.LLMPipeline(MODEL_DIR, "GPU", **config)
+        print("Pipeline ready on Intel Arc B580!")
+
+        class ChatMessage(BaseModel):
+            role: str
+            content: Optional[str] = ""
+
+        class ChatCompletionRequest(BaseModel):
+            model: Optional[str] = MODEL_ID
+            messages: List[ChatMessage]
+            tools: Optional[List[Dict[str, Any]]] = None
+            tool_choice: Optional[Any] = None
+            temperature: Optional[float] = 0.7
+            top_p: Optional[float] = 0.95
+            max_tokens: Optional[int] = 1024
+            stream: Optional[bool] = False
+
+        @app.get("/v1/models")
+        async def get_models():
+            return {
+                "object": "list",
+                "data": [
+                    {
+                        "id": MODEL_ID,
+                        "object": "model",
+                        "created": int(time.time()),
+                        "owned_by": "openvino",
+                    }
+                ],
+            }
+
+        @app.post("/v1/chat/completions")
+        async def chat_completions(req: ChatCompletionRequest):
+            ch = ov_genai.ChatHistory()
+            
+            tool_name = None
+            if req.tools and len(req.tools) > 0:
+                first_tool = req.tools[0].get("function", {})
+                tool_name = first_tool.get("name", "function")
+                schema = json.dumps(first_tool.get("parameters", {}))
+                ch.append({
+                    "role": "system",
+                    "content": f"You must extract the information and return ONLY a valid JSON object matching this schema:\n{schema}\nDo not include any other text."
+                })
+
+            for m in req.messages:
+                ch.append({"role": m.role, "content": m.content or ""})
+            
+            prompt = tokenizer.apply_chat_template(ch, add_generation_prompt=True)
+            
+            response_text = str(pipe.generate(prompt, max_new_tokens=req.max_tokens or 1024)).strip()
+            
+            clean_json = response_text
+            match = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", response_text, re.DOTALL)
+            if match:
+                clean_json = match.group(1)
+
+            if tool_name:
+                message = {
+                    "role": "assistant",
+                    "content": None,
+                    "tool_calls": [
+                        {
+                            "id": f"call_{uuid.uuid4().hex[:8]}",
+                            "type": "function",
+                            "function": {
+                                "name": tool_name,
+                                "arguments": clean_json,
+                            },
+                        }
+                    ],
+                }
+            else:
+                message = {
+                    "role": "assistant",
+                    "content": response_text,
+                }
+
+            return {
+                "id": f"chatcmpl-{uuid.uuid4()}",
+                "object": "chat.completion",
+                "created": int(time.time()),
+                "model": req.model or MODEL_ID,
+                "choices": [
+                    {
+                        "index": 0,
+                        "message": message,
+                        "finish_reason": "stop" if not tool_name else "tool_calls",
+                    }
+                ],
+                "usage": {
+                    "prompt_tokens": len(prompt) // 4,
+                    "completion_tokens": len(response_text) // 4,
+                    "total_tokens": (len(prompt) + len(response_text)) // 4,
+                },
+            }
+
+        if __name__ == "__main__":
+            uvicorn.run(app, host="0.0.0.0", port=${toString cfg.gpuLlmPort})
+      '';
 in
 {
   options.custom.services.cwu-ltb-archive = with types; {
     enable = mkBoolOpt false "Whether or not to enable the automated CWU LTB archive container.";
+    enableGpuLlm = mkBoolOpt true "Whether to run OpenVINO LLM on the Intel Arc B580 GPU on the host for Paperless AI.";
+    gpuLlmPort = mkOpt int 8001 "Host port for OpenVINO LLM server.";
     hostWanInterface =
       mkOpt (nullOr str) null
         "The WAN network interface on the host used for NAT routing (null for all egress interfaces).";
@@ -42,7 +180,24 @@ in
     networking.firewall.allowedTCPPorts = [
       cfg.hostPort
       cfg.ollamaPort
-    ];
+    ]
+    ++ (optional cfg.enableGpuLlm cfg.gpuLlmPort);
+
+    # -------------------------------------------------------------------------
+    # OPENVINO LLM SERVICE (INTEL ARC B580 DISCRETE GPU)
+    # -------------------------------------------------------------------------
+    systemd.services.openvino-b580-llm = mkIf cfg.enableGpuLlm {
+      description = "OpenVINO LLM Server for Intel Arc B580 GPU";
+      wantedBy = [ "multi-user.target" ];
+      after = [ "network.target" ];
+      serviceConfig = {
+        ExecStart = "${openvinoServer}/bin/openvino-b580-llm-server";
+        Restart = "always";
+        RestartSec = "5s";
+        User = "root";
+        Group = "render";
+      };
+    };
 
     # -------------------------------------------------------------------------
     # DECLARATIVE NIXOS CONTAINER
@@ -120,9 +275,14 @@ in
 
               # Paperless AI / LLM configuration
               PAPERLESS_AI_ENABLED = true;
-              PAPERLESS_AI_LLM_BACKEND = "ollama";
-              PAPERLESS_AI_LLM_ENDPOINT = "http://127.0.0.1:11434";
-              PAPERLESS_AI_LLM_MODEL = "llama3.2:1b";
+              PAPERLESS_AI_LLM_BACKEND = if cfg.enableGpuLlm then "openai-like" else "ollama";
+              PAPERLESS_AI_LLM_ENDPOINT =
+                if cfg.enableGpuLlm then
+                  "http://${cfg.containerHostIp}:${toString cfg.gpuLlmPort}/v1"
+                else
+                  "http://127.0.0.1:11434";
+              PAPERLESS_AI_LLM_MODEL =
+                if cfg.enableGpuLlm then "Qwen2.5-1.5B-Instruct-fp16-ov" else "llama3.2:1b";
               PAPERLESS_AI_LLM_EMBEDDING_BACKEND = "ollama";
               PAPERLESS_AI_LLM_EMBEDDING_ENDPOINT = "http://127.0.0.1:11434";
               PAPERLESS_AI_LLM_EMBEDDING_MODEL = "nomic-embed-text:latest";
