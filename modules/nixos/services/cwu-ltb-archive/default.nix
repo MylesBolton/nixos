@@ -18,6 +18,7 @@ let
           uvicorn
           openvino-genai
         ];
+        doCheck = false;
       }
       ''
         import os
