@@ -19,8 +19,8 @@ in
     hostPort = mkOpt int 8080 "The public-facing port on the host forwarded to Paperless-ngx.";
     ollamaPort = mkOpt int 11434 "The host port forwarded to Ollama in the container.";
     ollamaModels = mkOpt (listOf str) [
-      "llama3.2"
-      "nomic-embed-text"
+      "llama3.2:1b"
+      "nomic-embed-text:latest"
     ] "Ollama models to automatically download on startup.";
     containerHostIp =
       mkOpt str "192.168.100.10"
@@ -96,6 +96,10 @@ in
             host = "0.0.0.0";
             port = 11434;
             loadModels = cfg.ollamaModels;
+            environmentVariables = {
+              OLLAMA_KEEP_ALIVE = "24h";
+              OLLAMA_NUM_PARALLEL = "1";
+            };
           };
 
           environment.systemPackages = [ pkgs.ollama ];
@@ -118,7 +122,7 @@ in
               PAPERLESS_AI_ENABLED = true;
               PAPERLESS_AI_LLM_BACKEND = "ollama";
               PAPERLESS_AI_LLM_ENDPOINT = "http://127.0.0.1:11434";
-              PAPERLESS_AI_LLM_MODEL = "qwen3.5:4b";
+              PAPERLESS_AI_LLM_MODEL = "llama3.2:1b";
               PAPERLESS_AI_LLM_EMBEDDING_BACKEND = "ollama";
               PAPERLESS_AI_LLM_EMBEDDING_ENDPOINT = "http://127.0.0.1:11434";
               PAPERLESS_AI_LLM_EMBEDDING_MODEL = "nomic-embed-text:latest";
