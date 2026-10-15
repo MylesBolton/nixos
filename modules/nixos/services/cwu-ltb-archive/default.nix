@@ -17,6 +17,11 @@ in
       mkOpt (nullOr str) null
         "The WAN network interface on the host used for NAT routing (null for all egress interfaces).";
     hostPort = mkOpt int 8080 "The public-facing port on the host forwarded to Paperless-ngx.";
+    ollamaPort = mkOpt int 11434 "The host port forwarded to Ollama in the container.";
+    ollamaModels = mkOpt (listOf str) [
+      "llama3.2"
+      "nomic-embed-text"
+    ] "Ollama models to automatically download on startup.";
     containerHostIp =
       mkOpt str "192.168.100.10"
         "IPv4 address assigned to the host side of the container veth link.";
@@ -34,7 +39,10 @@ in
       externalInterface = cfg.hostWanInterface;
     };
 
-    networking.firewall.allowedTCPPorts = [ cfg.hostPort ];
+    networking.firewall.allowedTCPPorts = [
+      cfg.hostPort
+      cfg.ollamaPort
+    ];
 
     # -------------------------------------------------------------------------
     # DECLARATIVE NIXOS CONTAINER
@@ -45,11 +53,16 @@ in
       hostAddress = cfg.containerHostIp;
       localAddress = cfg.containerIp;
 
-      # Forward incoming hostPort traffic directly to Paperless-ngx
+      # Forward incoming hostPort traffic to Paperless (28981) and Ollama (11434)
       forwardPorts = [
         {
           containerPort = 28981;
           hostPort = cfg.hostPort;
+          protocol = "tcp";
+        }
+        {
+          containerPort = 11434;
+          hostPort = cfg.ollamaPort;
           protocol = "tcp";
         }
       ];
@@ -70,7 +83,22 @@ in
             "8.8.8.8"
           ];
           networking.useHostResolvConf = false;
-          networking.firewall.allowedTCPPorts = [ 28981 ];
+          networking.firewall.allowedTCPPorts = [
+            28981
+            11434
+          ];
+
+          # -------------------------------------------------------------------
+          # OLLAMA LLM SERVICE
+          # -------------------------------------------------------------------
+          services.ollama = {
+            enable = true;
+            host = "0.0.0.0";
+            port = 11434;
+            loadModels = cfg.ollamaModels;
+          };
+
+          environment.systemPackages = [ pkgs.ollama ];
 
           # -------------------------------------------------------------------
           # PAPERLESS-NGX BACKEND
@@ -86,6 +114,15 @@ in
               PAPERLESS_ALLOWED_HOSTS = "*";
               PAPERLESS_CSRF_TRUSTED_ORIGINS = "http://10.0.3.134:${toString cfg.hostPort},http://127.0.0.1:${toString cfg.hostPort},http://localhost:${toString cfg.hostPort}";
 
+              # Paperless AI / LLM configuration
+              PAPERLESS_AI_ENABLED = true;
+              PAPERLESS_AI_LLM_BACKEND = "ollama";
+              PAPERLESS_AI_LLM_ENDPOINT = "http://127.0.0.1:11434";
+              PAPERLESS_AI_LLM_MODEL = "llama3.2";
+              PAPERLESS_AI_LLM_EMBEDDING_BACKEND = "ollama";
+              PAPERLESS_AI_LLM_EMBEDDING_ENDPOINT = "http://127.0.0.1:11434";
+              PAPERLESS_AI_LLM_EMBEDDING_MODEL = "nomic-embed-text";
+
               # OCR configuration
               PAPERLESS_OCR_LANGUAGE = "eng";
               PAPERLESS_OCR_USER_ARGS = builtins.toJSON {
@@ -96,6 +133,11 @@ in
               PAPERLESS_CONSUMER_POLLING = 60;
             };
           };
+
+          # Ensure Paperless starts after Ollama
+          systemd.services.paperless-web.after = [ "ollama.service" ];
+          systemd.services.paperless-task-queue.after = [ "ollama.service" ];
+          systemd.services.paperless-consumer.after = [ "ollama.service" ];
 
           # -------------------------------------------------------------------
           # AUTOMATED LTB DOWNLOADER (SYSTEMD SERVICE & TIMER)
