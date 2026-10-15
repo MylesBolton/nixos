@@ -99,12 +99,8 @@ in
 
               # URL and CSRF security settings
               PAPERLESS_URL = "http://${cfg.domain}:${toString cfg.hostPort}";
-              PAPERLESS_CSRF_TRUSTED_ORIGINS = [
-                "http://${cfg.domain}:${toString cfg.hostPort}"
-                "http://127.0.0.1:${toString cfg.hostPort}"
-                "http://localhost:${toString cfg.hostPort}"
-              ];
-              PAPERLESS_ALLOWED_HOSTS = [ "*" ];
+              PAPERLESS_CSRF_TRUSTED_ORIGINS = "http://${cfg.domain}:${toString cfg.hostPort},http://127.0.0.1:${toString cfg.hostPort},http://localhost:${toString cfg.hostPort}";
+              PAPERLESS_ALLOWED_HOSTS = "*";
 
               # OCR configuration
               PAPERLESS_OCR_LANGUAGE = "eng";
